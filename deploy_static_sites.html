@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Развертывание статических сайтов, инструкция</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,14 +39,40 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
+<h1>Развертывание статических сайтов, инструкция</h1><p><h1>Публикация (развертывание) статического сайта с помощью Render.com</h1>
+<pre>
+1. Регистрируемся с помощью Github на https://dashboard.render.com/s
+2. Нажимаем New -> Static site ( https://dashboard.render.com/select-repo?type=static )
+3. Выбираем проект со статикой и нажимаем Connect (подключить).
+4. Заполняем имя проекта на Render, будет создан
+поддомен ввида projectname.onrender.com, остальные настройки можно не менять
+5. Нажимаем Create site
+</pre>
+
+<h1>Публикация статического сайта с помощью Firebase
+</h1>
+<pre>1. Регистрируемся с помощью Google на https://console.firebase.google.com
+2. Нажимаем Build -> Hosting в меню.
+3. Устанавливаем <i>firebase-tools</i>
+4. В папке с проектом <i>firebase login</i>, <i>firebase init</i>
+5. Выбираем стрелками пункт hosting
+6. Выбираем проект из пункта 2, в качестве директории указываем текущую (ставим точку)
+7. Вводим команду <i>firebase deploy </i></pre>
+
+<h1>Публикация статического сайта на Vercel</h1>
+
+<pre>1. Регистрируемся  https://vercel.com/dashboard
+2. Создаем новый проект Add -> new project,
+3. И добавляем репозиторий Github Import Git repository
+4. В настройках выставляем Framework - Other, Root Directory - ./
+5. Нажимаем Deploy  </pre>
+
+<h1>Публикация статического сайта с помощью Cloud Flare Pages </h1>
+
+<pre>1. Регистрируемся на https://pages.cloudflare.com/
+2. Переходим в раздел Workers and Pages, на вкладке Pages нажимаем Connect to Git
+3. Выбираем репозиторий, заполняем настройки аналогичным образом и выполняем deploy</pre>
+
 </p>
 <i>Теги документа</i> 
 

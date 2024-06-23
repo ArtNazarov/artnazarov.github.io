@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Настройка Lamp в Ubuntu Server Edition 22</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Настройка Lamp в Ubuntu Server Edition 22</h1><p>Даны приемы конфигурирования PHP 7.4 + MariaDB для развертывания веб-сайта внутри виртуальной машины<!--more-->
+
+Установка LAMP состоит из 4 этапов - развертывания сервера Linux, затем установки Apache, Mariadb и Php. Также для удобства работы с базой данных часто ставится phpmyadmin или другая оболочка.
+
+<strong>Этап 1</strong> - Установка Linux. В качестве подопытного возьмем серверный образ Ubuntu 22.04 Server
+
+Выбираем язык
+
+<img class="alignnone wp-image-417 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-0.png" alt="" width="1320" height="728" />
+
+Пропускаем обновление
+
+<img class="alignnone wp-image-418 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-1.png" alt="" width="1320" height="728" />
+
+Оставляем раскладку английской
+
+<img class="alignnone wp-image-419 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-3.png" alt="" width="1320" height="728" />
+
+Выбираем обычную версию
+
+<img class="alignnone wp-image-420 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-4.png" alt="" width="1320" height="728" />
+
+Поскольку машина виртуальная, интерфейс будет сконфигурирован как ethernet, переходим к следующему шагу
+
+<img class="alignnone wp-image-421 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-5.png" alt="" width="1320" height="728" />
+
+Адрес прокси не заполняем
+
+<img class="alignnone wp-image-422 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-6.png" alt="" width="1320" height="728" />
+
+Оставляем как есть строку для выбора зеркала
+
+<img class="alignnone wp-image-423 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-7.png" alt="" width="1320" height="728" />
+
+Выбираем разметить весь диск автоматически
+
+<img class="alignnone wp-image-424 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-8.png" alt="" width="1320" height="728" />
+
+Подтверждаем схему разметки
+
+<img class="alignnone wp-image-425 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-9.png" alt="" width="1320" height="728" />
+
+Подтверждаем изменения на диске ( предупреждение о потере данных при форматировании )
+
+<img class="alignnone wp-image-426 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-10.png" alt="" width="1320" height="728" />Вводим имя сервера, логин и пароль пользователя, аналогичный пароль будет у root
+
+<img class="alignnone wp-image-427 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-11.png" alt="" width="1320" height="728" />
+
+Можно установить SSH ( необязательно )
+
+<img class="alignnone wp-image-428 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-12.png" alt="" width="1320" height="728" />
+
+На следующем экране будут предложены дополнительные необязательные компоненты, переходим к следующему шагу
+
+<img class="alignnone wp-image-429 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-13.png" alt="" width="1320" height="728" />
+
+После нажатия Готово начнутся стандартные действия по установке, придется подождать около 10 минут.
+
+<img class="alignnone wp-image-430 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-14.png" alt="" width="1320" height="728" />После появления надписи Install complete (установка завершена), перезагружаем систему
+
+<img class="alignnone wp-image-431 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-15.png" alt="" width="1320" height="728" /><strong>Этап 2 Установка PHP</strong>
+
+Подготовительные действия - установка дополнений для системы
+
+Устанавливаем пакеты build-essential, gcc, make, unzip, mc
+
+<code>sudo apt-get install build-essential, gcc, make, unzip, mc</code>
+
+Монтируем виртуальный привод
+
+<code>sudo mkdir /mnt/cdrom</code>
+
+<code>sudo mount /dev/sr0 /mnt/cdrom</code>
+
+Подключаем образ дополнений гостевой системы
+
+<code>cd /mnt/cdrom</code>
+
+<code>sudo ./VBoxLinux&lt;tab&gt;</code> - запускаем файл с расширением .run для установки дополнений
+
+<code>sudo usermod -aG vboxsf &lt;username&gt;</code> - добавляем пользователя в группу vboxsf для доступа к общей папке
+
+Перезагружаем систему. Предположим, общая папка на хосте /mnt/shared_server и имеет аналогичное имя
+на гостевой системе. Переходим в эту папку и копируем в ~ необходимые файлы (сценарии, копии данных и т.п.)
+
+Установка PHP
+
+<code>sudo add-apt-repository ppa:ondrej/php</code>
+
+<code>sudo apt-get install php7.4</code>
+
+Смотрим доступные модули php
+
+<code>sudo apt-get install php7.4-&lt;tab&gt;</code>
+
+Ставим с помощью перечисления в фигурных скобках
+
+<code>sudo apt-get install php7.4-{common,cli,..., zip}</code>
+
+Должны быть установлены модули php как минимум
+<code>mbstring, bcmath, xml, mysql, common, gd, cli, curl, zip</code>
+
+Проверяем доступную версию
+
+<code>sudo update-alternatives --config php</code>
+
+Если установлено несколько версий, указываем номер соответв. 7.4 и жмем enter
+
+Этап 2 Установка веб-сервера
+
+<code>sudo apt-get install apache2 libapache2-mod-php7.4</code>
+
+Проверяем, что используется требуемая версия
+
+<code>php --version</code>
+
+Увеличиваем лимиты по памяти и по времени, правя файл
+
+<code>/etc/php/7.4/apache2/php.ini</code>
+
+В этом файле нужно перебрать переменные <code>upload_max_size,</code>
+<code>post_max_size, max_execution_time,max_input_time,memory_limit</code>
+
+Ускоряет редактирование прием поиска подстройки - в vim нажать / и ввести имя переменной, в nano Ctrl+W и название, затем enter
+
+Нано и вим ставятся командами
+
+<code>sudo apt-get install nano vim</code>
+
+Этап 3 Установка базы данных -
+
+Ставим mariadb
+
+<code>sudo apt-get install mariadb-server mariadb-client</code>
+
+&nbsp;
+
+Начальная настройка root
+
+<code># mysql_secure_installation</code> ( в начале у root нет пароля, создаем его)
+
+Переходим в оболочку базы
+
+<code># mysql -u root -p</code> ( заходим с созданным паролем root)
+
+Создаем пользователя с расширенными привилегиями для phpmyadmin
+
+<code>CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';</code>
+<code>GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;</code>
+<code>GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';</code>
+
+<code>FLUSH PRIVILEGES;</code>
+
+Этап 4
+
+Установка phpmyadmin
+
+Загружаем пример конфигурации
+<code>wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz</code>
+Распакуем
+<code>tar xvf phpMyAdmin-*-all-languages.tar.gz</code>
+Файлы перенесем по пути /var/www/html/phpmyadmin
+
+Создадим временную папку
+<code>sudo mkdir -p /var/www/html/phpmyadmin/tmp</code>
+Снимем копию с примерной конфигурации как рабочую
+<code>sudo cp /var/www/html/phpmyadmin/config.sample.inc.php /var/www/html/phpmyadmin/config.inc.php</code>
+
+Поправим настройки
+
+<code>sudo nano /var/www/html/phpmyadmin/config.inc.php</code>
+
+Вносим
+
+<code>$cfg[‘blowfish_secret’] = "" — меняется на случайное слово</code>
+<code>$cfg['TempDir'] = '/var/www/html/phpmyadmin/tmp'; - временный каталог</code>
+<code>$cfg["ExecTimeLimit"] = 99999;</code>
+
+Смена владельца и права на доступ для веб-сервера
+
+<code>sudo chown -R www-data:www-data /var/www/</code>
+<code>sudo find /var/www/html/phpmyadmin/ -type d -exec chmod 755 {} \;</code>
+<code>sudo find /var/www/html/phpmyadmin/ -type f -exec chmod 644 {} \;</code>
+
+Добавляем конфигурацию в apache
+
+<code>sudo nano /etc/apache2/conf-available/phpmyadmin.conf</code>
+<code>sudo a2enconf phpmyadmin</code>
+
+---
+Файл конфигурации phpmyadmin.conf:
+
+<code></code>
+
+<code>Alias /phpmyadmin /var/www/html/phpmyadmin</code>
+
+<code></code>
+
+<code>&lt;Directory /var/www/html/phpmyadmin&gt;</code>
+<code>Options Indexes FollowSymLinks</code>
+<code>DirectoryIndex index.php</code>
+
+<code></code>
+
+<code>&lt;IfModule<strong> mod_php7.c</strong>&gt;</code>
+<code>AddType application/x-httpd-php .php</code>
+
+<code></code>
+
+<code>php_flag magic_quotes_gpc Off</code>
+<code>php_flag track_vars On</code>
+<code>php_flag register_globals Off</code>
+<code>php_value include_path .</code>
+<code>&lt;/IfModule&gt;</code>
+
+<code></code>
+
+<code>&lt;/Directory&gt;</code>
+
+<code></code>
+
+<code># Authorize for setup</code>
+<code>&lt;Directory /var/www/html/phpmyadmin/setup&gt;</code>
+<code>&lt;IfModule mod_authn_file.c&gt;</code>
+<code>AuthType Basic</code>
+<code>AuthName "phpMyAdmin Setup"</code>
+<code>AuthUserFile /etc/phpmyadmin/htpasswd.setup</code>
+<code>&lt;/IfModule&gt;</code>
+<code>Require valid-user</code>
+<code>&lt;/Directory&gt;</code>
+
+<code></code>
+
+<code># Disallow web access to directories that don't need it</code>
+<code>&lt;Directory /var/www/html/phpmyadmin/libraries&gt;</code>
+<code>Order Deny,Allow</code>
+<code>Deny from All</code>
+<code>&lt;/Directory&gt;</code>
+<code>&lt;Directory /var/www/html/phpmyadmin/setup/lib&gt;</code>
+<code>Order Deny,Allow</code>
+<code>Deny from All</code>
+<code>&lt;/Directory&gt;</code>
+
+<code> </code>
+
+---
+
+Настройка виртуальных хостов ( с помощью сценария )
+
+sudo ./gen-host.sh
+
+создаем конфигурации на каждый хост, потребуются
+
+<em>сценарий gen-host.sh</em>
+
+<code>read -p "Enter your host [new.local]: " host</code>
+<code>host=${host:-new}</code>
+<code>echo "make keys $host"</code>
+<code>sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout "$host.key" -out "$host.crt"</code>
+<code>echo "Install certs ..."</code>
+<code>sudo cp *.key /etc/ssl/private/</code>
+<code>sudo cp *.crt /etc/ssl/certs/</code>
+<code>echo "Append to vhosts..."</code>
+<code>sed -e "s/host/${host}/g" &lt;vhosts.template &gt; host.conf</code>
+<code>sudo cp host.conf /etc/apache2/sites-available</code>
+<code>echo "127.0.0.1 $host.local" | sudo tee -a /etc/hosts</code>
+<code>echo "127.0.0.1 www.$host.local" | sudo tee -a /etc/hosts</code>
+<code>sudo a2ensite host</code>
+<code>sudo systemctl reload apache2</code>
+
+<em>шаблон vhosts.template</em>
+
+<code>&lt;VirtualHost *:80&gt;</code>
+<code>ServerAdmin webmaster@dummy-host.example.com</code>
+<code>DocumentRoot "/var/www/host.local"</code>
+<code>ServerName host.local</code>
+<code>ServerAlias www.host.local</code>
+<code>ErrorLog "logs/host.local-error_log"</code>
+<code>CustomLog "logs/host.local-access_log" common</code>
+<code>&lt;/VirtualHost&gt;</code>
+
+<code>&lt;VirtualHost *:443&gt;</code>
+<code>DocumentRoot "/var/www/host.local"</code>
+<code> </code>
+<code>ServerName host.local</code>
+<code>ServerAlias www.host.local</code>
+<code>SSLEngine On</code>
+<code>SSLCertificateFile "/etc/ssl/certs/host.crt"</code>
+<code>SSLCertificateKeyFile "/etc/ssl/private/host.key"</code>
+
+<code>&lt;Directory "/var/www/host.local"&gt;</code>
+<code>Options All</code>
+<code>AllowOverride All</code>
+<code>order allow,deny</code>
+<code>allow from all</code>
+<code>&lt;/Directory&gt;</code>
+<code>&lt;/VirtualHost&gt;</code>
+
+В каталог /etc/apache2/sites-available/ (доступные) переносим конфигурации апач на каждый сайт
+
+Выполняем чтобы включить сайт в обработку apache
+
+<code>sudo a2ensite имя-сайта.conf</code>
+
+Включаем ssl, rewrite для apache
+
+<code>sudo a2enmod ssl</code>
+<code>sudo a2enmod rewrite</code>
+
+делаем папку для логов
+
+<code>sudo mkdir /etc/apache2/logs</code>
+
+&nbsp;
+
+<code>systemctl reload apache2</code> — чтобы перезагрузить сервер
+
+<code>sudo systemctl status apache2</code> - чтобы просмотреть сообщения об ошибках
+
+&nbsp;
+
+Получаем на 8080 доступ к phpmyadmin
+
+<img class="alignnone wp-image-433 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-17.png" alt="" width="1320" height="728" />
+
+Заходим в админку
+
+<img class="alignnone wp-image-436 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-installed-phpmyadmin.png" alt="" width="1600" height="900" />
+
+Делаем импорт ( потребует времени, для чего и необходимо было увеличить лимиты в php.ini)
+
+<img class="alignnone wp-image-434 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-18.png" alt="" width="1320" height="728" />
+
+Подключаемся к сайту внутри виртуальной машине по ssl на порту 8443 (сайт на joomla)
+
+<img class="alignnone wp-image-437 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-local-site.png" alt="" width="1600" height="900" />
+
+Админка opencart
+
+<img class="alignnone wp-image-443 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Ubuntu-admin-shop.png" alt="" width="1600" height="900" /></p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

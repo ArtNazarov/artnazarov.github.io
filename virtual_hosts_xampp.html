@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Настройка виртуальных хостов в Xampp</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Настройка виртуальных хостов в Xampp</h1><p><ol>
+ 	<li>Создаем настроечный <em>шаблон</em> vhosts.template в каталоге /home/username
+
+<!--more-->
+
+<code>&lt;VirtualHost *:80&gt;</code>
+<code>ServerAdmin webmaster@dummy-host.example.com</code>
+<code>DocumentRoot "/opt/lampp/htdocs/domains/host.local"</code>
+<code>ServerName host.local</code>
+<code>ServerAlias www.host.local</code>
+<code>ErrorLog "logs/$host.local-error_log"</code>
+<code>CustomLog "logs/host.local-access_log" common</code>
+<code>&lt;/VirtualHost&gt;</code><code>&lt;VirtualHost *:443&gt;</code>
+<code>DocumentRoot "/opt/lampp/htdocs/domains/host.local"</code>
+<code>ServerName /opt/lampp/htdocs/domains/host.local</code>
+<code>ServerName host.local</code>
+<code>ServerAlias www.host.local</code>
+<code>SSLEngine On</code>
+<code>SSLCertificateFile "/opt/lampp/etc/ssl.crt/host.crt"</code>
+<code>SSLCertificateKeyFile "/opt/lampp/etc/ssl.key/host.key"</code><code>&lt;Directory "/opt/lampp/htdocs/domains/host.local"&gt;</code>
+<code>Options All</code>
+<code>AllowOverride All</code>
+<code>order allow,deny</code>
+<code>allow from all</code>
+<code>&lt;/Directory&gt;</code>
+<code>&lt;/VirtualHost&gt;</code></li>
+ 	<li>Создаем генератор настроек по шаблону gen-xampp-hosts.sh в /home/username
+содержимое файла
+<code><strong>read</strong> -p "Enter your host [new.local]: " host</code>
+<code>host=${host:-new}</code>
+<code>echo "make keys $host"</code>
+<code>sudo <strong>openssl</strong> req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout "$host.key" -out "$host.crt"
+</code><code><strong>echo</strong> "Install certs ..."
+sudo <strong>cp</strong> *.key /opt/lampp/etc/ssl.key/
+sudo <strong>cp</strong> *.crt /opt/lampp/etc/ssl.crt/
+<strong>echo</strong> "Append to vhosts..."</code>
+<code><strong>sed</strong> -e "s/host/${host}/g" &lt;vhosts.template &gt; temp.conf</code>
+<code><strong>cat</strong> temp.conf | sudo <strong>tee</strong> -a /opt/lampp/etc/extra/httpd-vhosts.conf</code>
+<code><strong>echo</strong> "127.0.0.1 $host.local" | sudo <strong>tee</strong> -a /etc/hosts</code>
+<code><strong>echo</strong> "127.0.0.1 www.$host.local" | sudo <strong>tee</strong> -a /etc/host</code>s</li>
+ 	<li>Даем исполняемые права и запускаем
+<code><strong>chmod</strong> +x gen-xampp-hosts.sh                                 </code>
+<code><strong>sudo</strong> ./gen-xampp-hosts.sh</code><iframe src="//www.youtube.com/embed/FRxGZrTkqok" width="560" height="314" allowfullscreen="allowfullscreen"></iframe>
+Примечание - конфигурация будет дописана в конец файла
+/opt/lampp/etc/extra/httpd-vhosts.conf
+Ключи ssh будут размещены в соответствующих каталогах
+/opt/lampp/etc/ssl.crt и /opt/lampp/etc/ssl.key</li>
+ 	<li>Используя возможности dialog, можно переделать сценарий для псевдографического стиля
+<code>clear</code>
+<code>host=$(dialog --title "Add new virtual host" --backtitle "Host name: " --inputbox "" 8 180 2&gt;&amp;1 &gt;/dev/tty)</code>
+<code>if [ -n "$host" ]; then</code>
+<code>dialog --title "1/3" --msgbox "Install certs for $host.local" 6 44</code>
+<code>clear</code>
+<code>sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout "$host.key" -out "$host.crt"</code>
+<code>cp *.key /opt/lampp/etc/ssl.key/</code>
+<code>cp *.crt /opt/lampp/etc/ssl.crt/</code>
+<code>dialog --title "2/3" --msgbox "Write Apache conf for $host.local" 6 44</code>
+<code>clear</code>
+<code>sed -e "s/host/${host}/g" &lt;vhosts.template &gt; temp.conf</code>
+<code>cat temp.conf | sudo tee -a /opt/lampp/etc/extra/httpd-vhosts.conf</code>
+<code>dialog --title "3/3" --msgbox "Changes /etc/hosts for $host.local" 6 44</code>
+<code>clear</code>
+<code>echo "127.0.0.1 $host.local" | sudo tee -a /etc/hosts</code>
+<code>echo "127.0.0.1 www.$host.local" | sudo tee -a /etc/hosts</code>
+<code>dialog --title "All done" --msgbox "Restart Apache using /opt/lampp/xampp" 6 44</code>
+<code>clear</code>
+<code>else</code>
+<code>dialog --title "Cancel operation" --msgbox "No changes was made" 6 44</code>
+<code>clear</code>
+<code>fi</code>
+<iframe src="//www.youtube.com/embed/7yxdoA7FnY0" width="560" height="314" allowfullscreen="allowfullscreen"></iframe>5. В рабочей среде gnome или kde можно использовать gdialog и kdialog соответственно, что потребует незначительной переделки сценария, например,<code>host=$(kdialog --title "Ввод информации" --inputbox "Адрес хоста" "new");</code>
+<code>if [ -n "$host" ]; then</code>
+<code>kdialog --title "1/3" --msgbox "Install certs for $host.local" 6 44</code><code>sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout "$host.key" -out "$host.crt"</code>
+<code>sudo cp *.key /opt/lampp/etc/ssl.key/</code>
+<code>sudo cp *.crt /opt/lampp/etc/ssl.crt/</code>
+<code>kdialog --title "2/3" --msgbox "Write Apache conf for $host.local" 6 44</code><code>sed -e "s/host/${host}/g" &lt;vhosts.template &gt; temp.conf</code>
+<code>cat temp.conf | sudo tee -a /opt/lampp/etc/extra/httpd-vhosts.conf</code>
+<code>kdialog --title "3/3" --msgbox "Changes /etc/hosts for $host.local" 6 44</code>
+
+<code>echo "127.0.0.1 $host.local" | sudo tee -a /etc/hosts</code>
+<code>echo "127.0.0.1 www.$host.local" | sudo tee -a /etc/hosts</code>
+<code>kdialog --title "All done" --msgbox "Restart Apache using /opt/lampp/xampp" 6 44</code>
+
+<code>else</code>
+<code>kdialog --title "Cancel operation" --msgbox "No changes was made" 6 44</code>
+
+<code>fi</code>
+
+<iframe src="//www.youtube.com/embed/SnSU4CS1fLo" width="560" height="314" allowfullscreen="allowfullscreen"></iframe></li>
+</ol>
+<!--more-->
+
+<!--more-->
+</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

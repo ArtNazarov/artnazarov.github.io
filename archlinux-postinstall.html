@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Скрипт настройки Arch Linux</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,17 +39,83 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
-<i>Теги документа</i> 
+<h1>Скрипт настройки Arch Linux</h1><p>Заметка посвящена возможностям скрипта, с помощью которого можно донастроить  Arch сразу после установки
 
+<!--more-->
+
+Страница скрипта <a href="https://github.com/ArtNazarov/arch-postinstall">https://github.com/ArtNazarov/arch-postinstall </a>
+
+Переходим в терминал, делаем скрипт запускаемым
+<code><strong>chmod</strong> +x arch-postinstall.sh</code>
+
+Запускаем <code>./arch-postinstall.sh</code>
+
+От предлагаемых возможностей <strong>можно</strong> отказаться, нажав N или Enter, чтобы установить
+выбираем Y
+<h3 style="text-align: center;"><strong>Возможности</strong></h3>
+<p style="text-align: center;"><strong>Начальная настройка</strong></p>
+
+<ul>
+ 	<li>Обновление ключей</li>
+ 	<li>Системные утилиты</li>
+ 	<li>Общее обновление системы</li>
+</ul>
+<p style="text-align: center;"><strong>Установка ядер на выбор</strong></p>
+
+<ul>
+ 	<li>Установка ядра Xanmod, или</li>
+ 	<li>Установка ядра Linux Tkg</li>
+ 	<li>Установка ядра Zen</li>
+ 	<li>Установка утилит сборки, компоновки, линковки, компиляции</li>
+ 	<li>Настройка сети</li>
+ 	<li>Утилиты управления частотой процессора</li>
+</ul>
+<p style="text-align: center;"><strong>Пакетные менеджеры</strong></p>
+
+<ul>
+ 	<li>Установка Flatpak</li>
+ 	<li>Установка Snap
+<p style="text-align: center;"><strong>Настройка видеосистемы</strong></p>
+</li>
+ 	<li>Установка Mesa</li>
+ 	<li>Установка Vulkan</li>
+ 	<li>Установка DBus broker для видео</li>
+</ul>
+&nbsp;
+<p style="text-align: center;"><strong>При переустановке</strong></p>
+
+<ul>
+ 	<li>Очистка кеша шрифтов</li>
+ 	<li>Очистка предыдущей инсталляции Chrome
+<p style="text-align: center;"><strong>Безопасность</strong></p>
+</li>
+ 	<li>Установка утилит безопасности (apparmor, firejail)
+<p style="text-align: center;"><strong>Звуковая система и bluetooth</strong></p>
+</li>
+ 	<li>Установка утилит для bluetooth</li>
+ 	<li>Установка звуковой системы (Alsa, Pipewire или PulseAudio)</li>
+ 	<li>Установка аудиоплееров
+<p style="text-align: center;"><strong>Прочие приложения (необязательно)</strong></p>
+</li>
+ 	<li>Установка торрент клиента</li>
+ 	<li>Инструменты разработчика</li>
+ 	<li>Установка софта из flatpak</li>
+ 	<li>Установка центра приложений pamac</li>
+ 	<li>Установка видеоплеера</li>
+ 	<li>Установка хранилки паролей</li>
+ 	<li>Установка WINE для приложений Windows
+<p style="text-align: center;"><strong>Оптимизации</strong></p>
+</li>
+ 	<li>Утилита ANANICY</li>
+ 	<li>Утилита RNG (не ставить, если выбран ANANICY)</li>
+ 	<li>Утилита HAVEGED</li>
+ 	<li>Настройка Trim для ssd</li>
+</ul>
+Скринкаст в реальном времени
+
+<iframe src="//www.youtube.com/embed/l7fq3ntVQUg" width="560" height="314" allowfullscreen="allowfullscreen"></iframe></p>
+<i>Теги документа</i> 
+&nbsp;<a href="/tags/arch.html">ArchLinux</a>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 

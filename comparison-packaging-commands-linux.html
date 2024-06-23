@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Сравнение команд для различных пакетных менеджеров</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Сравнение команд для различных пакетных менеджеров</h1><p>Перечень команд для управления установкой, обновлением, удалением и восстановлением программ в Linux
+для различных пакетных систем
+
+<!--more-->
+<h2>Основные операции</h2>
+<table>
+<tbody>
+<tr>
+<th>Действия</th>
+<th>Arch</th>
+<th>Red Hat/Fedora</th>
+<th>Debian/Ubuntu</th>
+<th>SLES/openSUSE</th>
+<th>Gentoo</th>
+</tr>
+<tr>
+<td>Поиск пакета</td>
+<td><code>pacman -Ss</code></td>
+<td><code>dnf search</code></td>
+<td><code>apt search</code></td>
+<td><code>zypper search</code> или
+
+<code>zypper se [-s]</code></td>
+<td><code>emerge -S</code></td>
+</tr>
+<tr>
+<td>Установка пакета по имени</td>
+<td><code>pacman -S</code></td>
+<td><code>dnf install</code></td>
+<td><code>apt install</code></td>
+<td><code>zypper install</code> или <code>zypper in</code></td>
+<td><code>emerge [-a]</code></td>
+</tr>
+<tr>
+<td>Обновление пакетов до новых версий</td>
+<td><code>pacman -Syu</code></td>
+<td><code>dnf upgrade</code></td>
+<td><code>apt update</code> и затем <code>apt upgrade</code></td>
+<td><code>zypper update</code> или <code>zypper up</code></td>
+<td><code>emerge -[a]uDN @world</code></td>
+</tr>
+<tr>
+<td>Полное обновление системы</td>
+<td><code>pacman -Syu</code></td>
+<td><code>dnf distro-sync</code></td>
+<td><code>apt update</code> и затем <code>apt dist-upgrade</code></td>
+<td><code>zypper dup</code></td>
+<td><code>emerge -[a]uDN @world</code></td>
+</tr>
+<tr>
+<td>Удаление пакета со всеми его зависимостями</td>
+<td><code>pacman -Rs</code></td>
+<td><code>dnf remove</code></td>
+<td><code>apt autoremove</code></td>
+<td><code>zypper remove</code> или <code>zypper rm</code></td>
+<td><code>emerge -[a]vc</code></td>
+</tr>
+<tr>
+<td>Удаление пакета с конфигурационными файлами</td>
+<td><code>pacman -Rn</code></td>
+<td>?</td>
+<td><code>apt purge</code></td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>Удаление пакета с зависимостями и с конфигурацией</td>
+<td><code>pacman -Rns</code></td>
+<td>?</td>
+<td><code>apt autoremove --purge</code></td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>Удаление зависимостей, которые более не нужны ( осиротевшие )</td>
+<td><code>pacman -Qdtq | pacman -Rs -</code> (<code>-Qdttq</code> для игнорирования необязательных )</td>
+<td><code>dnf autoremove</code></td>
+<td><code>apt autoremove</code></td>
+<td><code>zypper rm -u</code> (только удаляет пакет) либо <code>zypper packages --unneeded</code> (выдает список)</td>
+<td><code>emerge [-a] --depclean</code></td>
+</tr>
+<tr>
+<td>Удаление пакетов, не входящих ни в один репозиторий</td>
+<td><code>pacman -Qmq | pacman -Rs -</code></td>
+<td><code>dnf repoquery --extras</code></td>
+<td><code>aptitude purge '/home/username/o'</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Установленный ранее пакет отметить как явно требуемую зависимость</td>
+<td><code>pacman -D --asexplicit</code></td>
+<td><code>dnf mark install</code></td>
+<td><code>apt-mark manual</code></td>
+<td><code>zypper install --force</code> (обходной вариант, потребует переустановки пакета)</td>
+<td><code>emerge --select</code></td>
+</tr>
+<tr>
+<td>Установка пакета как зависимости, но не явно требуемой</td>
+<td><code>pacman -S --asdeps</code></td>
+<td><code>dnf install</code> и затем <code>dnf mark remove</code></td>
+<td><code>apt-mark auto</code></td>
+<td>n/a</td>
+<td><code>emerge [-a] --oneshot</code> или <code>emerge [-a] -1</code></td>
+</tr>
+<tr>
+<td>Только скачивание пакетов, без распаковки и установки</td>
+<td><code>pacman -Sw</code></td>
+<td><code>dnf download</code></td>
+<td><code>apt install --download-only</code> (в кеш пакетов) или <code>apt download</code> (в обход кеша пакетов)</td>
+<td><code>zypper --download-only</code></td>
+<td><code>emerge [-a] --fetchonly</code></td>
+</tr>
+<tr>
+<td>Очищает локальные кеши</td>
+<td><code>pacman -Sc</code> или <code>pacman -Scc</code></td>
+<td><code>dnf clean all</code></td>
+<td><code>apt autoclean</code> удалит только ненужные или <code>apt clean</code></td>
+<td><code>zypper clean</code></td>
+<td><code>eclean distfiles</code></td>
+</tr>
+<tr>
+<td>Оболочка для ввода команд</td>
+<td></td>
+<td><code>dnf shell</code></td>
+<td></td>
+<td><code>zypper shell</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Показать журнал действий</td>
+<td>открыть <code>/var/log/pacman.log</code></td>
+<td><code>dnf history</code></td>
+<td>открыть <code>/var/log/dpkg.log</code></td>
+<td>открыть <code>/var/log/zypp/history</code></td>
+<td>открыть <code>/var/log/portage</code></td>
+</tr>
+<tr>
+<td>Получение дампа системной информации, состояния пакетов</td>
+<td>просмотр <code>/var/lib/pacman/local</code></td>
+<td>просмотр <code>/var/lib/rpm/Packages</code></td>
+<td><code>apt-cache stats</code></td>
+<td></td>
+<td><code>emerge --info</code></td>
+</tr>
+<tr>
+<td>Доставить изменения по e-mail</td>
+<td></td>
+<td></td>
+<td><code>apt install apt-listchanges</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Запрос определенных пакетов</h2>
+<table>
+<tbody>
+<tr>
+<th>Action</th>
+<th>Arch</th>
+<th>Red Hat/Fedora</th>
+<th>Debian/Ubuntu</th>
+<th>SLES/openSUSE</th>
+<th>Gentoo</th>
+</tr>
+<tr>
+<td>Вся или большая часть информации по пакету</td>
+<td><code>pacman -Si</code> или <code>pacman -Qi</code></td>
+<td><code>dnf list</code> или <code>dnf info</code></td>
+<td><code>apt show</code> или <code>apt-cache policy</code></td>
+<td><code>zypper info</code> или <code>zypper if</code></td>
+<td><code>emerge -S</code>, <code>emerge -pv</code> или <code>eix</code></td>
+</tr>
+<tr>
+<td>Отображение информации о локальном пакете</td>
+<td><code>pacman -Qi</code></td>
+<td><code>rpm -qi</code> / <code>dnf info installed</code></td>
+<td><code>dpkg -s</code> или <code>aptitude show</code></td>
+<td><code>zypper info</code> или <code>rpm -qi</code></td>
+<td><code>emerge -pv</code> или <code>emerge -S</code></td>
+</tr>
+<tr>
+<td>Отображение информации по удаленному пакету</td>
+<td><code>pacman -Si</code></td>
+<td><code>dnf info</code></td>
+<td><code>apt-cache show</code> или <code>aptitude show</code></td>
+<td><code>zypper info</code></td>
+<td><code>emerge -pv</code> и <code>emerge -S</code> или <code>equery meta</code></td>
+</tr>
+<tr>
+<td>Показать файлы, предоставленные локальным пакетом</td>
+<td><code>pacman -Ql</code></td>
+<td><code>rpm -ql</code></td>
+<td><code>dpkg -L</code></td>
+<td><code>rpm -ql</code></td>
+<td><code>equery files</code> либо <code>qlist</code></td>
+</tr>
+<tr>
+<td>Показать файлы, предоставленные удаленны пакетом</td>
+<td><code>pacman -Fl</code></td>
+<td><code>dnf repoquery -l</code> или <code>repoquery -l</code> (из пакета yum-utils)</td>
+<td><code>apt-file list</code></td>
+<td></td>
+<td><code>pfl</code></td>
+</tr>
+<tr>
+<td>Запрос пакета, который содержит нужный файл</td>
+<td><code>pacman -Qo</code></td>
+<td><code>rpm -qf</code> (только установленные) or <code>dnf provides</code> (всё) or <code>repoquery -f</code> (из пакета yum-utils)</td>
+<td><code>dpkg -S</code> либо <code>dlocate</code></td>
+<td><code>rpm -qf</code> (только установленные) или <code>zypper search -f</code> (всё)</td>
+<td><code>equery belongs</code> либо <code>qfile</code></td>
+</tr>
+<tr>
+<td>Перечислить файлы в пакете</td>
+<td><code>pacman -Ql</code> или <code>pacman -Fl</code></td>
+<td><code>dnf repoquery -l</code></td>
+<td><code>dpkg-query -L</code></td>
+<td><code>rpm -ql</code></td>
+<td><code>equery files</code> или <code>qlist</code></td>
+</tr>
+<tr>
+<td>Поискать с помощью регулярного выражения</td>
+<td><code>pacman -F</code></td>
+<td><code>dnf provides</code></td>
+<td><code>apt-file search</code></td>
+<td><code>zypper what-provides</code> либо <code>zypper wp</code></td>
+<td><code>equery belongs</code> (только установленные) либо <code>pfl</code></td>
+</tr>
+<tr>
+<td>Выполнить поиск, чтобы найти пакет, содержащий файл</td>
+<td><code>pacman -F</code></td>
+<td><code>dnf provides</code></td>
+<td><code>apt-file search</code> или <code>auto-apt</code></td>
+<td><code>zypper search -f</code></td>
+<td><code>equery belongs</code> или <code>qfile</code></td>
+</tr>
+<tr>
+<td>Показать историю изменений файла</td>
+<td><code>pacman -Qc</code></td>
+<td><code>dnf changelog</code></td>
+<td><code>apt-get changelog</code></td>
+<td><code>rpm -q --changelog</code></td>
+<td><code>equery changes -f</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Запрос списков пакетов</h2>
+<table>
+<tbody>
+<tr>
+<th>Action</th>
+<th>Arch</th>
+<th>Red Hat/Fedora</th>
+<th>Debian/Ubuntu</th>
+<th>SLES/openSUSE</th>
+<th>Gentoo</th>
+</tr>
+<tr>
+<td>Поиск пакетов по имени, описанию</td>
+<td><code>pacman -Ss</code></td>
+<td><code>dnf search</code></td>
+<td><code>apt search</code></td>
+<td><code>zypper search</code> или <code>zypper se -s</code></td>
+<td><code>emerge -S</code> или <code>eix</code></td>
+</tr>
+<tr>
+<td>Список пакетов, которые можно обновить</td>
+<td><code>pacman -Qu</code></td>
+<td><code>dnf list updates</code> or <code>dnf check-update</code></td>
+<td><code>apt list --upgradable</code></td>
+<td><code>zypper list-updates</code> или <code>zypper patch-check</code> (just for patches)</td>
+<td><code>emerge -uDNp @world</code></td>
+</tr>
+<tr>
+<td>Показать список всех пакетов</td>
+<td><code>pacman -Sl</code></td>
+<td><code>dnf list available</code></td>
+<td><code>apt-cache dumpavail</code> либо <code>apt-cache dump</code> (только кеш) или <code>apt-cache pkgnames</code></td>
+<td><code>zypper packages</code></td>
+<td><code>portageq all_best_visible /</code></td>
+</tr>
+<tr>
+<td>Список установленных пакетов</td>
+<td><code>pacman -Q</code></td>
+<td><code>dnf list installed</code></td>
+<td><code>dpkg --list | grep ^i</code></td>
+<td><code>zypper search --installed-only</code></td>
+<td><code>qlist -IC</code></td>
+</tr>
+<tr>
+<td>Список пакетов установленных, но недоступных в источниках</td>
+<td><code>pacman -Qm</code></td>
+<td><code>dnf list extras</code></td>
+<td><code>apt --installed list | grep ,local</code></td>
+<td><code>zypper se -si | grep 'System Packages'</code></td>
+<td><code>eix-test-obsolete</code></td>
+</tr>
+<tr>
+<td>Список недавно добавленных в источник пакетов</td>
+<td></td>
+<td><code>dnf list recent</code></td>
+<td><code>aptitude search '/home/username/N'</code> или <code>aptitude forget-new</code></td>
+<td></td>
+<td><code>eix-diff</code></td>
+</tr>
+<tr>
+<td>Список установленных локально</td>
+<td><code>pacman -Q</code></td>
+<td><code>rpm -qa</code></td>
+<td><code>dpkg -l</code> или <code>apt list --installed</code></td>
+<td><code>zypper search -s</code> или <code>rpm -qa</code></td>
+<td><code>qlist -ICv</code></td>
+</tr>
+<tr>
+<td>Поиск по локальным пакетам по названию и описанию</td>
+<td><code>pacman -Qs</code></td>
+<td><code>rpm -qa '*&lt;str&gt;*'</code></td>
+<td><code>aptitude search '/home/username/i(/home/username/n $name|/home/username/d $description)'</code></td>
+<td></td>
+<td><code>eix -S -I</code></td>
+</tr>
+<tr>
+<td>Список пакетов, не требуемых никаким другим</td>
+<td><code>pacman -Qtt</code></td>
+<td><code>dnf leaves</code> или <code>package-cleanup --leaves --all</code></td>
+<td><code>deborphan -anp1</code></td>
+<td></td>
+<td><code>emerge -pc</code></td>
+</tr>
+<tr>
+<td>Список пакетов установленных явно не как зависимости</td>
+<td><code>pacman -Qe</code></td>
+<td><code>dnf history userinstalled</code></td>
+<td><code>apt-mark showmanual</code></td>
+<td>grep -E '^i\+' (обход)</td>
+<td><code>emerge -pvO @selected</code> или <code>eix --selected</code></td>
+</tr>
+<tr>
+<td>Список пакетов установленных автоматически как зависимости</td>
+<td><code>pacman -Qd</code></td>
+<td>grep -E '^i[^+]' (обход)</td>
+<td><code>apt-mark showauto</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Запрос зависимостей пакета</h2>
+<table style="width: 108.38%;">
+<tbody>
+<tr>
+<th style="width: 13.8947%;">Action</th>
+<th style="width: 6.94737%;">Arch</th>
+<th style="width: 15.0526%;">Red Hat/Fedora</th>
+<th style="width: 22.2524%;">Debian/Ubuntu</th>
+<th style="width: 25.4627%;">SLES/openSUSE</th>
+<th style="width: 14.8112%;">Gentoo</th>
+</tr>
+<tr>
+<td style="width: 13.8947%;">Отображение обратных зависимостей ( пакетов, для которых требуется установка X)</td>
+<td style="width: 6.94737%;"><code>pacman -Sii</code> либо <code>pacman -Qii</code></td>
+<td style="width: 15.0526%;"><code>dnf repoquery --alldeps --whatrequires</code> либо <code>repoquery --whatrequires</code></td>
+<td style="width: 22.2524%;"><code>apt-cache rdepends</code>
+или <code>aptitude search /home/username/D$pattern</code></td>
+<td style="width: 25.4627%;"><code>zypper search --requires</code></td>
+<td style="width: 14.8112%;"><code>emerge -pvc</code></td>
+</tr>
+<tr>
+<td style="width: 13.8947%;">Показать конфликтующие пакеты с данным</td>
+<td style="width: 6.94737%;"><code>pacman -Si</code> или <code>pacman -Qi</code></td>
+<td style="width: 15.0526%;"><code>dnf repoquery --conflicts</code></td>
+<td style="width: 22.2524%;"><code>aptitude search '/home/username/C$pattern'</code></td>
+<td style="width: 25.4627%;"></td>
+<td style="width: 14.8112%;"></td>
+</tr>
+<tr>
+<td style="width: 13.8947%;">Перечислить все прямые зависимости для данного</td>
+<td style="width: 6.94737%;"><code>pacman -Si</code> или <code>pacman -Qi</code></td>
+<td style="width: 15.0526%;"><code>dnf repoquery --requires</code> или <code>repoquery -R</code></td>
+<td style="width: 22.2524%;"><code>apt-cache depends</code> или <code>apt-cache show</code></td>
+<td style="width: 25.4627%;"><code>zypper info --requires</code></td>
+<td style="width: 14.8112%;"><code>emerge -ep</code></td>
+</tr>
+<tr>
+<td style="width: 13.8947%;">Посмотреть, что предоставляет данный пакет</td>
+<td style="width: 6.94737%;"><code>pacman -Sii</code> или <code>pacman -Qii</code></td>
+<td style="width: 15.0526%;"><code>dnf repoquery --provides</code></td>
+<td style="width: 22.2524%;"><code>dpkg -s</code> или <code>aptitude show</code></td>
+<td style="width: 25.4627%;"><code>zypper info --provides</code></td>
+<td style="width: 14.8112%;"><code>equery files</code> or <code>qlist</code></td>
+</tr>
+<tr>
+<td style="width: 13.8947%;">Список всех пакетов для которых требуется данный</td>
+<td style="width: 6.94737%;"><code>pacman -Sii</code></td>
+<td style="width: 15.0526%;"><code>dnf repoquery --installed --alldeps --whatrequires</code></td>
+<td style="width: 22.2524%;"><code>aptitude search /home/username/D{depends,recommends,suggests}:$pattern</code> или <code>aptitude why</code></td>
+<td style="width: 25.4627%;"><code>zypper search --requires</code></td>
+<td style="width: 14.8112%;"><code>equery depends -a</code></td>
+</tr>
+<tr>
+<td style="width: 13.8947%;">Показать устаревшие</td>
+<td style="width: 6.94737%;"><code>pacman -Si</code> или <code>pacman -Qi</code></td>
+<td style="width: 15.0526%;"><code>dnf list obsoletes</code></td>
+<td style="width: 22.2524%;"><code>apt-cache show</code></td>
+<td style="width: 25.4627%;"></td>
+<td style="width: 14.8112%;"></td>
+</tr>
+<tr>
+<td style="width: 13.8947%;">Создать выходный данные, пригодные для обработки в dotty</td>
+<td style="width: 6.94737%;"></td>
+<td style="width: 15.0526%;"></td>
+<td style="width: 22.2524%;"><code>apt-cache dotty</code></td>
+<td style="width: 25.4627%;"></td>
+<td style="width: 14.8112%;"></td>
+</tr>
+</tbody>
+</table>
+<h2>Управление источниками установки</h2>
+<table>
+<tbody>
+<tr>
+<th>Action</th>
+<th>Arch</th>
+<th>Red Hat/Fedora</th>
+<th>Debian/Ubuntu</th>
+<th>SLES/openSUSE</th>
+<th>Gentoo</th>
+</tr>
+<tr>
+<td>Настройки</td>
+<td>правка <code>/etc/pacman.conf</code></td>
+<td>правка <code>/etc/yum.repos.d/${REPO}.repo</code></td>
+<td>правка <code>/etc/apt/sources.list</code></td>
+<td>правка <code>/etc/zypp/repos.d/${REPO}.repo</code></td>
+<td><code>layman</code> или <code>eselect repository</code></td>
+</tr>
+<tr>
+<td>Добавление источника</td>
+<td>правка <code>/etc/pacman.conf</code></td>
+<td><code>/etc/yum.repos.d/*.repo</code></td>
+<td><code>apt-cdrom add</code></td>
+<td><code>zypper service-add</code></td>
+<td><code>layman</code> или <code>overlays</code></td>
+</tr>
+<tr>
+<td>Обновить информацию по источнику</td>
+<td><code>pacman -Sy</code></td>
+<td><code>dnf clean expire-cache</code>а затем <code>dnf check-update</code></td>
+<td><code>apt-get update</code></td>
+<td><code>zypper refresh</code> или <code>zypper ref</code></td>
+<td><code>emerge --sync</code> или <code>layman -S</code></td>
+</tr>
+<tr>
+<td>Вывести все источники установки</td>
+<td><code>cat /etc/pacman.d/mirrorlist</code></td>
+<td><code>cat /etc/yum.repos.d/*</code></td>
+<td><code>apt-cache policy</code></td>
+<td><code>zypper service-list</code></td>
+<td><code>layman -l</code> или <code>eselect repository list</code></td>
+</tr>
+<tr>
+<td>Вывести все пакеты , доступные в репозитории</td>
+<td><code>paclist &lt;repo&gt;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>eix --in-overlay</code></td>
+</tr>
+<tr>
+<td>Сделать источник недоступным</td>
+<td></td>
+<td><code>dnf --disablerepo=</code></td>
+<td></td>
+<td></td>
+<td><code>emerge package::repo-to-use</code></td>
+</tr>
+<tr>
+<td>Загрузить пакеты из другой версии дистрибутива</td>
+<td><code>pacman -S </code><code><em>repo_name</em></code><code>/</code><code><em>package</em></code></td>
+<td><code>dnf --releasever=</code></td>
+<td><code>apt-get install -t release package</code> или <code>apt-get install package/release</code> (не охватывает зависимости)</td>
+<td></td>
+<td><code>echo "category/package /home/username/amd64" &gt;&gt; /etc/portage/package.keywords</code> а потом<code>emerge package</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Переопределения</h2>
+<table>
+<tbody>
+<tr>
+<th>Action</th>
+<th>Arch</th>
+<th>Red Hat/Fedora</th>
+<th>Debian/Ubuntu</th>
+<th>SLES/openSUSE</th>
+<th>Gentoo</th>
+</tr>
+<tr>
+<td>Заблокировать изменения пакета</td>
+<td>edit <code>/etc/pacman.conf</code> измени IgnorePkg</td>
+<td>edit <code>dnf.conf</code> добавь <code>exclude</code></td>
+<td><code>apt-mark hold pkg</code></td>
+<td><code>zypper al</code> or положи имя пакета в<code>/etc/zypp/locks</code></td>
+<td><code>/etc/portage/package.mask</code></td>
+</tr>
+<tr>
+<td>Удалить правило блокировки пакета</td>
+<td>edit <code>/etc/pacman.conf</code> удалит пакет из строки IgnorePkg</td>
+<td></td>
+<td><code>apt-mark unhold pkg</code></td>
+<td><code>zypper rl</code> or удали имя пакета из<code>/etc/zypp/locks</code></td>
+<td><code>/etc/portage/package.mask</code> (или <code>package.unmask</code>)</td>
+</tr>
+<tr>
+<td>Показать список правил</td>
+<td><code>cat /etc/pacman.conf</code></td>
+<td></td>
+<td><code>/etc/apt/preferences</code></td>
+<td><code>zypper ll</code> или просмотр<code>/etc/zypp/locks</code></td>
+<td><code>cat /etc/portage/package.mask</code></td>
+</tr>
+<tr>
+<td>Установить приоритет пакета</td>
+<td>правка <code>/etc/pacman.conf</code> измени HoldPkg и/или IgnorePkg</td>
+<td></td>
+<td><code>/etc/apt/preferences</code>, <code>apt-cache policy</code></td>
+<td><code>zypper mr -p</code></td>
+<td>правка <code>/etc/portage/package.accept_keywords</code> внеси строку <code>=category/package-version</code></td>
+</tr>
+<tr>
+<td>Удаление приоритета</td>
+<td></td>
+<td></td>
+<td><code>/etc/apt/preferences</code></td>
+<td><code>zypper mr -p</code></td>
+<td>правка <code>/etc/portage/package.accept_keywords</code> удали соотв. строку</td>
+</tr>
+<tr>
+<td>Показать список приоритетов</td>
+<td></td>
+<td></td>
+<td><code>apt-cache policy</code> или <code>/etc/apt/preferences</code></td>
+<td><code>zypper lr -p</code></td>
+<td><code>grep -r . /etc/portage/package.accept_keywords</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Верификация и восстановление</h2>
+<table>
+<tbody>
+<tr>
+<th>Action</th>
+<th>Arch</th>
+<th>Red Hat/Fedora</th>
+<th>Debian/Ubuntu</th>
+<th>SLES/openSUSE</th>
+<th>Gentoo</th>
+</tr>
+<tr>
+<td>Проверить один пакет</td>
+<td><code>pacman -Qk</code> (<code>можно добавить еще k</code>)</td>
+<td><code>rpm -V</code></td>
+<td><code>debsums</code></td>
+<td><code>rpm -V</code></td>
+<td><code>equery check</code></td>
+</tr>
+<tr>
+<td>Проверить все пакеты</td>
+<td><code>pacman -Qk</code> (можно добавит еще <code>k</code>)</td>
+<td><code>rpm -Va</code></td>
+<td><code>debsums</code></td>
+<td><code>rpm -Va</code></td>
+<td><code>equery check</code></td>
+</tr>
+<tr>
+<td>Переустановка пакета</td>
+<td><code>pacman -S</code></td>
+<td><code>dnf reinstall</code></td>
+<td><code>apt install --reinstall</code></td>
+<td><code>zypper install --force</code></td>
+<td><code>emerge -1O</code></td>
+</tr>
+<tr>
+<td>Проверить зависимости по всей системе</td>
+<td><code>pacman -Dk</code></td>
+<td><code>dnf repoquery --requires</code></td>
+<td><code>apt-get check</code></td>
+<td><code>zypper verify</code></td>
+<td><code>emerge -uDN @world</code></td>
+</tr>
+<tr>
+<td>Исправление сломанных зависимостей</td>
+<td>для уровня зависимостей <em>pacman</em>, используй <code>pacman -Dk</code>; для библиотек общего доступа нужен <a href="https://aur.archlinux.org/packages/findbrokenpkgs/">findbrokenpkgs </a> <code>lddd</code> (из <a href="https://archlinux.org/packages/?name=devtools">devtools</a>)</td>
+<td><code>dnf repoquery --unsatisfied</code></td>
+<td><code>apt-get --fix-broken</code> а затем<code>aptitude install</code></td>
+<td><code>zypper verify</code></td>
+<td><code>revdep-rebuild</code></td>
+</tr>
+<tr>
+<td>Список контрольных точек</td>
+<td>n/a</td>
+<td><code>dnf history list</code></td>
+<td></td>
+<td>n/a</td>
+<td></td>
+</tr>
+<tr>
+<td>Откатить на контрольную точку</td>
+<td>n/a</td>
+<td><code>dnf history rollback</code></td>
+<td></td>
+<td>n/a</td>
+<td></td>
+</tr>
+<tr>
+<td>Отмена одиночной транзакции</td>
+<td>n/a</td>
+<td><code>dnf history undo</code></td>
+<td></td>
+<td>n/a</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Использование файлов пакетов и сборка пакетов</h2>
+<table>
+<tbody>
+<tr>
+<th>Action</th>
+<th>Arch</th>
+<th>Red Hat/Fedora</th>
+<th>Debian/Ubuntu</th>
+<th>SLES/openSUSE</th>
+<th>Gentoo</th>
+</tr>
+<tr>
+<td>Запросить пакет, предоставленный в командной строке</td>
+<td><code>pacman -Qp</code></td>
+<td><code>rpm -qp</code></td>
+<td><code>dpkg -I</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Список содержимого пакета</td>
+<td><code>pacman -Qpl</code></td>
+<td><code>rpmls rpm -qpl</code></td>
+<td><code>dpkg -c</code></td>
+<td><code>rpm -qpl</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Установить локальный пакет из файла</td>
+<td><code>pacman -U</code></td>
+<td><code>dnf install</code></td>
+<td><code>apt install</code></td>
+<td><code>zypper in</code></td>
+<td><code>emerge</code></td>
+</tr>
+<tr>
+<td>Обновить пакет из локального файла</td>
+<td><code>pacman -U</code></td>
+<td><code>dnf upgrade</code></td>
+<td><code>debi</code></td>
+<td></td>
+<td><code>emerge</code></td>
+</tr>
+<tr>
+<td>Добавить локальный пакет в кеш</td>
+<td><code>cp </code><code><em>package-filename</em></code><code> /var/cache/pacman/pkg/</code></td>
+<td></td>
+<td><code>apt-cache add </code><code><em>package-filename</em></code></td>
+<td>n/a</td>
+<td><code>cp </code><code><em>package-filename</em></code><code> /usr/portage/distfiles</code></td>
+</tr>
+<tr>
+<td>Распаковать пакет</td>
+<td><code>tar -xvf</code></td>
+<td><code>rpm2cpio | cpio -vid</code></td>
+<td><code>dpkg-deb -x</code></td>
+<td><code>rpm2cpio | cpio -vid</code></td>
+<td><code>tar -jxvf</code></td>
+</tr>
+<tr>
+<td>Установка / удаление с учетом зависимостей</td>
+<td>Используй <a href="https://wiki.archlinux.org/title/ABS">ABS</a> и выполни <code>makepkg -seoc</code></td>
+<td><code>dnf builddep</code></td>
+<td><code>apt-get build-dep</code></td>
+<td><code>zypper si -d</code></td>
+<td><code>emerge -o</code></td>
+</tr>
+<tr>
+<td>Отобразить пакет с исходниками</td>
+<td></td>
+<td><code>dnf repoquery -s</code></td>
+<td><code>apt-cache showsrc</code></td>
+<td>n/a</td>
+<td></td>
+</tr>
+<tr>
+<td>Загрузить пакеты с исходниками</td>
+<td>Исп. <a href="https://wiki.archlinux.org/title/ABS">ABS</a> и выполни <code>makepkg -o</code></td>
+<td><code>dnf download --source</code></td>
+<td><code>apt-get source</code> или <code>debcheckout</code></td>
+<td><code>zypper source-install</code></td>
+<td><code>emerge --fetchonly</code></td>
+</tr>
+<tr>
+<td>Сборка из исходников</td>
+<td><code>makepkg -s</code></td>
+<td><code>rpmbuild -ba</code> (обычно) или <em>mock</em> (в  chroot)</td>
+<td><code>debuild</code></td>
+<td><code>rpmbuild -ba</code>, затем build, и затем <code>osc build</code></td>
+<td><code>ebuild</code> или <code>quickpkg</code></td>
+</tr>
+<tr>
+<td>Проверить на проблемы с упаковкой</td>
+<td><em>namcap</em>
+(требует <a href="https://archlinux.org/packages/?name=namcap">namcap</a>)</td>
+<td><em>rpmlint</em></td>
+<td><em>lintian</em></td>
+<td><em>rpmlint</em></td>
+<td><em>repoman</em></td>
+</tr>
+</tbody>
+</table>
+</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

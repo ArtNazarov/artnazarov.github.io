@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Считывание пользовательских параметров в bash</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Считывание пользовательских параметров в bash</h1><p><p style="text-align: justify;">Предыдущая заметка была посвящена сборке пакетов приложений, созданных в среде Lazarus. В этой заметке дается описание сборки установочного пакета ArchLinux другой популярной среды разработки Qt Creator.</p>
+<p style="text-align: justify;">Установочный пакет нужен для поставки исправного приложения конечному пользователю.</p>
+<!--more-->
+
+<hr />
+
+<ol>
+ 	<li>Устанавливаем <code>sudo <strong>pacman</strong> -S qtcreator</code></li>
+ 	<li>Создаем новое приложение - Файл, New project, приложение qt widgets</li>
+ 	<li>Приложение называем hello-qt, файлы размещаем в папке /home/username/qt-example/hello-qt</li>
+ 	<li>Оставляем остальные настройки по умолчанию</li>
+ 	<li>Нажимаем Сборка - Собрать проект</li>
+ 	<li>Закрываем среду</li>
+ 	<li>Открываем окно терминала, переходим в папку <code><strong> cd</strong> /home/username/qt-example/hello-qt</code></li>
+ 	<li>Нажимаем <code><strong>ls</strong></code>
+Выведет список файлов:
+CMakeLists.txt  CMakeLists.txt.user  main.cpp  mainwindow.cpp  mainwindow.h  mainwindow.ui</li>
+ 	<li>Создаем PKGBUILD
+<code><strong>touch</strong> PKGBUILD</code>
+Вставляем в редакторе
+(о приемах работы в vi есть заметка на сайте)
+<code><strong>vi</strong> PKGPUILD</code>
+следующий шаблон<code># Maintainer: Artem Nazarov &lt;artem@nazarow.ru&gt; </code>
+<code>pkgname=hello-qt </code>
+<code>pkgver=0.0.1 </code>
+<code>pkgrel=1 </code>
+<code>pkgdesc='Test app' </code>
+<code>arch=('x86_64') </code>
+<code>url="" </code>
+<code>license=('LGPL3') </code>
+<code>depends=() </code>
+<code>makedepends=() </code>
+<code>conflicts=() </code>
+<code>provides=() </code>
+<code>groups=() </code>
+<code>source=("hello-qt.pro" "main.cpp"  "mainwindow.cpp"  "mainwindow.h"  "mainwindow.ui") </code>
+<code>sha512sums=("SKIP" "SKIP" "SKIP" "SKIP" "SKIP") </code><code>build() { </code>
+<code> qmake PREFIX=/usr </code>
+<code> make </code>
+<code>} </code><code>package() { </code>
+<code>   make install </code>
+<code>}</code></li>
+ 	<li>Добавляем файл проекта
+<code><code><strong>touch</strong> hello-qt.pro</code></code>Вставляем строки , используя редактор <code style="color: #000000;"><code><strong>vi</strong> hello-qt.pro</code></code><code> # Tells build system that project uses Qt Core and Qt GUI modules. </code>
+<code>QT       += core gui </code><code># Prior to Qt 5 widgets were part of Qt GUI module. In Qt 5 we need to add Qt Widgets module. </code>
+<code>greaterThan(QT_MAJOR_VERSION, 4): QT += widgets </code><code># Specifies name of the binary. </code>
+<code>TARGET = hello-qt </code><code># Denotes that project is an application. </code>
+<code>TEMPLATE = app </code><code># List of source files (note: Qt Creator will take care about this list, you don't need to update is manually). </code>
+<code>SOURCES += main.cpp\ </code>
+<code>       mainwindow.cpp </code><code># List of header files (note: Qt Creator will take care about this list). </code>
+<code>HEADERS  += mainwindow.h </code>
+
+<code># List of "ui" files for a tool called Qt Designer, which is embedded into Qt Creator in newer versions of IDE (note: Qt Creator will take care about this li</code>
+<code>st). </code>
+<code>FORMS    += mainwindow.ui</code></li>
+ 	<li>Запускаем сборку пакета
+<code><strong>makepkg</strong> -si</code></li>
+ 	<li>Смотрим каталог (<strong><code>ls</code></strong>), появился установочный файл пакета
+<em><em>hello-qt-0.0.1-1-x86_64.pkg.tar.zst</em></em>Пользователь может установить программу из пакета так
+<code>sudo <strong>pacman</strong> -U hello-qt-0.0.1-1-x86_64.pkg.tar.zst</code></li>
+ 	<li>Запускаем установленную программу
+<code><strong>hello-qt</strong></code></li>
+ 	<li>Она была установлена по пути bin
+<code><strong>which</strong> hello-qt</code>
+/bin/hello-qt</li>
+ 	<li>Удаление пакета <code>sudo <strong>pacman</strong> -R hello-qt</code></li>
+</ol>
+</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

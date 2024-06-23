@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Использование Github Pages в HtmlBuilder</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,14 +39,33 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
+<h1>Использование Github Pages в HtmlBuilder</h1><p><p>Создайте репозиторий для статики, например, username.github.io</p>
+
+<p>Клонируйте репозиторий на свой компьютер</p>
+
+<p>Укажите папку репозитория в специальных настройках генератора</p>
+
+<p>Укажите папку с собранным сайтом в специальных настройках</p>
+
+<p>Перейдите на вкладку со сборкой. Нажмите опубликовать на Github</p>
+
+<p>Будет создан очередной коммит, в который будут добавлены рекурсивно
+ файлы и каталоги из папки сборки в каталог локального репозитория</p>
+
+<p>Чтобы перенести изменения (отправить/запушить коммит)
+из папки на компьютере на удаленный репозиторий на Github перейдите
+в Терминал (uxterm, konsole и т.п)
+и внутри папки с локальным репозиторием введите команду git push -u origin main , подтвердите
+публикацию изменений введя логин и пароль. Также можно открыть
+Github Desktop и отправить изменения, используя эту программу,
+при этом Github Desktop может спросить пароль от хранилища учетных данных
+</p>
+
+<p>Вы можете настроить хостинг для статических сайтов вроде Vercel,
+указать другой каталог и собирать сайт в папку произвольного
+репозитория. После отправки данных на удаленный сервер, хостер
+переопубликует на своем сервере или в своей CDN ваши файлы, перенеся
+изменения из удаленного репозитория</p>
 </p>
 <i>Теги документа</i> 
 

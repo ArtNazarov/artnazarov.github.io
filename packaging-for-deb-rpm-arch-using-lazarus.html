@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Создаем пакет Debian, Archlinux и Rpm для графического приложения Lazarus</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,51 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Создаем пакет Debian, Archlinux и Rpm для графического приложения Lazarus</h1><p><p style="text-align: justify;">В данной статье описан способ сборки пакета для приложений,
+написанных с помощью IDE Lazarus<!--more--></p>
+
+
+<hr />
+
+<ol>
+ 	<li>Устанавливаем Lazarus
+<code><code>sudo </code></code><strong>pacman</strong><code> -S lazarus-qt5</code></li>
+ 	<li>Создаем в домашнем каталоге папку lazfiles
+<code><code></code></code><strong>mkdir</strong><code> lazfiles</code></li>
+ 	<li>Создаем минимальное графическое приложение (Файл, Создать, Проект - Приложение), нажимаем сохранить всё, переходим в каталог lazfiles, выбираем имя проекта hello_app.</li>
+ 	<li>В главном меню выбираем Запуск, собрать. Закрываем IDE после окончания компиляции.</li>
+ 	<li>В каталоге lazfiles будет исполняемый файл hello_app.  Начнем с создания deb пакета</li>
+ 	<li>Установим dpkg - <code><code>sudo </code></code><strong>pacman</strong><code> -S dpkg</code></li>
+ 	<li>Создадим каталог для сборки пакета внутри lazfiles, например, hello_app
+<code><code></code></code><strong>mkdir</strong><code> hello_app-0.0.1/{DEBIAN,usr/local/bin} -p</code></li>
+ 	<li>Скопируем исполняемый по пути hello_app/usr/local/bin
+<code><code> </code></code><strong>cp</strong><code> hello_app hello_app-0.0.1/usr/local/bin/</code></li>
+ 	<li>Открываем в vi и добавляем по образцу строки
+<code><code> </code></code><strong>vi</strong><code> hello_app-0.0.1/DEBIAN/control</code><code>Package: hello </code>
+<code>Version: 0.0.1  </code>
+<code>Architecture: amd64  </code>
+<code>Maintainer: Artem Nazarov &lt;artem@nazarow.ru&gt;  </code>
+<code>Description: Example</code></li>
+ 	<li> Выполняем сборку пакета
+<code><code></code></code><strong>dpkg-deb</strong><code> --build --root-owner-group hello_app-0.0.1</code>
+Займет некоторое время...</li>
+ 	<li>Конвертируем пакет в формат Archlinux
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">yay -S debtap
+sudo debtap -u
+deptap hello_app-0.0.1.deb</pre>
+Вводим имя (не обязательно), лицензию (необязательно), нажимаем EnterНа выходе получаем pkg  файлhello-0.0.1-1-x86_64.pkg.tar.zst</li>
+ 	<li>Попробуем установить
+sudo pacman -U hello-0.0.1-1-x86_64.pkg.tar.zst
+
+Примеры zst пакетов - <a href="https://drive.google.com/file/d/1xa145DSGvI5XyAQK8AeiZd4BgcnxgwNC/view?usp=share_link">myoffice home edition 2022</a>, <a href="https://drive.google.com/file/d/1KWdpWHY2SCGAVU_ZYE8ClK-KvPedDMaH/view?usp=share_link">Yandex Browser 22.9.3 for Archlinux</a></li>
+ 	<li>В консоли браузера печатаем команду hello_app и запускается наше приложение.</li>
+ 	<li>Если необходимо получить rpm пакет, выполняем конвертацию с помощью утилиты alien
+<code><code></code></code><strong>yay</strong><code> -S alien_package_converter</code></li>
+ 	<li>Конвертируем из deb в rpm
+<code><code></code></code><strong>fakeroot</strong><code><code> </code></code><strong>alien</strong><code> -r hello_app-0.0.1.deb</code></li>
+ 	<li>В итоге получается rpm файл, пригодный для систем
+hello-0.0.1-2.amd64.rpm</li>
+</ol></p>
 <i>Теги документа</i> 
 
 <script>

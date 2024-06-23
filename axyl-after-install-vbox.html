@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Настройка LAMP с виртуальными хостами по SSH для виртуальной машины virtualbox c установленным Axyl</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Настройка LAMP с виртуальными хостами по SSH для виртуальной машины virtualbox c установленным Axyl</h1><p>Пример настройки Axyl для веб-разработки
+
+<!--more-->
+
+1. На хосте и на гостевой машине ставим openssh и включаем сервис sshd для проброса доступа
+<code>sudo pacman -S openssh
+sudo systemctl enable sshd.service
+sudo systemctl start sshd.service</code>
+
+2.1 В настройках сети VirtualBox пробрасываем гостевой порт 22 на порт 3022 хоста ( Настройки -&gt; Сеть -&gt; Дополнительно)
+2.2 В настройках сети VirtualBox пробрасываем гостевой порт 80 на порт 8080 хоста ( Настройки -&gt; Сеть -&gt; Дополнительно)
+<img class="alignnone wp-image-396 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-ports-config.png" alt="" width="1600" height="900" />
+3. Настраиваем общие папки.
+На хосте
+<code>sudo mkdir /mnt/shared_server
+sudo chown $USER:$USER /mnt/shared_server -R
+sudo chown 755 /mnt/shared_server</code>
+В настройках виртуальной машины ( Устройства - Общие папки - Настроить )
+добавляем
+/mnt/shared_server - путь на хосте
+имя папки shared_server
+автоподключение - да
+точка подключения /mnt/shared_server
+создать постоянную папку - да
+В терминале гостевой машины
+<code>sudo usermod -a -G vboxsf $USER</code>
+<img class="alignnone wp-image-398 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-shared-folders.png" alt="" width="1600" height="900" />
+Пробуем загрузится в консоль
+
+<code>ssh -p 3022 artem@127.0.0.1</code> ( пользователь гостевой машины, созданный на этапе установки )
+
+в сеансе ssh выполняем установку веб-сервера, php интерпретатора и mariadb
+
+sudo pacman -S apache
+sudo pacman -S php php-apache
+sudo pacman -S mariadb
+sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+По умолчанию пароль для пользователя root пустой.
+
+Запустим apache
+
+sudo systemctl enable httpd.service
+sudo systemctl start httpd.service
+
+открываем на хосте 127.0.0.1:8080 - отобразится страница следующего вида
+
+<img class="alignnone wp-image-399 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-apache.png" alt="" width="1600" height="900" />
+
+Необходимо внести некоторые настройки, чтобы php файлы обрабатывались интерпретатором
+
+в гостевой ставим nano: sudo pacman -S nano
+
+правим конфиг apache
+
+# nano /etc/httpd/conf/httpd.conf
+
+Ctrl+W mod_event и меняем на
+
+#LoadModule mpm_event_module modules/mod_mpm_event.so
+LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
+
+в конце файла
+
+LoadModule php_module modules/libphp.so
+AddHandler php-script .php
+Include conf/extra/php_module.conf
+
+создаем файл # nano /srv/http/index.php
+
+в гостевой машине с содержимым
+
+<code>&lt;? php echo "test"; ?&gt;</code>
+
+перезапускаем apache
+
+sudo systemctl restart httpd.service
+
+Открываем на хосте 127.0.0.1:8080<img class="alignnone wp-image-400 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-ready-LAMP.png" alt="" width="1600" height="900" />
+
+php сценарий обработан, базовая настройка сделана.
+
+Рассмотрим пример настройки виртуальных хостов
+
+правим /etc/hosts
+
+<code>127.0.0.1 server
+127.0.0.1 domain1.com
+127.0.0.1 domain2.com</code>
+
+Правим настройки apache
+
+# nano /etc/httpd/conf/httpd.conf
+
+Раскомментируем строку
+
+# Virtual hosts
+Include conf/extra/httpd-vhosts.conf
+
+добавляем каталоги для виртуальных хостов sudo nano /etc/httpd/conf/extra/httpd-vhosts.conf
+
+<code>
+ServerAdmin webmaster@domain1.com
+DocumentRoot "/srv/http/domain1.com"
+ServerName domain1.com
+ServerAlias www.domain1.com
+ErrorLog "/var/log/httpd/domain1.com-error_log"
+CustomLog "/var/log/httpd/domain1.com-access_log" common</code>
+
+ServerAdmin webmaster@domain2.com
+DocumentRoot "/srv/http/domain2.com"
+ServerName domain2.com
+ErrorLog "/var/log/httpd/domain2.com-error_log"
+CustomLog "/var/log/httpd/domain2.com-access_log" common
+
+В основной машине также правим /etc/hosts
+
+<code>127.0.0.1 server
+127.0.0.1 domain1.com
+127.0.0.1 domain2.com</code>
+
+В гостевой машине создадим 2 каталога для доменов
+<code>mkdir -p /srv/http/domain1.com
+mkdir -p /srv/http/domain2.com
+Добавим два файла
+sudo nano /srv/http/domain1.com/index.html
+sudo nano /srv/http/domain1.com/index.html</code>
+
+с содержимым domain1 и domain2 соответственно, сохраним (ctrl+o)
+
+Проверим синтаксис, перезапустим веб-сервер
+
+<code># apachectl configtest
+# systemctl restart httpd.service</code>
+
+Если все сделано верно, отобразится строка, соответствующая домену
+
+<img class="alignnone wp-image-403 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-virtualhosts.png" alt="" width="1600" height="900" />
+
+Также можно почитать про <a href="http://nazarow.ru/%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%be%d0%b2-%d0%b2%d0%b8%d1%80%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d0%bc/">образы</a> и про<a href="http://nazarow.ru/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b2%d0%b8%d1%80%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d1%85%d0%be%d1%81%d1%82%d0%be%d0%b2-%d0%b2-xampp/"> настройку виртуальных хостов</a>
+
+Модифицированный скрипт для Axyl (для добавления виртуального хоста)
+
+<code>read -p "Enter your host [new.local]: " host
+host=${host:-new}
+echo "make keys $host"
+sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout "$host.key" -out "$host.crt"
+echo "Install certs ..."
+sudo cp *.key /home/artem/ssl.key/
+sudo cp *.crt /home/artem/ssl.crt/
+echo "Append to vhosts..."
+sed -e "s/host/${host}/g"  temp.conf
+cat temp.conf | sudo tee -a /etc/httpd/conf/extra/httpd-vhosts.conf
+echo "127.0.0.1 $host.local" | sudo tee -a /etc/hosts
+echo "127.0.0.1 www.$host.local" | sudo tee -a /etc/hosts</code>
+
+Для добавления ключей server.crt, server.key
+
+<code>read -p "Enter your host [type server]: " host
+host=${host:-new}
+echo "make keys $host"
+sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout "$host.key" -out "$host.crt"
+sudo cp server.crt /etc/httpd/conf/
+sudo cp server.key /etc/httpd/conf/</code>
+
+Для SSL шифрования раскомментировать строки
+<code>Include conf/extra/httpd-ssl.conf
+LoadModule rewrite_module modules/mod_rewrite.so
+LoadModule ssl_module modules/mod_ssl.so
+LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+</code>
+в файле
+<code>sudo nano /etc/httpd/conf/httpd.conf </code>
+
+Итог - тестовое https соединение настроено
+
+<img class="alignnone wp-image-412 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-https3.png" alt="" width="1640" height="908" />
+
+<img class="alignnone wp-image-414 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-https4.png" alt="" width="1640" height="908" />
+
+если после запуска в Application Log  требует libcrypt.so.1, ставим <code>yay -S libxcrypt-compat</code></p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

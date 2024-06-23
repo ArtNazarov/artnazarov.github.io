@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Команды flatpak и snap в сравнении</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,79 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Команды flatpak и snap в сравнении</h1><p>Варианты команд для flatpak и snap
+
+<!--more-->
+<table style="width: 100%; height: 567px;">
+<tbody>
+<tr style="height: 24px;">
+<td style="width: 24.3182%; height: 24px;">Назначение</td>
+<td style="width: 55%; height: 24px;">Flatpak</td>
+<td style="width: 19.5455%; height: 24px;">Snap</td>
+</tr>
+<tr style="height: 150px;">
+<td style="width: 24.3182%; height: 150px;">Установка пакета</td>
+<td style="width: 55%; height: 150px;"><code>flatpak install аргумент</code>
+<code>1) источник
+</code><code> </code><code>id-приложения</code>
+<code>2) путь к локальному файлу .flatpakref
+3) короткое имя пакета</code><code>
+</code><code>4) ссылка на файл в сети .flatpakref</code></td>
+<td style="width: 19.5455%; height: 150px;"><code>snap install </code><code>имя</code></td>
+</tr>
+<tr style="height: 100px;">
+<td style="width: 24.3182%; height: 100px;">Просмотр установленных</td>
+<td style="width: 55%; height: 100px;"><code>flatpak list —app
+</td>
+<td style="width: 19.5455%; height: 100px;"><code>snap list</code></td>
+</tr>
+<tr style="height: 50px;">
+<td style="width: 24.3182%; height: 50px;">Обновить установленный</td>
+<td style="width: 55%; height: 50px;">flatpak update id-приложения</td>
+<td style="width: 19.5455%; height: 50px;"><code>snap refresh </code><code>имя</code></td>
+</tr>
+<tr style="height: 72px;">
+<td style="width: 24.3182%; height: 72px;">откатить версию</td>
+<td style="width: 55%; height: 72px;">flatpak remote-info --log flathub id-приложения
+flatpak update --commit=&lt;COMMIT_ID&gt;
+flatpak mask id-приложения</td>
+<td style="width: 19.5455%; height: 72px;"><code>snap revert </code><code>имя</code></td>
+</tr>
+<tr style="height: 25px;">
+<td style="width: 24.3182%; height: 25px;">удалить пакет</td>
+<td style="width: 55%; height: 25px;"><code>flatpak uninstall &lt;Application ID&gt;</code>
+или
+удаление неиспользуемого</code> <code>flatpak uninstall —unused</code>
+</td>
+<td style="width: 19.5455%; height: 25px;"><code>snap remove </code><code>имя</code></td>
+</tr>
+<tr style="height: 25px;">
+<td style="width: 24.3182%; height: 25px;">Поиск пакета</td>
+<td style="width: 55%; height: 25px;"><code>flatpak search &lt;искомая фраза&gt;</code></td>
+<td style="width: 19.5455%; height: 25px;"></td>
+</tr>
+<tr style="height: 73px;">
+<td style="width: 24.3182%; height: 73px;">Запуск</td>
+<td style="width: 55%; height: 73px;"><code>flatpak run &lt;Application ID&gt;</code></td>
+<td style="width: 19.5455%; height: 73px;">приложение будет доступно по пути <code>/snap/bin</code></td>
+</tr>
+<tr style="height: 48px;">
+<td style="width: 24.3182%; height: 48px;">Устранение неисправностей</td>
+<td style="width: 55%; height: 48px;"><code>flatpak repair</code></td>
+<td style="width: 19.5455%; height: 48px;"></td>
+</tr>
+<tr style="height: 48px;">
+<td style="width: 24.3182%; height: 48px;">Создание снимка</td>
+<td style="width: 55%; height: 48px;"></td>
+<td style="width: 19.5455%; height: 48px;"><code> snap save</code></td>
+</tr>
+<tr style="height: 48px;">
+<td style="width: 24.3182%; height: 48px;">Восстановление снимка</td>
+<td style="width: 55%; height: 48px;"> </td>
+<td style="width: 19.5455%; height: 48px;"><code>snap restore</code></td>
+</tr>
+</tbody>
+</table></p>
 <i>Теги документа</i> 
 
 <script>

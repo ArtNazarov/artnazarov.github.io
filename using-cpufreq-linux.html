@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Использование cpufreq в Linux</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,27 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Использование cpufreq в Linux</h1><p>В зависимости от дистрибутив, cpufreq может быть доступен как из основного пакетного менеджера, так и из под snap, второй вариант предпочтительнее.<!--more-->
+Для установки в Debian based системах
+<script src="https://gist.github.com/ArtNazarov/7aa05e84e49bf5f9f5ca630870360a9a.js"></script>
+После установки cpufrequtils можно ограничить следующими командами частоту
+<script src="https://gist.github.com/ArtNazarov/8669f5cd6bd6dc6e9711f582ef292974.js"></script>
+Далее, чтобы автоматически понижалась частота, нужно создать сервис для файла regim.sh:
+Создаем файл /etc/systemd/system/cpufreq.service
+<code>
+[Unit]
+Description=Cpufreq util service
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/username/regim.sh
+[Install]
+WantedBy=multi-user.target
+</code>
+Затем выполним включение и добавим сервис в автозагрузку
+<code>
+systemctl start cpufreq
+systemctl enable cpufreq
+</code></p>
 <i>Теги документа</i> 
 
 <script>

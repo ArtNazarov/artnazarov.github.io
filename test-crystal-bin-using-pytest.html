@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Пример расширения на Crystal и его тестирование с помощью PyTest</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,74 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Пример расширения на Crystal и его тестирование с помощью PyTest</h1><p>HtmlBuilder имеет поддержку расширений, посмотрим как написать простейший модуль на языке Crystal и протестируем его в pytest<!--more-->
+
+Начнем с установки компилятора
+<pre>sudo pacman -S crystal shards</pre>
+Затем создадим исполняемый файл Crystal, который откроет файл youtube.inp , в котором будет id ролика, и создаст файл youtube.out, в котором будет лежать  html разметка для плеера
+<pre># ВХОДНОЙ ФАЙЛ ИМЕЕТ ИМЯ МОДУЛЬ.inp
+path_source = "youtube.inp"
+# у выходного .out
+path_dest = "youtube.out"
+
+# создаем указатель на файл источник
+input_file = File.new path_source, "r"
+# считываем контент
+youtube_id = File.read path_source
+# шаблон плеера
+template = "&lt;iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/test-crystal-bin-using-pytest\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen&gt;&lt;\/iframe&gt;"
+# делаем замену
+html = template.sub("test-crystal-bin-using-pytest",youtube_id)
+# по смыслу это ID ролика
+# открываем указатель на запись
+
+File.write( path_dest, html)
+input_file.close
+</pre>
+Теперь расширение надо скомпилировать. Сохраним исходный код в youtube.cr
+
+<code>crystal build youtube.cr</code>
+
+В каталоге появится файл youtube, который можно запустить из консоли ./youtube
+
+Установим с помощью pip pytest для прогона тестов
+
+<code>pip install pytest</code>
+
+Следующим шагом является написание теста на Python
+<pre>import subprocess
+def test_youtube():
+example_input = open("youtube.inp", "w")
+example_input.write("8jed0wIQv_A")
+example_input.close()
+subprocess.run(["/home/artem/youtube-crystal/youtube", ""]);
+example_output = open("youtube.out", "r");
+# ожидаем
+expected = """&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/8jed0wIQv_A" title="YouTube video player" frameborder="0" allow="ac
+celerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;\n"""
+# считываем
+html = example_output.read()
+
+example_output.close
+# сравнили
+assert html == expected</pre>
+Идея теста простая - подготовим входные данные, вызовем внешнюю программу, затем сравним ожидаемый результат с эталоном
+
+Сохраним файл под именем test_youtube.py. Запустим тест с помощью pytest
+
+pytest test_youtube.py
+
+Результат показывает, что модуль прошел тестирование
+
+<code> = test session starts = </code>
+<code>platform linux -- Python 3.10.7, pytest-7.2.0, pluggy-1.0.0 </code>
+<code> </code>
+<code>plugins: anyio-3.6.1 </code>
+<code>collected 1 item                                                                                                                                             </code>
+
+<code>test_youtube.py .                                                                                                                                     [100%] </code>
+
+<code> = 1 passed in 0.04s = </code></p>
 <i>Теги документа</i> 
 
 <script>

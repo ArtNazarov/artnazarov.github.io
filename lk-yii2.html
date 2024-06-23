@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Делаем личный кабинет пользователю на Yii2</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Делаем личный кабинет пользователю на Yii2</h1><p>Рассмотрим способ, как создать личный кабинет пользователя с 3 функциями - смена e-mail, смена пароля, удаление аккаунта<!--more-->1. Для смены пароля нам понадобится - модель представления активной формы с валидацией данных, шаблон действия над активной формой смены пароля, дополнительный метод в модели пользователя, 2 метода в контроллере пользователя на get и post запросы.
+
+2. Аналогично по смене e-mail
+
+3. Действия для удаления аккаунта пользователя потребуют активную форму с флажком и модель представления этой формы, нужен будет и метод в контроллере.
+
+4. Поскольку в личный кабинет пользователя не должны заходить гости, в контроллере пользователя понадобятся 2 метода - действие по перенаправлению на заглушку ограниченный доступ, и функция, которая перенаправляет гостей на заглушку. Эту функцию следует вызывать внутри контроллера пользователя, если требуется авторизация.
+
+Рассмотрим пример с изменением пароля. В файл yii2/models/MySetPasswordForm.php добавим модель представления (MV) формы
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+
+namespace app\models;
+
+use Yii;
+use yii\base\Model;
+
+/**
+* LoginForm is the model behind the login form.
+*
+* @property-read User|null $user
+*
+*/
+class MySetPasswordForm extends Model
+{
+
+public $password;
+public $password2;
+
+/**
+* @return array the validation rules.
+*/
+public function rules()
+{
+return [
+['password', 'required'],
+['password2', 'required'],
+['password2', 'compare', 'compareAttribute'=&gt;'password', 'message'=&gt;'Не совпадают пароли']
+
+];
+}
+
+}</pre>
+<code></code>
+
+&nbsp;
+
+<code></code>
+
+2. В файл yii2/views/user/setpassword.php добавим представление активной формы
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;h1&gt;Смена пароля&lt;/h1&gt;
+&lt;div class="panel panel-info"&gt;
+&lt;div class='panel-heading'&gt;&lt;/div&gt;&lt;!-- comment --&gt;
+&lt;div class='panel-body'&gt;
+
+&lt;?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+$form = ActiveForm::begin([
+'id' =&gt; 'my-set-password-form',
+'options' =&gt; ['class' =&gt; 'form-horizontal'],
+]) ?&gt;
+
+&lt;?= $form-&gt;field($model, 'password')-&gt;passwordInput() ?&gt;
+&lt;?= $form-&gt;field($model, 'password2')-&gt;passwordInput() ?&gt;
+&lt;div class="form-group"&gt;
+&lt;div class="col-lg-offset-1 col-lg-11"&gt;
+&lt;?= Html::submitButton('Смена пароля', ['class' =&gt; 'btn btn-primary']) ?&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;?php ActiveForm::end() ?&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;</pre>
+&nbsp;
+
+3. В файл  yii2/models/UserRecord.php добавим метод модели для смены пароля
+<pre class="EnlighterJSRAW" data-enlighter-language="php">public function changePassword(string $password){
+$this-&gt;passhash = sha1($password); // назначаем хеш по паролю, sha1 для примера
+$this-&gt;save();
+}</pre>
+&nbsp;
+
+4. В файл yii2/controllers/UserController.php добавим обработчики действия по смене пароля
+<pre class="EnlighterJSRAW" data-enlighter-language="php">public function actionSetpassword(){
+
+$this-&gt;redirectToRestriced();
+
+if (yii::$app-&gt;request-&gt;isPost)
+return $this-&gt;actionSetpasswordPost();
+
+$mv = new MySetPasswordForm();
+
+return $this-&gt;render('/user/setpassword', ['model'=&gt;$mv]);
+}
+
+public function actionSetpasswordPost(){
+
+$this-&gt;redirectToRestriced();
+
+$mv = new MySetPasswordForm();
+$mv-&gt;load(yii::$app-&gt;request-&gt;post());
+
+$user = Yii::$app-&gt;user-&gt;identity;
+
+$user-&gt;changePassword($mv-&gt;password);
+
+return $this-&gt;redirect('/user/lk');
+}</pre>
+&nbsp;
+
+<code></code>
+
+5. Поскольку нам необходимо ограничить доступ в личный кабинет,
+то добавляем соответствующее представление yii2/views/user/restricted.php с сообщением
+Ограниченный доступ
+
+6. Сделаем шаблон представления личного кабинета /yii2/views/user/lk.php
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;h1&gt;Личный кабинет&lt;/h1&gt;
+Имя пользователя: &lt;!--?php echo $lk['username']; ?--&gt;
+
+&lt;a href="/user/setemail/"&gt;Сменить почту&lt;/a&gt;
+&lt;a href="/user/setpassword/"&gt;Сменить пароль&lt;/a&gt;
+&lt;!-- comment --&gt;
+
+&lt;hr /&gt;
+
+&lt;a href="/user/forget/"&gt;Удалить аккаунт&lt;/a&gt;</pre>
+&nbsp;
+
+7. Теперь сделаем модель представления для диалога Удаление пользователя yii2/models/MyForgetForm.php
+
+<!--?php &lt;/p&gt; &lt;p&gt;namespace app\models;&lt;/p&gt; &lt;p&gt;use Yii;&lt;br ?--> <code></code>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">use yii\base\Model;
+
+ 
+class MyForgetForm extends Model
+{
+
+public $confirmdelete;
+
+/**
+* @return array the validation rules.
+*/
+public function rules()
+{
+return [
+['confirmdelete', 'required']
+];
+}
+
+}</pre>
+<code></code>
+
+&nbsp;
+
+<code></code><code></code>
+
+8. В модели данных пользователя добавим методы для смены пароля, email, удаления аккаунта в yii2/models/UserRecord.php
+<pre class="EnlighterJSRAW" data-enlighter-language="php">public function changeEmail(string $email){
+
+$this-&gt;email = $email; // заменяем e-mail
+$this-&gt;save();
+
+}
+
+public function changePassword(string $password){
+$this-&gt;passhash = sha1($password); // назначаем хеш по паролю
+$this-&gt;save();
+}
+
+public function forgetUser(){
+$this-&gt;delete(); // удаляем текущего
+}</pre>
+&nbsp;
+
+&nbsp;
+
+9. Переходим к контроллеру пользователя. Добавим действия по смене пароля  yii2/controllers/UserController.php
+<pre class="EnlighterJSRAW" data-enlighter-language="php">public function actionSetpassword(){
+
+$this-&gt;redirectToRestriced();
+
+if (yii::$app-&gt;request-&gt;isPost)
+return $this-&gt;actionSetpasswordPost();
+
+$mv = new MySetPasswordForm();
+
+return $this-&gt;render('/user/setpassword', ['model'=&gt;$mv]);
+}
+
+public function actionSetpasswordPost(){
+
+$this-&gt;redirectToRestriced();
+
+$mv = new MySetPasswordForm();
+$mv-&gt;load(yii::$app-&gt;request-&gt;post());
+
+$user = Yii::$app-&gt;user-&gt;identity;
+
+$user-&gt;changePassword($mv-&gt;password);
+
+return $this-&gt;redirect('/user/lk');
+}</pre>
+&nbsp;
+
+&nbsp;
+
+10. Теперь добавим действия по удалению пользователя
+<pre class="EnlighterJSRAW" data-enlighter-language="php">public function actionForget(){
+$this-&gt;redirectToRestriced();
+if (yii::$app-&gt;request-&gt;isPost)
+return $this-&gt;actionForgetPost();
+$mv = new MyForgetForm();
+return $this-&gt;render('forget', ['model'=&gt;$mv]);
+}
+
+public function actionForgetPost(){
+$this-&gt;redirectToRestriced();
+$mv = new MyForgetForm();
+$mv-&gt;load(yii::$app-&gt;request-&gt;post());
+if ($mv-&gt;confirmdelete)
+{
+
+Yii::$app-&gt;user-&gt;identity-&gt;forgetUser();
+Yii::$app-&gt;user-&gt;logout();
+
+}
+
+return $this-&gt;redirect('/');
+}</pre>
+&nbsp;
+
+<code></code><code></code>
+
+11. Добавляем действия для показа личного кабинета и показа страницы-заглушки доступ ограничения
+
+<code></code>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">public function actionLk(){
+$this-&gt;redirectToRestriced();
+$lk = ['username'=&gt;'test'];
+$lk['username'] = Yii::$app-&gt;user-&gt;identity-&gt;username;
+return $this-&gt;render('/user/lk', ['lk'=&gt;$lk]);
+}
+
+public function actionRestricted(){
+
+return $this-&gt;render('/user/restricted');
+}</pre>
+&nbsp;
+
+12. Добавляем метод, который будет переадресовывать гостей на заглушку
+<pre class="EnlighterJSRAW" data-enlighter-language="php">public function redirectToRestriced(){
+// гостям это запрещено
+if (Yii::$app-&gt;user-&gt;isGuest) {
+$this-&gt;redirect('/user/restricted');
+}
+
+}</pre>
+&nbsp;</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

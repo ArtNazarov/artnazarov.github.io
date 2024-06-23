@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Блокировка IP по нескольким странам</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,17 +39,42 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
+<h1>Блокировка IP по нескольким странам</h1><p><p>Предположим, что стоит задача закрыть доступ к устройству
+для каких-то недружественных стран. В этом случае, необходимо
+получить IP адреса подсетей, принадлежащих этому государству,
+затем внести правила их обработки с помощью утилиты ipset</p>
+<p>Установка ipset - yay -S ipset. После выполнения
+скрипта, указанного ниже, следует сохранить правила
+и включить сервис</p>
+<p># ipset save > /etc/ipset.conf</p>
+<p># systemctl start ipset.service</p>
+<p># systemctl enable ipset.service</p>
+
+<p>Код блокировки по списку стран(<b>block-by-countries.sh</b>)</p>
+<pre><code>
+sudo ipset destroy countries
+sudo ipset -N countries nethash
+rm ips.txt
+touch ips.txt
+COUNTRIES=("uk" "pl")
+for C in "${COUNTRIES[@]}"
+do
+        echo $C
+        curl "https://raw.githubusercontent.com/herrbischoff/country-ip-blocks/master/ipv4/$C.cidr" -o list.txt
+        cat list.txt >> ips.txt
+        rm list.txt
+done;
+
+filename="ips.txt"
+while read -r line; do
+    iprange="$line"
+    echo "Range to ban - $iprange"
+    sudo ipset add countries $iprange
+done < "$filename"
+sudo iptables -I INPUT -m set --match-set countries src -j DROP </code>  </pre>
 </p>
 <i>Теги документа</i> 
-
+&nbsp;<a href="/tags/arch.html">ArchLinux</a>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 

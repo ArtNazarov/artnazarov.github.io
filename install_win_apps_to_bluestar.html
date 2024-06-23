@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Установка Windows программ в Linux на примере ArchLinux BlueStar</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,57 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Установка Windows программ в Linux на примере ArchLinux BlueStar</h1><p>Статья освещает настройку 32 битного префикса.<!--more-->
+
+Убедимся, что пакет wine доступен <code>sudo pacman -Fy wine</code>
+
+Поиск также можно выполнить командой
+<code>sudo pacman -Ss wine | less</code>
+<ol>
+ 	<li>Устанавливаем cabextract
+<code>sudo pacman -Sy cabextract</code></li>
+ 	<li>Устанавливаем wine, wine-stable-mono и winetricks
+<code>sudo pacman -Sy wine</code>
+<code>yay -S wine-stable-mono</code>
+<code>sudo pacman -Sy winetricks</code></li>
+ 	<li><a href="https://raw.githubusercontent.com/ArtNazarov/wt-install/main/wt-install-all.sh">Скачиваем файл</a> и запускаем установку компонент
+<code>./wt-install-all.sh</code></li>
+ 	<li>Отредактируйте переменные среды своего терминала.
+В Konsole это Настройка / Настроить профиль / Переменные окружения. Добавьте строки и измените username на имя пользователя
+<code>WINEARCH=win32</code>
+<code>WINEDEBUG=-all</code>
+<code>WINEPREFIX=/home/<strong>username</strong>/.wine</code></li>
+ 	<li>Прописываем переменные в .bashrc
+<code>nano .bashrc</code>
+добавляем
+<code>export WINEARCH=32</code>
+<code>export WINEPREFIX=/home/username/wine</code>
+<code>export WINEDEBUG=-all</code>
+сохраняем ctrl+o, ctrl+x,
+применяем изменения <code>source .bashrc</code></li>
+ 	<li>Предположим у вас есть сборник программ с автоустановкой в виде образа диска iso.
+- переименуем для удобства файл в m.iso
+- создадим в домашнем каталоге папку iso
+<code>mkdir /home/username/iso</code>
+- примонтируем диск
+<code>sudo mount -o loop m.iso /home/username/iso</code>
+- перейдем к диску и запустим в терминале файл автозапуска
+<code>cd /home/username/iso</code>
+<code>wine autorun.exe</code>
+<h6>Советы:</h6>
+1. Остановить подсистему вайна можно командой <code><b>
+wineserver -k</b> </code>
+2. Чтобы удалить результаты экспериментов (Clementine также играет музыку как и AIMP), нужно очистить префикс от установленных программ и данных
+<strong>rm -rf ~/.wine</strong>
+3. Загрузка wine выполняется командой
+<strong><code>wineboot</code></strong>
+4. Настройки можно менять командами
+<strong><code>winetricks</code></strong>
+или
+<strong><code>winecfg</code></strong>
+<img class="alignnone wp-image-106 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/Beloff.png" alt="" width="1280" height="720" /><img class="alignnone wp-image-107 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/installer.png" alt="" width="1254" height="199" /><img class="alignnone wp-image-103 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/winSoft.png" alt="" width="1280" height="720" /></li>
+</ol>
+Удаление wine - <code>sudo pacman -Rscn wine</code></p>
 <i>Теги документа</i> 
 
 <script>

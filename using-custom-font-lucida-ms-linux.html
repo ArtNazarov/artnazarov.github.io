@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Решение проблемы со шрифтом Lucida Grande</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,26 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Решение проблемы со шрифтом Lucida Grande</h1><p>В ряде случае веб-сайты могут отображаться неправильно из-за того, что сайт использует нестандартный шрифт<!--more-->
+
+Веб-мастера игнорируют так называемые безопасные веб-шрифты (которые имеются во всех основных операционных системах). Рассмотрим пример <img class="alignnone wp-image-511 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/Lucida1.png" alt="" width="1280" height="720" />
+
+В данном случае сайт сокращателя ссылок Яндекса использует шрифт Lucida Grande. Также можно отметить, что есть указание на шрифты MS, которые разумеется отсутствуют в системе (автор использует Linux)
+
+<img class="alignnone wp-image-512 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/Lucida2.png" alt="" width="1280" height="720" />
+
+Обратим внимание, что если дизайнер не задал жестко font, то браузер использует шрифты из настроек системы и проблема пропадает сама собой. Но править код сайта мы не можем (точнее, мы могли бы поставить заплатку с помощью расширения типа Stylish, но это не решит проблему глобально)
+
+Таким образом, чтобы исправить проблемы с отображением шрифтов нужно а) добавить корректный шрифт в систему б) доустановить шрифты MS.
+
+Шрифт Lucida (в архиве) можно взять отсюда https://fonts-online.ru/fonts/lucida-grande
+Если в системе уже есть шрифт ( файл может иметь другое имя), удаляем его.
+
+Шрифты MS можно получить следующим способом, если установлена виртуальная машина - зайти в папку C:\Windows\Fonts и скопировать на папку основного компьютера файлы ttf.
+
+Затем полученные файлы нужно скопировать (например, с помощью mc) в папку ~/.fonts
+
+Далее следует закрыть программу (браузер, текстовый редактор) и открыть снова, чтобы произошло перечитывание доступных шрифтов.</p>
 <i>Теги документа</i> 
 
 <script>

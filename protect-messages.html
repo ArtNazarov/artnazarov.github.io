@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Защита переписки в интернете</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Защита переписки в интернете</h1><p>Про защиту переписки в интернете ( и <a href="https://encryptor.artnazarov.ru">encryptor.artnazarov.ru</a> ) <!--more-->
+
+<img class="aligncenter wp-image-491 size-large" src="http://nazarow.ru/wp-content/uploads/2022/10/encryptor_vers1-1024x555.png" alt="" width="640" height="347" />
+
+Чтобы дополнительно защитить текст от посторонних глаз, можно отправлять получателю не открытый (человеко-читаемый текст), а защищенный паролем. Пароль расшифровку для симметричных шифров такой же как и на расшифровку, то есть отправитель и получатель должны договорится об одном кодовом слове.
+
+&nbsp;
+
+Идея элементарного способа шифрования заключается в применении логической операции исключающего или, а именно при сравнении 0 и 0 или 1 и 1 дают всегда 0, то есть одинаковые биты дают нули, а разные биты ( 0 и 1, 1 и 0) дают единицу.
+
+Операция применяется последовательно к числовым кодам, соответствующим буквам шифруемого текста и пароля. Когда пароль просмотрен до конца, то очередной буквой пароля вновь становится первая ( то есть пароль 12345 фактически зацикливается в строку вида 1234512345... и так далее). Дополнительно выполнятся сдвиг с помощью суммирования.
+
+Особенностью представления строк в браузере является их хранение в стандарте UTF 16 в памяти.
+
+Рассмотрим практический пример - пароль Pushkin.
+
+Стих
+
+«Печален ты; признайся, что с тобой».
+— Люблю, мой друг! — «Но кто ж тебя пленила?»
+— Она.— «Да кто ж? Глидера ль, Хлоя, Лила?»
+— О, нет! — «Кому ж ты жертвуешь душой?»
+
+превратится в
+
+ǺթՅԮ՚Ց՚լŔ԰ԢŏňՐԏՌՃՔ՚ՏԮԞŘŒԮԨՖōԐŔ԰ՕՙՖՖǪŚŸⅻŊձԟՠՍԼŃŊՔՏըŔՆԧԧՙŎůⅠŒǂյՖōթԶՌŇ՜ňԫդՃԻŇՓՑ՚լՌՇ՗œǑţ⅃ŔլՔ՚ņⅹůǝզ՗ŊՒԫխŔՄŖŊչՔէՀՅԧ՚ňՔԛŘŒՌՏՖԠŻŔէՏՏ՘ŐǪžⅦŇմńōլԿ԰ňŊⅼōǺծՌՓԧň՗ůԶԷŇ՜՛ԭԑՆԯ՜ԢԤōգԵԺՕՑŕǔ
+
+При проектировании веб сервисов с чувствительными данными желательно шифровать обратимым способом данные во избежание утечек открытого текста, чем часто грешат многие сервисы.
+
+На сайте также реализован американский стандартный шифр DES, принятый в США в 1977 и алгоритм TripleDES
+
+Шифр AES выполняет более сложное математическое преобразование. Как и DES, AES относится к блочным шифрам.
+
+Симметричный шифр Rabbit отличается тщательным перемешиванием.
+
+Шифры RC4 и RC4 Drop имеющиеся в шифраторе также относится к общепризнанным криптографическим шифрам и достаточно стойки.
+
+Рассмотрим пример с AES, зашифруем паролем Stalin приказ 227
+
+Надо упорно, до последней капли крови защищать каждую позицию, каждый метр советской территории, цепляться за каждый клочок Советской земли и отстаивать его до последней возможности. Наша Родина переживает тяжелые дни. Мы должны остановить, а затем отбросить и разгромить врага, чего бы это нам ни стоил
+
+После применения AES к этому тексту будет получена шифровка
+
+U2FsdGVkX1+/1eHeN6qQexxhORQVoBxFFAlKZRQVL4cYByx0/7qj/CipC6RlXddLueQXuELYK6dj5H2Le8nLMwCxik4/NK5ePIvEG8PFRpl6e8WGGqmBJvBzzH40tnibiwocIWqFDscn8eTdeneWdD1OhC/OKUQO0gvd94WJsJoX3rS+fMenyhIyffJhTSYNcNSbmHJXszuUsn4YheKXKahaYPahUlgAtP9w5gM68IChWgzz//qua8n852zcIeXlXsimnZQxBnfH+UDFc3VYgIM7QOLYs0xUcM3nzZ8l/NVEFS00EwHJ54bKi/CFG1H/IDHOHY7SBXjUZqrNTGrwK1VPgvrXVTM242ZoKDjpdv5TqhV535Ju0r5thUyjVXxP13RTHNo6r9Iyua+MJyJ3zXLQ1O1tyD6YF9cLbCwArS2TlfaCvMtV6F6hy9q6UgeFKZRrDdYzGfS6uwm8jldG7fA2xEzkwIrHc5MwvPmLaEDrQfR+BX7lXZcJDt+uPWKvtHuthF/C19WAifsxQNcvyj+SOoaHUAoP6GsFks6wVuwUfeWpZjAdwN/indJFpAF5Hopm0UhB9iuBH0MEDxjndHw/Z4l/JItRWo2yEOhzFjbVLVamZP3+TdoYs184hwS9S+ZApUJZYd1Tv7orLjG+xJkhfLFjk7xARKibOcNH4KpeI+qwAknRT8a6JH5ydeZkzq5MXC8RD24YI7sROvBhQCSHJZJlp9tpOXz2PjGJgjP8hlXnh06o5i137ZFZqT/p
+
+Двойное шифрование позволяет сделать следующее - сначала открытый текст шифруется первым паролем выбранным первым методом, затем шифрованный текст перешифровывается вторым способом с другим вторым паролем. Чтобы расшифровать текст выполняются шаги в обратном порядке - сначала расшифровывается текст вторым методом с вторым паролем, затем полученная шифровка раскрывается первым способом с первым паролем
+
+Пример - пароль1 Слава пароль2 России , методы RC4Drop и TripleDES шифрограмма
+
+U2FsdGVkX18C4XPQuxW0y/7yWeK9ypwemD6jDmQh2PTWv+3t+YvksTqVb2eVJZHsJ1XgMJxGhT03QWmP93aHKBb9VXFFQVUcpmKEt1OsH7vINZtNHVr8uKIsQkFZyAwoQdNUgUn6o7D8EUmeg/ABPyfdOl20ErIMN9V/Kc1DQnsgZSCvUEJhYIUDWrCF+D9Ld+W6RCWDqss4eB+vIm60Vh86eny0yBn7F5zx9mA7AKYmzbo2Wd2MZhOCt4CezoonZ+e+TpQTFNXvhlDrsO4xytFcEQ6vWT19hIB5KhCQIrJ3F74ythMRnqn8SF7QzkBOohKEWuiaGriOV4U+Z25QMDbHeKDxHBUcaB5p0ycj7xqggZqxWhXGjfvbMaTOpmIrc/fFvOAi7VbchUcuBca3l1fgA5dbcbmZoTPJGd8CM3D9STEEYmKmG94qOVVezJpF
+
+при расшифровке будет получен Гимн России
+
+Россия - священная наша держава,
+Россия - любимая наша страна.
+Могучая воля, великая слава -
+Твое достоянье на все времена!
+
+Можно воспользоваться расширением https://github.com/artnazarov/encrypt-chrome-ext для чтения закрытой переписки. В расширение вводится пароль и выбирается метод шифрования.
+
+<img class="aligncenter wp-image-499 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/settings.png" alt="" width="911" height="206" />
+
+Расширение ожидает загрузки страницы, а затем ищет шифрограммы и открывает их
+
+<img class="alignnone wp-image-501 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/proverka.png" alt="" width="629" height="313" />
+
+&nbsp;
+
+После автоматической расшифровки появляется скрытый текст
+
+&nbsp;
+
+<img class="alignnone wp-image-502 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/result-des.png" alt="" width="682" height="317" /></p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

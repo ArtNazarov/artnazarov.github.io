@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Установка Virtualbox на Archlinux Kernel 6.0</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,24 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Установка Virtualbox на Archlinux Kernel 6.0</h1><p>Об установке Virtualbox для 6-ого ядра<!--more-->
+Устанавливаем пакет linux-headers
+
+<code>yay -S linux-headers</code>
+Выбираем вариант 8 ( linux60-headers )
+
+После установки
+
+<code>yay -S virtualbox</code>
+Выбираем вариант 7 ( linux60-virtualbox-host-modules )
+
+Загружаем модуль ядра
+
+<code>sudo modprobe vboxdrv</code>
+
+Запуск virtualbox
+
+<code>virtualbox &amp;</code></p>
 <i>Теги документа</i> 
 
 <script>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Блокируем рекламу и вредоносные сайты с помощью Acryliс в Windows</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Блокируем рекламу и вредоносные сайты с помощью Acryliс в Windows</h1><p>Acrylic - утилита DNS прокси, которая имеет много полезных функций. Одной из особенностей Acrylic является поддержка больших файлов hosts.<!--more-->
+
+В Windows, в том числе в 11 версии, имеется проблема, при которой служба DNS Cache начинает нагружать процессор, что приводит к заметному ухудшению общей производительности системы. Это известная проблема, которая до сих пор не решена.
+
+Для чего нужно использовать hosts файлы: блокировка телеметрий, блокировка вредоносных доменов, блокировка интернет-рекламы и так далее.
+
+Откуда можно взять hosts файл с большим списком сайтов?
+
+1. https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts Сводный список, блокирующий рекламу и вредоносы.
+
+2. https://pgl.yoyo.org/adservers/serverlist.php?showintro=0;hostformat=hosts режет только рекламу
+
+3. https://www.encrypt-the-planet.com/downloads/hosts разнообразная телеметрия
+
+Порядок настройки Acrylic
+
+1. Скачиваем дистрибутив https://sourceforge.net/projects/acrylic/files/Acrylic/2.1.0/Acrylic.exe/download
+
+2. Устанавливаем
+
+3. Открываем Acrylic UI, нажимаем File -&gt; Open Acrylic hosts. Вставляем строки из hosts файлов, перечисленных выше.
+
+4. Нажимаем File -&gt; Save
+
+5. Программа запросит подтверждение перезапуска службы, соглашаемся
+
+6. Открываем файл конфигурации File -&gt; Open Acrylic Configuration.
+
+Находим строку PrimaryServerAddress, меняем на PrimaryServerAddress=77.88.8.88
+
+Находим строку SecondaryServerAddress, меняем на
+SecondaryServerAddress=77.88.8.2
+
+Тем самым мы прописываем безопасный DNS от Яндекса ( подробнее на https://dns.yandex.ru/), можно прописать семейный DNS, если хотите отключить сайты для взрослых
+
+Сохраняем (Ctrl+S), перезапускаем.
+
+Альтернатива - прописать 8.26.56.26 и 8.20.247.20 - безопасные DNS от Comodo
+
+7. Остается прописать адрес прокси-сервера 127.0.0.1 в свойствах подключения.
+
+Рассмотрим на примере Windows 11
+
+Win+R, control, Сети и Интернет, Центр управления сетями, Изменение параметров адаптера, Беспроводная сеть, Правый щелчок мышью, Свойства, выбираем IP версии 4, кнопка свойства, переключаем на использовать следующие адреса DNS, вводим 127 0 0 1 в пункте Предпочитаемый DNS сервер.
+
+Также можно прописать и другим способом - правый щелчок по значку Wi-Fi в правом нижнем углу, Параметры сети и интернета, Wi-Fi, Свойства (имя беспроводной сети), Изменить параметры DNS, убираем автоматически, переключаем на вручную, включаем IPV4, прописываем предпочтительный DNS сервер 127.0.0.1
+
+8. Обновление DNS Cache - Win+R, cmd, набираем команду ipconfig /flushdns, закрываем.
+
+На этом настройка Acrylic в основном завершена.
+
+В окне Acrylic UI должно быть написано Service Installed &amp; Running - служба установлена и запущена. Если необходимо перезапустить службу вручную, выбираем Actions -&gt; Restart Acrylic Service.</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

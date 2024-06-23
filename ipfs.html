@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-IPFS</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,14 +39,29 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
+<h1>IPFS</h1><p><h3>Чтобы опубликовать сайт в децентрализованной сети IPFS</h3>
+<ol>
+<li>Создайте аккаунт https://app.fleek.co/ с помощью Github </li>
+<li>Создайте новый проект на github и добавьте туда файлы сборки </li>
+<li>Нажмите add new site в разделе hosting</li>
+<li>Выберите проект в списке</li>
+<li>Оставьте тип сборки Other</li>
+<li>Дождитесь окончания развертывания</li>
+<li>Имя хоста вида sitename.on.fleek.co можно поменять в настройках позднее.</li>
+</ol>
+
+
+<p>Примечания - каждое новое развертывание происходит в сетевой узел вида
+https://ipfs.fleek.co/ipfs/Qmbb28WDFnt7PxE3cmQna2AsZ92TH1Mc6vjaUDgGhZVyLs
+, где Qmbb28WDFnt7PxE3cmQna2AsZ92TH1Mc6vjaUDgGhZVyLs - хеш очередной сборки </p>
+
+<p>Узнать текущий хеш можно с помощью пункта verify on ipfs </p>
+
+<p>До публикации хеш не рассчитывается заранее и не может быть известен генератору,
+поэтому следует использовать домен, выданный на fleek</p>.
+
+<p>Тем не менее сборка будет доступен по хешу, например, https://ipfs.io/ipfs/Qmbb28WDFnt7PxE3cmQna2AsZ92TH1Mc6vjaUDgGhZVyLs/</p>
+
 </p>
 <i>Теги документа</i> 
 

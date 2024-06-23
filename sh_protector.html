@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Сценарий sh для защиты каталога от удаления и модификации</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,47 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Сценарий sh для защиты каталога от удаления и модификации</h1><p>код и пример
+
+<!--more-->
+<ol>
+ 	<li>Создаем файл protect.sh, даем ему права на выполнение
+<code>sudo <strong>chmod</strong> +x protect.sh</code> и вставляем код
+<code>function protect(){</code>
+<code>echo "apply protection"</code>
+<code>sudo chattr +i -R "$1"</code>
+<code>}</code>
+<code>function unprotect(){</code>
+<code>echo "apply unprotection"</code>
+<code>sudo chattr -i -R "$1"</code>
+<code>}</code>
+
+<code>if [ $# -lt 2 ] ; then</code>
+<code>echo " need 2 args command and path "</code>
+<code>fi</code>
+
+<code>action=$1</code>
+<code>path="$2"</code>
+<code>echo "Param count is $#"</code>
+<code>echo "Chosen action is $action"</code>
+<code>echo "Chosen path is $path"</code><code>case "$action" in</code>
+<code>"protect" )</code>
+<code>protect "$path"</code>
+<code>;;</code>
+<code>"unprotect" )</code>
+<code>unprotect "$path"</code>
+<code>;;</code>
+<code>*)</code>
+<code>echo "commands protect or unprotect require"</code>
+<code>esac</code>
+
+возможно, новую версию выложу <a href="https://raw.githubusercontent.com/ArtNazarov/protect.sh/main/protect.sh">здесь</a></li>
+ 	<li>Использование, примерСоздадим папку <code><strong>mkdir</strong> ~/important</code>Установим защиту
+<code>sudo <strong>./protect.sh</strong> protect important</code>
+
+Снимем защиту
+<code>sudo <strong>./protect.sh</strong> unprotect important</code></li>
+</ol></p>
 <i>Теги документа</i> 
 
 <script>

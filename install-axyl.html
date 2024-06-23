@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Установка Axyl Linux</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Установка Axyl Linux</h1><p>Axyl Linux - вариант archlinux с установкой различных графических оболочек с инсталлятором archinstall
+Рассмотрим шаги установки в виртуальной машине. После установки система займет 3 Гб на диске (при создании машины использовался   vdi)
+
+<!--more-->
+
+<img class="alignnone wp-image-353 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/axyl1.png" alt="" width="1280" height="720" />
+
+Нажимаем Win + Enter, чтобы попасть в терминал ( Alt + Enter )
+
+<img class="alignnone wp-image-354 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/axyl2.png" alt="" width="1280" height="720" />
+
+Запускаем от имени администратора archinstall. Выбираем язык. Для первичной настройки лучше оставить us
+
+<img class="alignnone wp-image-355 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/axyl3.png" alt="" width="1280" height="720" />
+
+Дожидаемся проверки доступности зеркал
+
+<img class="alignnone wp-image-356 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl4.png" alt="" width="1280" height="720" />
+
+Выбираем Russia или 47. Можно выбрать Germany
+
+<img class="alignnone wp-image-357 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl5.png" alt="" width="1280" height="720" />
+
+Выбираем основной диск ( 1 )
+
+<img class="alignnone wp-image-359 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl6-1.png" alt="" width="1280" height="720" />
+
+Нажимаем enter и выбираем 0 - автоматическая разметка
+
+<img class="alignnone wp-image-360 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl7.png" alt="" width="1280" height="720" />
+
+Выбираем тип файловой системы btrfs
+
+<img class="alignnone wp-image-361 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl8.png" alt="" width="1280" height="720" />
+
+Выбираем Y чтобы автоматически создать подразделы
+
+<img class="alignnone wp-image-362 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl9.png" alt="" width="1280" height="720" />
+
+Нажимаем enter, чтобы не шифровать диск
+
+<img class="alignnone wp-image-363 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl10.png" alt="" width="1280" height="720" />
+
+Отказываемся от swap в оперативной памяти
+
+<img class="alignnone wp-image-364 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl11.png" alt="" width="1280" height="720" />
+
+Выбираем имя компьютера в сети
+
+<img class="alignnone wp-image-365 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl12.png" alt="" width="1280" height="720" />
+
+Вводим пароль пользователя root (суперпользователь)
+
+<img class="alignnone wp-image-366 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl13.png" alt="" width="1280" height="720" />
+
+Повторно вводим для подтверждения
+
+<img class="alignnone wp-image-367 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl14.png" alt="" width="1280" height="720" />
+
+Аналогично создаем дополнительного пользователя
+
+<img class="alignnone wp-image-368 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl15.png" alt="" width="1280" height="720" />
+
+Можем добавить в группу sudoers для удобства настройки
+
+<img class="alignnone wp-image-369 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl16.png" alt="" width="1280" height="720" />
+
+Выбираем тип системы - desktop для установки окружения рабочего стола
+
+<img class="alignnone wp-image-370 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl17.png" alt="" width="1280" height="720" />
+
+Выбираем минималистичное i3
+
+<img class="alignnone wp-image-371 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl18.png" alt="" width="1280" height="720" />
+
+Выбираем конфигурацию окружения
+
+<img class="alignnone wp-image-372 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl19.png" alt="" width="1280" height="720" />
+
+Выбираем открытые видео драйверы 1
+
+<img class="alignnone wp-image-373 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl20.png" alt="" width="1280" height="720" />
+
+Выбираем звуковую систему
+
+&nbsp;
+
+<img class="alignleft wp-image-375 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl21-1.png" alt="" width="1280" height="720" />
+
+Тип ядра , можно нажать enter для стандартного
+
+<img class="alignnone wp-image-376 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl22.png" alt="" width="1280" height="720" />
+
+Перечисляем через пробел дополнительный софт
+
+<img class="alignnone wp-image-377 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl23.png" alt="" width="1280" height="720" />
+
+Копируем настройки сети 0
+
+<img class="alignnone wp-image-378 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl24.png" alt="" width="1280" height="720" />
+
+На следующем экране выбираем часовой пояс
+
+<img class="alignnone wp-image-379 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl25.png" alt="" width="1280" height="720" />
+
+Устанавливаем точное время
+
+<img class="alignnone wp-image-380 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl26.png" alt="" width="1280" height="720" />
+
+Нажимаем Enter чтобы начать установку. На реальной машине форматирование приведет к потере данных, будьте внимательны.
+
+&nbsp;
+
+&nbsp;
+
+<img class="alignnone wp-image-382 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-during-install-0.png" alt="" width="1280" height="720" />
+
+Стартует форматирование
+
+<img class="alignnone wp-image-383 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-during-install-1.png" alt="" width="1280" height="720" />
+
+Устанавливаются пакеты
+
+<img class="alignnone wp-image-384 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-during-install-2.png" alt="" width="1280" height="720" />
+
+И так далее.  Вы можете зайте в настроенную систему, нажав Y (chroot)
+
+<img class="alignnone wp-image-385 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-end-install.png" alt="" width="1280" height="720" />
+
+После установки вводим reboot для перезагрузки. В virtualbox изымаем виртуальный образ из дисковода
+
+<img class="alignnone wp-image-386 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-postinstall-0.png" alt="" width="1280" height="720" />
+
+Enter
+
+<img class="alignnone wp-image-387 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-postinstall-1.png" alt="" width="1280" height="720" />
+
+Вводим свой логин
+
+<img class="alignnone wp-image-388 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-postinstall-2.png" alt="" width="1280" height="720" />
+
+В очередном окне выбираем клавишу-модификатор для i3
+
+<img class="alignnone wp-image-392 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-term.png" alt="" width="1280" height="720" />
+
+Нажимаем win + enter - запускается терминал. вводим mc + enter
+
+<img class="alignnone wp-image-391 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-mc.png" alt="" width="1280" height="720" />
+
+Запустился mc, указанный как дополнительный пакет</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

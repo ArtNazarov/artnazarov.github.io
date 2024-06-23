@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Использование облегченного языка разметки Textile</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,14 +39,55 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
+<h1>Использование облегченного языка разметки Textile</h1><p><p>Еще один пример создания расширения на языке Python для HtmlBuilder   </p>
+
+<p>Язык Textile позволяет с помощью упрощенной разметки подготовливать документ,
+который потом конвертируется в html формат. Предложен Дином Олленом (Dean Allen)</p>
+
+<p>Установим textile c помощью pip</p>
+
+<code>pip install textile</code>
+
+<p>Создадим файл textilex.py</p>
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python">
+<code>
+import textile
+
+file = open('textilex.inp',mode='r')
+content = file.read()
+file.close()
+
+content = textile.textile(content)
+
+file = open('textilex.out',mode='w')
+file.write(content)
+file.close()
+</code>
+</pre>
+
+<p>Мы импортируем модуль для конвертирования, а второй строкой запрашиваем разметку
+на языке Textile из файла textilex.inp (куда генератор сайта скинет найденный
+фрагмент текста между пользовательским тегом)
+и результат записываем в textilex.out - этот файл генератор прочитает и заменит
+его содержимым фрагмент, от начала и до конца пользовательского тега.
+Соберем двоичный файл
+</p>
+
+<code>pyinstaller textilex.py --onefile</code>
+
+<p>Из каталога dist скопируем в папку с программой файл textilex</p>
+
+<p>На какой-либо странице вставим</p>
+
+<img src="/images/textile1.png">
+
+<p>и запустим генератор</p>
+
+<p>Результат</p>
+
+<img src="/images/textile2.png">
+
 </p>
 <i>Теги документа</i> 
 

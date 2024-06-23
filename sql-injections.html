@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Об SQL-инъекциях</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,48 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Об SQL-инъекциях</h1><p>Обычно про SQL инъекции рассказывают на примере оператора SELECT, что недостаточно очевидно показывает опасность инъекции. Разберем случаи, когда на сайте реализовано api, позволяющее асинхронно выполнять удаление или обновление данных.<!--more-->
+
+Рассмотрим запрос к сайту вида <code>somesite.ru/delprofile.php?user=alice</code>
+
+Запрос удаляет профиль пользователя alice с сайта
+
+При обращении к базе данных будет выполнен запрос вида
+
+<code>DELETE FROM users WHERE username='alice'</code>
+
+Если вместо alice ввести в адресной строке выражение alice’ OR 1=1;--
+
+то в результате подстановки получится SQL выражение
+
+<code>DELETE FROM users WHERE username='alice' OR 1=1;--'</code>
+
+; является разделителем команд к базе данных, а - - позволяет оставлять комментарии
+
+поскольку 1=1 всегда верно то и условие c оператором ИЛИ для каждой строки будет верно.
+
+Это означает, что про построчном сравнении будут удалены ВСЕ строки в базе данных.
+
+&nbsp;
+
+Другой пример — внесение в базу данных изменений от лица другого пользователя
+
+Рассмотрим URL адрес вида <code>site.ru/update_password.php?username=alice&amp;new_pass=12345</code>
+
+В обработчике запроса может быть выполнен SQL запрос вида
+
+<code>UPDATE users SET password='12345' WHERE username='alice'</code>
+
+Предположим, что злоумышленник модифицирует адресную строку
+
+<code>site.ru/update_password.php?new_pass=12345&amp;username=alice’ OR 1=1;--</code>
+
+В этом случае логика запроса меняется
+
+<code>UPDATE users SET password='12345' WHERE username='alice' OR 1=1;--»</code>
+
+и пароли будут сменены для всех пользователей сайта и злоумышленник
+сможет получить доступ к аккаунта обычных или привелигированных пользователей.</p>
 <i>Теги документа</i> 
 
 <script>

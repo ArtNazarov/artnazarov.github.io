@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Пишем расширение для конвертации markdown в html для HtmlBuilder</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,37 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Пишем расширение для конвертации markdown в html для HtmlBuilder</h1><p>=Еще один пример создания расширения на языке Python для HtmlBuilder<!--more-->
+
+Язык markdown позволяет с помощью упрощенной разметки подготовливать документ,
+который потом конвертируется в html формат. Упрощение заключается в том,
+что в markdown нет открывающих и закрывающих тегов. Предоставим возможность
+пользователю набирать разметку, используя этот формат.
+
+Будем набирать код расширения в IDE Pychar Community Edition<code></code>
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">yay -S pycharm-community-edition</pre>
+&nbsp;
+
+Создадим файл markdown-d.py
+<pre class="EnlighterJSRAW" data-enlighter-language="python">import markdown 
+markdown.markdownFromFile(input='markdown.inp', output='markdown.out')</pre>
+Мы импортируем модуль для конвертирования, а второй строкой запрашиваем разметку на языке Markdown из файла markdown.inp (куда генератор сайта скинет найденный фрагмент текста между пользовательским тегом) и результат записываем в markdown.out - этот файл генератор прочитает и заменит его содержимым фрагмент, от начала и до конца пользовательского тега. Соберем двоичный файл
+
+<code>pyinstaller markdown-d.py --onefile</code>
+
+Из каталога dist скопируем в папку с программой файл markdown-d, переименовав его в markdown
+
+На какой-либо странице вставим
+
+<code>markdown</code>
+<code># hello</code>
+<code>/markdown</code>
+
+и запустим генератор
+
+Результат:
+
+<code>&lt;h1&gt;hello&lt;/h1&gt;</code></p>
 <i>Теги документа</i> 
 
 <script>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Использование редакторов vi/vim и компиляция С++ программы</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Использование редакторов vi/vim и компиляция С++ программы</h1><p><p style="text-align: justify;">В статье рассматриваются базовые приемы для работы в редакторах vi/vim с примером компиляции простейшего консольного приложения из репозитория.</p>
+<p style="text-align: justify;">Поскольку основная трудность состоит в специфике процесса правки исходника (шутка про самый частый вопрос как выйти из редактора vi возникла неспроста), упор делается на объяснение способов добавления, удаления, поиска, вставки и копирования, сохранения исходника.</p>
+<!--more-->
+<h5 style="text-align: center;"> Подготовка окружения</h5>
+Установим компилятор g++, для этого нужен пакет gcc
+
+<code>sudo <strong>pacman</strong> -Sy gcc</code>
+
+Если vi/vim не установлен, то добавляем редактор
+
+<code>sudo <strong>pacman</strong> -Sy vi vim</code>
+
+Создадим новую папку для проекта
+
+<code><strong>mkdir</strong> hello_world</code>
+
+Перейдем в этот каталог
+
+<code><strong>cd</strong> hello_world</code>
+
+Создадим новый файл hello.cpp
+
+<code><strong>vi </strong>hello.cpp</code>
+<h5 style="text-align: center;">Режимы vi/vim</h5>
+vi в начале находится в <em>нормальном</em> режиме. В нем нажатия на клавиши означают вовсе не ввод текста, а определенные команды.
+
+Переключите редактор в режим редактирования с помощью
+клавиши i (insert mode - режим вставки)
+
+Набираем код простейшей программы
+
+<code>#include &lt;iostream&gt;</code>
+<code>using namespace std;</code>
+<code>int main(){</code>
+<code>cout &lt;&lt; "Hello, world"; </code>
+<code>exit(0);</code>
+<code>}</code>
+
+Чтобы разобраться, умышленно допустите пару опечаток.
+<p style="text-align: justify;">Предположим, мы делаем опечатку и нужно удалить текущий символ.</p>
+<p style="text-align: justify;">У vi следующая философия работы с текстом - так как мы хотим осуществить действие - это команда редактирования, то чтобы ее выполнить, стало быть, надо выйти из режима вставки и перейти в нормальный (редакторский) режим, поэтому нажимаем esc (перешли в нормальный режим), перемещаем стрелки к символу, который нужно стереть и нажимаем x, повторяем столько, сколько нужно, затем снова нажимаем i, чтобы вернуться в режим вставки текста. Нормальный начальный режим предназначен не для набора текста, а для редактирования и навигации по файлу.</p>
+<p style="text-align: justify;">У vi/vim есть и третий режим - режим интерператора (командный)</p>
+<p style="text-align: justify;">В нормальном режиме нажмите двоеточие : - внизу экрана появится приглашение для ввода команды. Нажмите enter и команда будет выполнена и vi вернется к нормальный режим.</p>
+<p style="text-align: justify;">Если нужно удалить текущую строку целиком, выходим в нормальный режим  esc, затем жмем dd</p>
+Другие удобные команды для быстрой правки в нормальном режиме
+<table style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td style="width: 50%;">nx</td>
+<td style="width: 50%;">удалить n символов, например 6x - сотрет 6 букв</td>
+</tr>
+<tr>
+<td style="width: 50%;">d5w</td>
+<td style="width: 50%;">удалить 5 слов</td>
+</tr>
+<tr>
+<td style="width: 50%;">d$</td>
+<td style="width: 50%;">удалить все от курсора и до конца строки (справа)</td>
+</tr>
+<tr>
+<td style="width: 50%;">d^</td>
+<td style="width: 50%;">удалить все от начала строки и до курсора (слева)</td>
+</tr>
+</tbody>
+</table>
+<h5 style="text-align: center;">Навигация</h5>
+Для перемещения (навигации) в нормальном режиме доступны следующие возможности
+
+Стрелки - перемещение по тексту
+<table style="border-collapse: collapse; width: 100%; height: 794px;">
+<tbody>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">j, k, h, l</td>
+<td style="width: 50%; height: 62px;">вниз, вверх, лево и вправо (аналог стрелок)</td>
+</tr>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">^ (каретка)</td>
+<td style="width: 50%; height: 62px;">курсор на начало текущей строки</td>
+</tr>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">$</td>
+<td style="width: 50%; height: 62px;">курсор на конец текущей строки</td>
+</tr>
+<tr style="height: 170px;">
+<td style="width: 50%; height: 170px;">nG</td>
+<td style="width: 50%; height: 170px;">поставить на линию с заданным номером
+( 4G переведет на 4 строку).Удобная команда, если нужно исправить опечатку, когда вы знаете в какой строке ошибка.</td>
+</tr>
+<tr style="height: auto;">
+<td style="width: 50%; height: 172px;">:номер</td>
+<td style="width: 50%; height: 172px;">перейти к строке с заданным номером, аналог nG</td>
+</tr>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">G</td>
+<td style="width: 50%; height: 62px;">перевести на последнюю строку</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">w</td>
+<td style="width: 50%; height: 40px;">к началу следующего слова</td>
+</tr>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">nw</td>
+<td style="width: 50%; height: 62px;">вперед на n слов ( 4w на 4 слова вперед)</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">b -</td>
+<td style="width: 50%; height: 40px;">к началу предыдущего слова</td>
+</tr>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">nb</td>
+<td style="width: 50%; height: 62px;">на n слов назад ( 4b на 4 слова назад )</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">{</td>
+<td style="width: 50%; height: 40px;">назад на один параграф</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">}</td>
+<td style="width: 50%; height: 40px;">вперед на один параграф</td>
+</tr>
+</tbody>
+</table>
+<h5 style="text-align: center;">Отмена действий</h5>
+<table style="border-collapse: collapse; width: 100%; height: 164px;">
+<tbody>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">u</td>
+<td style="width: 50%; height: 62px;">отмена последнего действия (можно удерживать)</td>
+</tr>
+<tr style="height: 62px;">
+<td style="width: 50%; height: 62px;">10u</td>
+<td style="width: 50%; height: 62px;">отменить 10 последних действий</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">U (заглавная)</td>
+<td style="width: 50%; height: 40px;">убрать все изменения в текущей строке</td>
+</tr>
+</tbody>
+</table>
+<h5 style="text-align: center;">Повторение действий</h5>
+<table style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td style="width: 50%;">ctrl+r</td>
+<td style="width: 50%;">( в нормальном режиме, r от слова redo) Однократный повтор</td>
+</tr>
+<tr>
+<td style="width: 50%;">10 ctrl+r</td>
+<td style="width: 50%;">вернуть 10 действий</td>
+</tr>
+</tbody>
+</table>
+<h5 style="text-align: center;">Поиск образца</h5>
+Частой является задача перейти к фрагменту текста путем сопоставления с образцом.
+
+Перейдем в нормальный режим, нажав esc
+Нажимаем /
+Вводим образец, например ;
+Нажимаем enter
+навигация - n - следующее вхождение
+N - предыдущее вхождение
+<p style="text-align: justify;">Переведите курсор на слово, нажмите * (звезда), чтобы найти следующее аналогичное вхождение или # (решетка), чтобы найти предыдущее.</p>
+<p style="text-align: justify;">В vi/vim поддерживаются регулярные выражения (regular expressions) при сопоставлении с образцом.</p>
+<p style="text-align: justify;">Например, \&lt;\(void\|main\|exit\)\&gt; будет искать вхождения или первого, или второго или третьего слова</p>
+
+<h5 style="text-align: center;">История поиска</h5>
+Введите / или ?, находясь в нормальном режиме.
+Используйте стрелки, чтобы пролистать сохраненные образцы
+Нажмите enter, чтобы повторить поиск
+
+Примечание - поиск в vi чувствителен к регистру
+Перейдите из нормального в командный
+:set ignorecase для поиска без учета регистра (:set ic)
+:set noignorecase для поиска с учетом регистра (:set noic)
+
+В файле /home/artem/.vimrc можно задать  эти настройки редактору.
+
+Также чувствительность к регистру можно задать ключами \c или \С после образца соответственно.
+<h5 style="text-align: center;">Сохранение исходника.</h5>
+<p style="text-align: justify;">Чтобы сохранить текст, переводим редактор из нормального в командный режим Esc, нажимаем клавишу : двоточие.
+Вводим wq - чтобы записать (<strong>w</strong>rite) и выйти (<strong>q</strong>uit), enter</p>
+q! - выйти без сохранения
+<h5 style="text-align: center;">Компиляция проекта.</h5>
+И так, мы вышли из редактора, сохранив исходный текст.
+Вводим команду
+
+<code><strong>g++</strong> -Wall hello.cpp -o hello</code>
+<p style="text-align: justify;">Параметр -Wall - ключ для компилятора, выставляющий настройки. О флагах компиляции <a href="https://ru.stackoverflow.com/questions/859500/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%82%D0%BE%D1%80-g-%D1%84%D0%BB%D0%B0%D0%B3%D0%B8-%D0%BE%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0">кратко по ссылке</a></p>
+Если текст набран верно, то будет собран исполняемый файл. Если в тексте ошибки, компилятор напишет, в каком участке искать ошибку, и нужно вернуться к файлу в vi, чтобы внести исправления. Команда терминала <code><strong>vi</strong> hello.cpp</code> как создает файл, так и позволяет открыть на чтение существующий. Для перемещения к строке с ошибкой используйте комбинацию :номер
+<h5 style="text-align: center;">Запуск программы</h5>
+./hello
+<h5 style="text-align: center;">Работа с терминалом в редакторе vim</h5>
+Теперь откроем редактор vim.  Редактирование, поиск и навигация в целом идентичны редактору vi. Редактор vim добавляет новые возможности.
+
+Откроем файл исходника
+
+<code><strong>vim</strong> hello.cpp</code>
+
+Введем команду :terminal
+<p style="text-align: justify;">Увидим, что окно vim разделил на две панели
+- в одной можно править текст
+- в другой можно запускать из командной строки
+компилятор.</p>
+<p style="text-align: justify;">Теперь не надо выходить из редактора, чтобы работать с компилятором.</p>
+Переключаться между окнами можно с помощью мыши.
+Потянув за заголовок окна, можно изменить его размер
+:below terminal - открыть окно терминала внизу
+<h5 style="text-align: center;">Выделение текста и понятие о регистрах</h5>
+Достаточно часто приходится работать с буфером обмена
+
+Перейдем в нормальный режим (esc)
+Чтобы начать выделение посимвольно, можно нажать v  (стрелки для того, чтобы тянуть маркер выделения).
+Клавиша V заглавная нужна, чтобы выделить строку целиком,
+Ctrl-v (также Ctrl-q) - выбрать прямогольный блок
+Подтверить выбор фрагмента, т.е. скопировать (yank) в стандартный регистр - клавиша y
+
+Вырезать текст - нажимаем d
+
+С помощью навигации перемещаемся к точке вставки
+
+Нажимаем заглавную P, чтобы вставить перед курсором, или p чтобы вставить после.
+
+Вставить пустую строку после курсора - клавиша o
+
+При работе с регистрами для копирования и вставки, можно применять модификаторы навигации
+<table style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td style="width: 50%;">yy or Y</td>
+<td style="width: 50%;">скопировать текущюю строку, включая перевод строки</td>
+</tr>
+<tr>
+<td style="width: 50%;">3yy</td>
+<td style="width: 50%;">скопировать три строки</td>
+</tr>
+<tr>
+<td style="width: 50%;">y^ -</td>
+<td style="width: 50%;"> скопировать влево (от начала до текущей)</td>
+</tr>
+<tr>
+<td style="width: 50%;">y$</td>
+<td style="width: 50%;">скопировать до конца текущей строки, но без перевода каретки</td>
+</tr>
+<tr>
+<td style="width: 50%;">yiw</td>
+<td style="width: 50%;">скопировать текущее слово (без обрамляющих пробелов)</td>
+</tr>
+<tr>
+<td style="width: 50%;">yaw</td>
+<td style="width: 50%;">скопировать текущее слово (включая пробелы)</td>
+</tr>
+<tr>
+<td style="width: 50%;">ytx</td>
+<td style="width: 50%;">взять между курсором и заданным символом</td>
+</tr>
+<tr>
+<td style="width: 50%;">yfx</td>
+<td style="width: 50%;">взять между курсором и заданным символом, включая его</td>
+</tr>
+</tbody>
+</table>
+<h5 style="text-align: center;">Вставка</h5>
+<table style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td style="width: 50%;">gp</td>
+<td style="width: 50%;">вставить текст после курсором и перейти к позиции после вставки</td>
+</tr>
+<tr>
+<td style="width: 50%;">gP</td>
+<td style="width: 50%;">вставить текст перед курсором и перейти к позиции после вставки.</td>
+</tr>
+</tbody>
+</table>
+<h5 style="text-align: center;"> Понятие о регистрах vim</h5>
+Регистры - это области памяти, к которым может обращаться редактор.
+
+Их 9 типов
+Регистр по умолчанию, он же безымянный, стандартный <code>""</code>
+Нумерованные регистры - от <code>"0</code> до <code>"9</code>
+Регистр малого удаления <code>"-</code>
+Именнованные буквенные <code>"a</code> до <code>"z</code> или <code>"A</code> до<code> "Z</code>
+Регистры только на чтение <code>":, "., "% и "#</code>
+Регистр для выражения <code>"=</code>
+Регистры выделения <code>"*, "+ и "/home/artem</code>
+Регистр черной дыры<code> "_</code>
+Регистр истории поиска (хранит последний образец) <code>"/</code>
+<p style="text-align: justify;">Перед командой копирования - вставки можно указать регистр. Таким образом, в отличие от стандартных редакторов, vi/vim имеет много буферов обмена, что способствует более продуктивной правке.</p>
+Например, скопировать текст из vim в буфер операционной системы <code>"*y</code>, вставить из буфера операционной системы<code> "*p</code>
+<h5 style="text-align: center;">Работа с репозиторием</h5>
+Делаем новую папку <code><strong>mkdir</strong> hello-github</code>, переходим в нее <code><strong>cd</strong> hello-github</code>
+Клонируем (скачиваем исходный код)
+<code><strong>git clone   </strong>https://github.com/jsanelli/cpp-HelloWorld</code>
+Переходим в каталог cpp-HelloWorld -<code><strong> cd</strong> cpp-HelloWorld</code>
+<strong><code>ls</code></strong> чтобы просмотреть список файлов, можем открыть в <code><strong>vi</strong> </code>и что-то подредактировать.
+Выполняем <code><strong>mkdir</strong> build</code> для создания каталога для сборки
+
+Выполняем <code><strong>cmake</strong> . -B build/</code> для подготовки
+Окончательно линкуем и компилируем <code><strong>cd</strong> build</code>, затем <strong><code>make</code></strong>
+Пробуем запустить - <code><strong>./demo</strong> test,</code> выведет Hello, test
+
+С помощью <strong><code>make</code></strong> можно детально настроить процесс сборки исходного кода в исполняемый.  Рассмотрение make и git в деталях выходит за рамки статьи.
+<h5 style="text-align: center;">На пути к AUR</h5>
+<p style="text-align: justify;">Отметим для полноты картины, что для написания установочного пакета в рамках ArchLinux необходимо также написать <em>PKGBUILD</em> файл, в котором детализирован процесс сборки и установки, там и применяется утилита make. Затем с помощью утилиты makepkg создается установочный pkg файл. Имея PKGBUILD файл, пользователь может установить программу с помощью команды makepkg -si из исходников или путем вызова pacman -U имя_пакетного_файла
+После сборки пакета становится возможным распространять программу через AUR или другую пакетную систему.</p>
+</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

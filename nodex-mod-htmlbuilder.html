@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Пример, как состыковать htmlbuilder и NodeJS</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,46 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Пример, как состыковать htmlbuilder и NodeJS</h1><p>Пытливый читатель может задаться вопросом, а можно ли встроить скрипт на основе Node
+<!--more-->
+Как обычно, нам понадобится nodejs и npm, установим также fs и eval
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">sudo apt-get install nodejs npm
+sudo npm install fs -g
+npm install eval</pre>
+eval необходимо установить в ту же папку, где и генератор
+
+Теперь добавим выполнение файла со сценарием
+<pre class="EnlighterJSRAW" data-enlighter-language="js">let fs = require('fs');
+let evaluator = require('eval');
+
+fs.readFile('nodex.inp', 'utf8', (err, data) =&gt; {
+        //if (err) { console.error(err); return; };
+        let script  = evaluator(  data );
+        let result = script(); // call function
+        fs.writeFile('nodex.out', result, function (err) {
+        //if (err) return console.log(err);
+        });
+});</pre>
+Далее скомпилируем
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">gcc nodex.cpp -o nodex</pre>
+&nbsp;
+
+бинарник nodex
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">#include &lt;cstdlib&gt;
+
+int main(){
+
+std::system("node mod.js");
+
+}
+</pre>
+Теперь добавим сценарий в любой материал сайта
+
+<img class="alignnone wp-image-584 size-full" src="http://nazarow.ru/wp-content/uploads/2022/11/nodex1.png" alt="" width="695" height="313" />
+
+как видим после выполнения строка из функции попадает в собранную страницу
+
+<img class="alignnone wp-image-585 size-full" src="http://nazarow.ru/wp-content/uploads/2022/11/nodex2.png" alt="" width="834" height="313" /></p>
 <i>Теги документа</i> 
 
 <script>

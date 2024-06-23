@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-ModuleNotFoundError при установке из AUR</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,23 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>ModuleNotFoundError при установке из AUR</h1><p><p style="text-align: justify;">Ошибка ModuleNotFoundError иногда возникает при установке приложений, использующих язык программирования Python.</p>
+<p style="text-align: justify;">Рассмотрим, как решить проблему в рамках arch linux</p>
+<!--more-->
+<p style="text-align: justify;">Например, при установке из AUR <code><strong>yay</strong> -Sy foobnix</code>
+и запуске плеера из терминала <code><strong>foobnix</strong> &amp;</code></p>
+выдается ошибка
+
+<em><code>ModuleNotFoundError: No module named 'httpx'</code></em>
+<p style="text-align: justify;">Сообщение явно обозначает причину сбоя -
+не найден модуль (дополнительная библиотека)
+Python.</p>
+<p style="text-align: justify;">Сначала добавляем менеджер библиотек PIP</p>
+<code>sudo <strong>pacman</strong> -Sy python-pip</code>
+<p style="text-align: justify;">Затем с помощью PIP ставим модуль httpx</p>
+<code><strong>pip</strong> install httpx</code>
+<p style="text-align: justify;">После установки приложение запускается в штатном режиме</p>
+<p style="text-align: justify;">Аналогичным способом устраняются схожие ошибки.</p></p>
 <i>Теги документа</i> 
 
 <script>

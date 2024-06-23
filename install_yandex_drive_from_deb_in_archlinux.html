@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Установка Яндекс Диска из deb пакета в Arch Linux</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,21 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Установка Яндекс Диска из deb пакета в Arch Linux</h1><p><p>последовательность шагов</p>
+<!--more-->
+<ol>
+ 	<li>Устанавливаем debtap для конвертирования deb в пакеты, пригодные для pacman
+<code><strong>yay</strong> -S debtap</code></li>
+ 	<li>Выполняем начальную настройку debtap
+<code>sudo <strong>debtap</strong> -u</code></li>
+ 	<li>Скачиваем Яндекс диск из репозитория
+<a href="https://repo.yandex.ru/yandex-disk/deb/pool/main/y/yandex-disk/">https://repo.yandex.ru/yandex-disk/deb/pool/main/y/yandex-disk/</a></li>
+ 	<li>Конвертируем
+<code><strong>debtap</strong> yandex-disk_0.1.6.1080_amd64.deb</code>
+Имя пакета - yandex-disk</li>
+ 	<li>Запускаем начальную настройку (получаем токен для доступа, указываем папку или принимаем расположение по умолчанию и т.д.
+<code><strong>yandex-disk</strong> setup</code></li>
+</ol></p>
 <i>Теги документа</i> 
 
 <script>

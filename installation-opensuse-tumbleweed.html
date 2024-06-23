@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Установка OpenSUSE tumbleweed</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Установка OpenSUSE tumbleweed</h1><p>Рассмотрим пошагово установку редакции tumbleweed
+
+<!--more-->
+
+Загружаемся с установочного носителя, в данном случае использовалась мультизагрузочная флешка Ventoy.
+Выбираем пункт Installation.
+
+<img class="alignnone wp-image-265 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install1-1024x768.jpg" alt="" width="640" height="480" />
+
+Ожидаем некоторое время, пока загружается инсталлятор
+
+<img class="alignnone wp-image-279 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install15-1024x768.jpg" alt="" width="640" height="480" />
+
+<img class="alignnone wp-image-266 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install2-1024x768.jpg" alt="" width="640" height="480" />
+
+<img class="alignnone wp-image-280 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install16-1024x768.jpg" alt="" width="640" height="480" />
+
+<img class="alignnone wp-image-281 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install17-1024x768.jpg" alt="" width="640" height="480" />
+
+В окне установщика дожидаемся обнаружения сети
+
+<img class="alignnone wp-image-267 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install3-1024x768.jpg" alt="" width="640" height="480" />
+
+<img class="alignnone wp-image-283 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install19-1024x768.jpg" alt="" width="640" height="480" />
+
+Нажимаем далее (Next), ничего менять не нужно.
+
+На следующем шаге укажем, что язык системы и раскладку русские.
+
+<img class="alignnone wp-image-268 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install4-1024x768.jpg" alt="" width="640" height="480" />
+
+Принимаем лицензионное соглашение
+
+<img class="alignnone wp-image-292 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install18-1-1024x768.jpg" alt="" width="640" height="480" />
+
+Выполняется проверка оборудования
+
+<img class="alignnone wp-image-284 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install20-1024x768.jpg" alt="" width="640" height="480" />
+
+На шаге с разметкой диска выбираем <strong>экспертную</strong> установку
+
+<img class="alignnone wp-image-285 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install21-1024x768.jpg" alt="" width="640" height="480" />
+
+Монтируем существующий или создаем новый по примерной схеме.  В данном случае
+на схеме первый диск ssd, второй диск обычный hdd, третий - загрузочная флешка.
+
+<img class="alignnone wp-image-286 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install22-1024x768.jpg" alt="" width="640" height="480" />
+
+Дважды нажимаем левой кнопкой по sda, попадаем в разметчик (partionier)
+
+<img class="alignnone wp-image-270 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install6-1024x768.jpg" alt="" width="640" height="480" />
+
+Нажимаем edit (правка)
+
+<img class="alignnone wp-image-271 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install7-1024x768.jpg" alt="" width="640" height="480" />
+
+Теперь нужно корректно прописать каждый раздел.
+
+Монтируем первый раздел как /boot ext4 c форматированием
+
+<img class="alignnone wp-image-272 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install8-1024x768.jpg" alt="" width="640" height="480" />
+
+<img class="alignnone wp-image-291 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install9-1-1024x768.jpg" alt="" width="640" height="480" />
+
+Аналогично по другим разделам.
+Второй раздел, около половины диска отдаем системе как / (корневая папка)
+
+<img class="alignnone wp-image-287 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install23-1024x768.jpg" alt="" width="640" height="480" />
+
+Третий раздел под домашнюю папку пользователя БЕЗ форматирования как /home
+
+<img class="alignnone wp-image-288 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install24-1024x768.jpg" alt="" width="640" height="480" />
+
+Четвертый раздел (без него системе не загрузится) в форматируем в fat, монтируем как /boot/efi
+и тип раздела указываем как системный загрузчик
+
+<img class="alignnone wp-image-290 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install25-1-1024x768.jpg" alt="" width="640" height="480" />
+
+Должно получится примерно так
+
+<img class="alignnone wp-image-274 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install10-1024x768.jpg" alt="" width="640" height="480" />
+
+Разметчик перечислит действия над данными. На разделах, отмеченных под
+удаление и форматирование, данные будут практически безвозвратно потеряны.
+
+<img class="alignnone wp-image-275 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install11-1024x768.jpg" alt="" width="640" height="480" />
+
+На следующем экране выбираем тип графического окружения (оболочки).
+
+<img class="alignnone wp-image-269 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install5-1024x768.jpg" alt="" width="640" height="480" />
+
+Вводим данные пользователя, не стоит соглашаться с автовходом. После установки
+стоит зайти в настройки KDE, выбрать Запуск и Завершение -&gt; Управление сеансами
+и поставить переключатель при входе в положение Начинать с пустого сеанса.
+
+Также на экране установки указываем, что тот же пароль использовать для root
+
+<img class="alignnone wp-image-277 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install13-1024x768.jpg" alt="" width="640" height="480" />
+
+На следующем шаге указываем свой часовой пояс, в данном случае это Москва +2 часа, Екатеринбург
+
+<img class="alignnone wp-image-276 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install12-1024x768.jpg" alt="" width="640" height="480" />
+
+Просматриваем еще раз пока не было выполнено форматирование действия
+над дисками и жмем установить.  Распаковка займет много времени по сравнению
+с BlueStar
+
+<img class="alignnone wp-image-278 size-large" src="https://nazarow.ru/wp-content/uploads/2022/05/opensuse-install14-1024x768.jpg" alt="" width="640" height="480" />
+
+Очищаем кеш шрифтов
+<code>  sudo rm /var/cache/fontconfig/*</code>
+<code>  rm ~/.cache/fontconfig/*</code>
+<code> fc-cache -r</code>
+
+После установки в консоли добираем дополнительное ПО
+
+<code>zypper refresh</code>
+
+<code>zypper install mc</code>
+<code>zypper install keepassxc</code>
+<code>zypper install cpufrequtils</code>
+
+Установка дополнительного дисплейного менеджера
+
+<code>zypper install sddm</code>
+
+<code>zypper install lightdm</code>
+
+Менять можно командами
+
+<code> update-alternatives --list default-displaymanager</code>
+<code> update-alternatives --config default-displaymanager</code>
+
+Если время установлено ошибочно, то
+<code>tzselect</code>
+
+<code>date -s "год-мм-дд чч:мм:00" (смотреть точное по time.yandex.ru)</code>
+
+<code> hwclock --verbose --systohc --utc</code>
+
+Проверяем доступность swap файла
+<code>lsblk -f </code>
+<code> swapon /dev/sdb5 &lt;- согласно данным предыдущей команды</code>
+<code> swapon --show</code>
+
+Добавляем поддержку flatpak
+
+<code> zypper install flatpak</code>
+<code> flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</code>
+
+Добавляем поддержку snap
+
+<code>  sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy</code>
+<code>  sudo zypper --gpg-auto-import-keys refresh</code>
+<code>  sudo zypper dup --from snappy</code>
+<code> sudo zypper install snapd</code>
+<code> sudo systemctl enable snapd</code>
+<code>  sudo systemctl start snapd</code>
+<code> sudo systemctl enable snapd.apparmor</code>
+<code>  sudo systemctl start snapd.apparmor</code>
+
+&nbsp;
+
+Установка Chrome
+
+<code> sudo zypper addrepo http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome</code>
+<code> sudo zypper refresh</code>
+<code> wget https://dl.google.com/linux/linux_signing_key.pub</code>
+<code> sudo zypper install --no-confirm google-chrome-stable</code>
+
+Ставим плеер и клиент торрент
+<code> zypper install qbittorrent</code>
+<code>  zypper install qmmp</code>
+Почта
+<code>zypper install thunderbird</code>
+
+&nbsp;
+
+Редактор
+<code>zypper install notepadqq</code>
+Разработка ПО
+
+<code> zypper in lazarus</code>
+<code>flatpak update</code>
+<code>flatpak install NetBeans</code>
+
+Песочница
+<code> zypper in firejail</code>
+
+Установка из snap
+<code>snap install core</code>
+<code> snap install telegram-desktop</code>
+<code> snap install vokoscreen-ng</code>
+
+Библиотеки для qt приложений
+<code>zypper install libQt5Svg5 libqt5-qtquickcontrols</code>
+
+Правка grub и настройка cpufreq аналогочна указанным в прошлых заметках
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+Базовая настройка ufw
+<code>sudo zypper install ufw</code>
+<code> sudo ufw enable</code>
+<code> ufw default deny incoming</code>
+<code>  ufw default allow outgoing</code>
+<code> systemctl enable ufw.service</code>
+<code> systemctl start ufw.service</code>
+<code>  sudo ufw status</code>
+<code>  sudo ufw allow qBittorrent</code>
+<code> ufw limit SSH</code>
+<code> sudo ufw allow bootps</code>
+<code> sudo ufw allow 53/udp</code>
+<code> sudo ufw allow 53/tcp</code>
+
+Если графическая программа не восстанавливает после себя разрешение экрана делаем трюк
+<code>xrandr</code> - запускаем xrandr и смотрим имя первого устройства для вывода, пусть это eDP-1
+<code>xrandr --output eDP-1 --mode 1600x900</code> - вернет разрешение
+
+Запуск программы на примере wine (строка для меню)
+<code>cd /home/username/.wine/drive_c/Games/ezquake/ &amp;&amp; wine ezquake.exe &amp;&amp; wineserver -k &amp;&amp; xrandr --output eDP-1 --mode 1600x900</code>
+Команда <code>wineserver -k</code> завершит все процессы в сеансе wine, а затем xrandr восстановит разрешение экрана
+
+Установка yandex-disk
+<code>sudo rpm -ivh --nodeps --force /путь/к/yandex-disk-*.x86_64.rpm</code>
+<code> yandex-disk setup</code>
+
+&nbsp;</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

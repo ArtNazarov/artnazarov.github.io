@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Пишем утилиту для формирования hosts файла по списку доменов</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,36 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Пишем утилиту для формирования hosts файла по списку доменов</h1><p>Рассмотрим задачу - по списку вредоносных доменов создать файл hosts<!--more-->
+
+Рассмотрим файл https://raw.githubusercontent.com/greatis/Anti-WebMiner/master/blacklist.txt , он содержит список доменов, которые распространяют майнеры. Чтобы сформировать hosts файл нужно дописать 0.0.0.0 к имени каждого домена через пробел
+<pre style='background:#fff'>
+<code>import sys </code>
+<code>def add_str_to_lines(f_in, f_out, str_to_add): </code>
+<code>   with open(f_in, "r") as f: </code>
+<code>       lines = f.readlines() </code>
+<code>       for index, line in enumerate(lines): </code>
+<code>           lines<a href="index.html">Главная</a> = str_to_add + " " + line.strip() + "\n" </code>
+<code>           print(lines<a href="index.html">Главная</a>) </code>
+
+<code>   with open(f_out, "w+") as f: </code>
+<code>       for line in lines: </code>
+<code>           print(line) </code>
+<code>           f.write(line) </code>
+
+<code>def main(): </code>
+<code>   f_in = sys.argv[1] </code>
+<code>   f_out = sys.argv[2] </code>
+<code>   str_to_add = sys.argv[3] </code>
+<code>   print(f_in) </code>
+<code>   print(f_out) </code>
+<code>   print(str_to_add) </code>
+<code>   add_str_to_lines( f_in, f_out, str_to_add ) </code>
+
+<code>main()</code>
+</pre>
+Для этого можно воспользоваться следующим алгоритмом - читаем все строки в массив из входного файла, затем делаем преобразование с каждой строкой (добавляем переданную строку к началу очередной) и записываем результаты в выходной файл. Чтобы программа запускалась из командной строки нужно подключить модуль sys, первым и вторым параметром передадим входной и выходной файл, третьим строку 0.0.0.0.  После сборки исполнимого файла вызвать утилиту можно будет так ./adder blacklists.txt hosts-add.txt 0.0.0.0
+Получившийся список можно сохранить в файле /etc/hosts в Linux, а в Windows использовать в утилите Acrylic DNS Proxy</p>
 <i>Теги документа</i> 
 
 <script>

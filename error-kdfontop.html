@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Устранение ошибки kdfontop</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,38 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Устранение ошибки kdfontop</h1><p>В случае с ошибкой KDFONTOP не загружается локализация консоли<!--more-->
+
+Чтобы устранить ошибку
+<ol>
+ 	<li style="list-style-type: none;">
+<ol>
+ 	<li>Редактируем переменную HOOKS в файле sudo nano  /etc/mkinitcpio.conf</li>
+ 	<li>Удаляем consolefont, keymap, пишем sd-console.
+Примерный вид <code>HOOKS="base udev autodetect modconf block keyboard sd-vconsole filesystems fsck"</code></li>
+ 	<li>От рута делаем пересборку инита
+<pre><code># mkinitcpio -P</code></pre>
+</li>
+ 	<li>В .bashrc добавляем команду setfont cyr-sun16</li>
+</ol>
+Примечание (должны быть выполнены условия):
+
+Содержимое /etc/vconsole.conf
+<code>KEYMAP=ru</code>
+<code>FONT=cyr-sun16</code>
+<code>CONSOLEFONT="cyr-sun16"</code>
+<code>CONSOLEMAP=""</code>
+
+Должен быть доступен шрифт из kbd
+<code>ls /usr/share/kbd/consolefonts/ | grep 'cyr-' | cut -d. -f1</code>
+
+В /etc/locale.gen должна быть раскомментирована ru_RU.UTF-8 UTF-8
+При необходимости раскомментировать, перегенерировать и назначить переключение:
+<pre><code># locale-gen</code></pre>
+<pre><code># localectl set-locale ru_RU.UTF-8</code></pre>
+<pre><code># localectl set-x11-keymap --no-convert us,ru pc105 "" grp:alt_shift_toggle</code></pre>
+</li>
+</ol></p>
 <i>Теги документа</i> 
 
 <script>

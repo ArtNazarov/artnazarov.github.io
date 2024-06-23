@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Установка Android на ноутбук или персональный компьютер</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Установка Android на ноутбук или персональный компьютер</h1><p>В настоящее время существуют проекты по переносу Android на обычные ноутбуки и персональные компьютеры. Поскольку в основе Android лежит ядро Linux, не представляет сложности установить настоящий Android в качестве дополнительной операционной системы. Это довольно интересно, поскольку предоставляет доступ к тысячам программ из play market.<!--more-->
+
+Порядок установки.
+
+Как правило, пользователи монтируют корневой каталог / и /home в разные разделы, это позволяет при переустановке системы сохранить данные. Делаем резервную копию /home, так как придется переустановить linux, так как это занимает немного времени, в этом ничего страшного нет.
+
+Понадобится образ Linux для вашей системы и образ Android.
+
+1. Создаем на диске новый раздел с типом ntfs и ставим ему метку ANDROID, размер раздела желательно больше 8 Гб, рекомендовано 16.
+
+2. Записываем на флешку с помощью Ventoy, Rufus либо IsoTousb установочный образ, который берем с сайта https://www.android-x86.org
+
+3. Устанавливаем систему на диск с меткой ANDROID, которую увидим в списке.
+
+4. Установщик Android устроен так, что сохраняет ntfs разделы, то есть Windows не пострадает при установке и даже будет доступна для запуска. А вот разделы ext4 перестанут определяться.
+
+5. Переустанавливаем Linux и восстанавливаем данные /home. Если не делали отдельно разделы / и /home, самое время это сделать.
+
+6. Загрузчик Grub не будет определять Android, но чтобы добавить его в систему, просто отредактируем файл 40_custom:
+
+#!/bin/sh
+
+exec tail -n +3 $0
+
+# This file provides an easy way to add custom menu entries. Simply type the
+
+# menu entries you want to add after this comment. Be careful not to change
+
+# the 'exec tail' line above.
+
+menuentry "Android" {
+
+insmod part_gpt
+
+set root='UUID'
+
+set DIR=/android-8.1-r6
+
+search --file --no-floppy --set=root $DIR/system.sfs
+
+linux $DIR/kernel root=/dev/ram0 androidboot.selinux=permissive quiet DATA=
+
+initrd $DIR/initrd.img
+
+}
+
+В файле надо отредактрировать uuid, заменить на вывод команды
+lsblk -o NAME,SIZE,TYPE,MOUNTPOINT,UUID
+в котором ищем идентификатор раздела с Android
+
+Также необходимо отредактировать путь - открываем диск с android и сверяемся с версией системы. Больше правок не нужно делать в этом файле, сохраняем его.
+
+Обновляем загрузчик grub (см. предыдущие заметки)
+
+В результате получаем систему, в которой доступны к загрузке Android, Linux (и Windows, если был установлен).
+
+По умолчанию, для данных будет выделено около 4 Гб, чтобы увеличить доступное пространство заполните нулями файл под новый размер, потребуется Linux, например, до 6 Гб
+
+dd if=/dev/zero of=data.img bs=1 count=0 seek=6G
+
+mkfs.ext4 data.img
+
+После того, как data.img будет зачищен, при загрузке Android нужно будет заново задать стартовые настройки вроде логина и пароля.</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

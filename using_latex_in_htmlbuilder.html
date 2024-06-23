@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Документы в формате LaTeX</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,14 +39,68 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
+<h1>Документы в формате LaTeX</h1><p><p>Язык разметки LaTeX позволяет с помощью развитой системы разметки подготовливать
+технические документы с формулами, которые потом конвертируется в html формат.
+Разрабатывался Дональдом Кнутом и Лесли Лампортом</p>
+
+<p>Установим mdtex2html c помощью pip</p>
+
+<code>pip install mdtex2html</code>
+
+<p>Создадим файл latexp.py и напишем конвертер</p>
+
+<pre class="EnlighterJSRAW" data-enlighter-language="python">
+<code>
+import mdtex2html
+
+def conv(x):
+        return mdtex2html.convert(x)
+
+# read file
+
+with open("latexpx.inp") as fin:
+        content_latex = fin.readlines()
+
+# convert each line
+
+content_html = list( map ( lambda line: conv(line), content_latex))
+
+# write file
+
+with open("latexpx.out", "w") as fout:
+        fout.writelines(content_html)
+
+</code>
+</pre>
+
+<p>Подготовим обертку на С++</p>
+<pre>
+<code>
+#include <cstdlib>
+
+int main(){
+
+std::system("python3 latexp.py");
+
+}
+</code>
+</pre>
+
+<p>Соберем файл latexpx</p>
+
+<code>gcc latexpx.cpp -o latexpx</code>
+
+<p>Из каталога скопируем в папку с программой файлы latexpx latexp.py</p>
+
+<p>На какой-либо странице вставим разметку</p>
+
+<img src="/images/latex1.png">
+
+<p>и запустим генератор</p>
+
+<p>Результат</p>
+
+<img src="/images/latex2.png">
 </p>
 <i>Теги документа</i> 
 

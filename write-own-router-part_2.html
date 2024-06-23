@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Пишем маршрутизацию с помощью регулярок - часть 2</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,71 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Пишем маршрутизацию с помощью регулярок - часть 2</h1><p>Теперь напишем диспетчер ядра, который будет создавать объект нужного контроллера и выполнять запрос, подставляя переменные
+
+<!--more-->
+<div class="border border-primary">Разбор регулярных выражений снижает производительность.
+Если вам не нужна сложная обработка адресной строки, то лучше использовать обычные строковые операции.
+Проверка строк на равенство в операторах типа if или switch..case будет быстрее regex. Также не следует забывать, переадресацию можно задать с помощью сопоставления с образцом на уровне веб-сервера, т.е. файла .htaccess для Apache, если требуется сделать ЧПУ. В этом случае делегировать роутинг можно не диспетчеру маршрутизации в ядре, а дать объектам класса приложения самим решать, какие контроллеры вызывать. Это может дать дополнительную гибкость, если действие <em>меняется</em> в зависимости от какой-то логики.
+</div>
+
+&nbsp;
+
+Собственно, дополним код из части 1
+<pre class="EnlighterJSRAW" data-enlighter-language="php">class page {
+	function view($page){
+		echo  'Hello from Page\View page = ' . $page;
+	}
+}
+
+class kernel {
+	public $R;
+	function __construct($default){
+		$this-&gt;R = new RouteDispatcher($default);
+		  
+	}
+	
+	function define_routes($declarations){
+		foreach ($declarations as $classname =&gt; $pattern){
+			
+			$this-&gt;R-&gt;add($classname, $pattern);
+		}
+	}
+	function dispatch($path){
+		$w = $this-&gt;R-&gt;check($path);
+		 
+	    $c = $w['matches']['controller'];
+	    $m = $w['matches']['action'];
+	    $p = $w['matches'];
+		
+		$obj = new $c();
+		$obj-&gt;$m(extract($p));
+	}
+}
+
+ $k = new Kernel('nowhere');
+  
+ $k-&gt;define_routes(
+ 	  [
+ 	  
+ 'test' =&gt; "#^(?&lt;controller&gt;test)/(?&lt;action&gt;\w+)$#i",
+ "site" =&gt; "#^(?&lt;controller&gt;site)/(?&lt;action&gt;\w+)$#i",
+ "super" =&gt; "#^(?&lt;controller&gt;super)/(?&lt;action&gt;\w+)$#i",
+ "view" =&gt; "#^(?&lt;controller&gt;page)/(?&lt;action&gt;\w+)/(?&lt;page&gt;\d+)$#i"
+ 	]);
+ $path = 'page/view/100';
+ $k-&gt;dispatch($path);</pre>
+В данном случае у нас добавляется Kernel (ядро), единственная задача которого поднять нужный контроллер, вызвать в нем метод и сбагрить туда параметры.
+
+Также мы добавили класс page, который должен вывести приветствие и напечатать значение параметра.
+
+Проверим, запустив
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">php test-router.php</pre>
+как видим, контроллер получил нужные параметры и поприветствовал нас
+
+&nbsp;
+
+<img class="alignnone size-medium wp-image-608" src="http://nazarow.ru/wp-content/uploads/2022/11/regex_router_kernel-215x300.png" alt="" width="215" height="300" /></p>
 <i>Теги документа</i> 
 
 <script>

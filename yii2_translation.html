@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Интернационализация в Yii2 с использованием констант</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,77 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Интернационализация в Yii2 с использованием констант</h1><p>Рассмотрим как можно перевести интерфейс небольшого веб-сайта<!--more-->1. Создаем файл lang/ui.php  с абстрактным описанием подписей в интерфейсе
+<pre class="EnlighterJSRAW" data-enlighter-language="php">define("UI_SITENAME", "UI_SITENAME");
+define("UI_MENU_MAIN_LINK", 'UI_MENU_MAIN_LINK');
+define("UI_ACCESS_DENIED", "UI_ACCESS_DENIED");</pre>
+В этом файле слева - имя константы, справа ключ в файле перевода.
+
+2. В папки messages/ru и messages/en добавляем переводы, отталкиваясь от ключей-констант из файла ui.php
+
+Файл messages/ru/app.php
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+return
+[ 
+
+UI_SITENAME =&gt; "Галерея",
+    
+UI_MENU_MAIN_LINK =&gt; 'Картины',
+
+UI_ACCESS_DENIED =&gt; "Ограниченный доступ",</pre>
+Файл messages/en/app.php
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+return
+[ 
+
+UI_SITENAME =&gt; "Gallery",
+    
+UI_MENU_MAIN_LINK =&gt; 'Pictures',
+
+UI_ACCESS_DENIED =&gt; "Restricted access",</pre>
+3. В представлениях используем Yii:t и ссылаемся на app как на категорию и указываем константы-ключи перевода
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">&lt;h1&gt;&lt;?= Yii::t('app', UI_LK); ?&gt;&lt;/h1&gt;
+
+&lt;?= Yii::t('app',UI_LK_USERNAME); ?&gt;: &lt;?php echo $lk['username']; ?&gt;&lt;br/&gt;
+
+&lt;a href="/user/setemail/"&gt;&lt;?= Yii::t('app', UI_LK_SETEMAIL_LINK); ?&gt;&lt;/a&gt;&lt;br/&gt;
+&lt;a href="/user/setpassword/"&gt;&lt;?= Yii::t('app', UI_LK_SETPASSWORD_LINK); ?&gt;&lt;/a&gt;&lt;br/&gt;&lt;!-- comment --&gt;
+&lt;hr/&gt;
+&lt;a href="/user/forget/"&gt;&lt;?= Yii::t('app',UI_LK_FORGET_LINK); ?&gt;&lt;/a&gt;</pre>
+в меню
+<pre class="EnlighterJSRAW" data-enlighter-language="php">if (Yii::$app-&gt;user-&gt;isGuest) { 
+$custom_links = [
+              [
+                  'label' =&gt; Yii::t('app', UI_MENU_LOGIN_LINK), 
+                  'url' =&gt; ['/user/login']
+              ],
+             [
+                 'label' =&gt;  Yii::t('app',UI_MENU_JOIN_LINK), 
+                 'url' =&gt; ['/user/join']
+             ]
+    ];
+                
+ }</pre>
+и так далее
+
+4. Подключаем ui.php в конфигурацию (config/web.php) и добавляем локализацию
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+ require $_SERVER['DOCUMENT_ROOT'] . '/lang/ui.php'; 
+$params = require __DIR__ . '/params.php';
+$db = require __DIR__ . '/db.php';
+
+$config = [
+    'sourceLanguage' =&gt; 'tr',
+    'language' =&gt; 'en'</pre>
+Преимущества описания с помощью констант
+
+Доступно автодополнение в IDE
+
+<img class="alignnone wp-image-574 size-full" src="http://nazarow.ru/wp-content/uploads/2022/11/ui_tr.png" alt="" width="886" height="112" />
+
+Гугл-переводчик не переводит константы
+
+<img class="alignnone wp-image-575 size-full" src="http://nazarow.ru/wp-content/uploads/2022/11/ui_tr2.png" alt="" width="1229" height="335" /></p>
 <i>Теги документа</i> 
 
 <script>

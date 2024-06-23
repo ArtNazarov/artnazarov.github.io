@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Выключить рекламу от Яндекса с помощью Acrylic</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,18 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Выключить рекламу от Яндекса с помощью Acrylic</h1><p>Скачайте файл antiyandex<!--more-->
+<script src="https://gist.github.com/ArtNazarov/16b5fe42a949f6c834eeec6292b1cdcf.js"></script>
+Сохраните его в каталог C:\Program Files (x86)\Acrylic DNS Proxy\
+Запустите Acrylic UI. Выберите File, далее пункт Open Acrylic Hosts
+В начале файла пропишите
+<code>
+0.0.0.0 &gt;yandex.ru
+0.0.0.0 &gt;yandex.com
+@ antiyandex.txt
+</code>
+Затем нажмите File, Save и подтвердите перезапуск, нажав Да.
+Также вы можете заблокировать полностью подсети Яндекса, если не используете никакие сервисы компании.</p>
 <i>Теги документа</i> 
 
 <script>

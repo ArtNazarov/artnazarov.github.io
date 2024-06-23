@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Клиенты IP-телефонии под Linux</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,17 +39,65 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
-<i>Теги документа</i> 
+<h1>Клиенты IP-телефонии под Linux</h1><p>IP-телефон (он же софтфон) — программа, которая позволяет совершать исходящие или входящие звонки с компьютера, используя гарнитуру (наушники и микрофон).<!--more-->
 
+Для доступа к услугам IP-телефонии необходимо получить настройки поставщика услуг и оплатить услугу (то есть звонки согласно тарифам).
+
+В бизнесе IP телефония широко используется для организации горячих линий. IP телефония стала одним из ключевых аспектов для организации call-центров. Постепенно этот вид услуг начинает получать популярность среди малого и среднего бизнеса, и даже среди самых обычных пользователей, поскольку имеет определенные преимущества перед обычной связью.
+
+Нужно отметить, что клиентская программа - софтфон - это аналог физической трубки устройства, которое так и называется в продаже - IP-телефон. Для приема звонков и их совершения достаточно настроить клиент, следуя указаниям поставщика IP услуг и справке по клиентской программе.
+
+Серверные же решения служат для организации так называемых виртуальных АТС и обычному пользователю не нужны. Например, бизнес использует на клиентских машинах приложение Citrix Workspace App for Linux ( <code>yay -S icaclient</code> ), в котором реализована поддержка софтофонов[<a href="https://support.citrix.com/article/CTX133024/delivering-softphones-with-virtual-apps-and-desktops">1</a>]
+
+Бытует мнение, что IP-телефония — прерогатива пользователей ОС Windows. На самом деле сервера для IP телефонии часто обслуживаются именно на Unix-подобных операционных системах, и соответственно под них были написаны первые софтофоны.
+
+Перечислим популярные решения.
+
+1. LinPhone
+
+Установка в Archlinux <code>yay -S linphone-desktop</code> или <code>yay -S linphone-desktop-appimage</code>
+
+2. Ekiga
+
+Установка<code> yay -S ekiga</code>
+
+3. SIP Blink
+
+Установка<code> yay -S blink</code>
+
+4. Zoiper
+
+Установка<code> yay -S zoiper</code> или<code> yay -S zoiper-classic</code>
+
+5. Jitsy Meet Desktop
+
+Установка <code>yay -S jitsi-meet-desktop</code>
+
+6. X-lite
+
+Установка <code>yay -S xlite-bin</code>
+
+7. Twinkle
+
+Установка <code>yay -S twinkle</code>
+
+8. MicroSIP
+
+Установка <code>yay -S microsip</code>
+
+9. Ktelephone
+
+Установка <code>yay -S ktelephone-git</code>
+
+10. Naumen Softphone
+
+Установка <code>yay -S nausoftphone nausoftphone-plugin-cef или nausoftphone</code>
+
+11. Kimi LinPhone Desktop
+
+Установка <code>yay -S kimi-linphone-desktop или yay -S kimi-linphone-desktop-beta</code></p>
+<i>Теги документа</i> 
+&nbsp;<a href="/tags/arch.html">ArchLinux</a>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 

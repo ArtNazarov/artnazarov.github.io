@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Установка Yii2 framework в Ubuntu Kinetic Kudu и XAMPP</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Установка Yii2 framework в Ubuntu Kinetic Kudu и XAMPP</h1><p>Заметка о том, как корректно поставить Xammp, Composer и настроить проект Yii2
+<!--more-->1. Вам понадобится версия XAMPP &gt;= 8 (<a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Linux/8.1.10/xampp-linux-x64-8.1.10-0-installer.run">файл для Linux</a>)
+
+2. Запустите установку от суперпользователя ./sudo xampp[tab], о настройке виртуальных хостов
+уже было в этом блоге.
+
+Так как плохой практикой является запуск проекта
+из домашнего каталога /home, то рекомендуется разделить рабочий каталог (куда вносятся правки)
+и каталог, в котором лежат файлы для локального веб-сервера, можно создать
+папку внутри /opt/lampp/htdocs/sites/yii2 для виртуального хоста и после внесения правок
+копировать рабочий каталог в каталог веб-сервера
+<pre class="EnlighterJSRAW" data-enlighter-language="bash"># sudo rm  /opt/lampp/htdocs/sites/yii2 -rf
+sudo cp /home/USERNAME/yii2        /opt/lampp/htdocs/sites/yii2 -R
+sudo chown daemon:daemon /opt/lampp/htdocs/sites/ -R</pre>
+&nbsp;
+
+<code></code>Изменение владельца необходимо для корректного доступа к файлам
+( для этого команду можно поместить в sh-файл или сделать alias в bashrc )
+
+Виртуальный хост будет иметь примерно такой вид (/opt/lampp/etc/extra/httpd-vhosts.conf)
+<pre class="EnlighterJSRAW" data-enlighter-language="raw">&lt;VirtualHost *:80&gt;
+   ServerAdmin email@mail.ru
+   DocumentRoot "/opt/lampp/htdocs/sites/yii2"
+   ServerName yii2.local
+   ServerAlias www.yii2.local
+   ErrorLog "logs/yii2.local-error_log"
+   CustomLog "logs/yii2.local-access_log" common
+       &lt;Directory "/opt/lampp/htdocs/sites/yii2"&gt;
+
+   Options Indexes FollowSymLinks ExecCGI Includes
+ 
+   AllowOverride All
+    
+   Order allow,deny
+   Allow from all
+
+ 
+   Require all granted
+       &lt;/Directory&gt;
+
+&lt;/VirtualHost&gt;</pre>
+&nbsp;
+
+3. Установите curl для скачивания установочного скрипта compose
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">sudo apt-get install curl</pre>
+4. Установите Composer с помощью команды
+
+<code></code>
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">cd /home/username/ 
+sudo curl -s https://getcomposer.org/installer | /opt/lampp/bin/php</pre>
+&nbsp;
+<pre><code>
+</code></pre>
+Обратите внимание, что должен указываться путь к интерпретатору php,
+который устанавливает XAMPP
+
+5. Создаем локальную ссылку, как если бы php был установлен в системе обычным образом
+
+<code>ln -s /opt/lampp/bin/php /usr/local/bin/php</code>
+
+6. После установки в текущем каталоге появится файл composer.phar, его нужно переместить
+
+<code>mv composer.phar /usr/local/bin/composer</code>
+
+7. Предположим, мы хотим начать новый проект в папке /home/username//yii2
+
+Запускаем команду
+<pre><code class="hljs bash language-bash">composer create-project --prefer-dist yiisoft/yii2-app-basic yii2
+</code></pre>
+8. Запуск менеджера XAMPP позволит запустить apache2 и mysql
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">cd /opt/lampp
+sudo ./manager-linux-x64.run</pre>
+&nbsp;
+
+9. Предположим, в /etc/hosts у вас yii2.local, тогда после установки Yii2 можно открыть по ссылке
+http://yii2.local/web/index.php
+Если вы добавили свой контроллер и свое действие, то они будут доступны по ссылке вида
+http://yii2.local/web/index.php?r=имя_контроллера/действие
+
+10. По запуску тестов.
+
+Естественно, локальный веб-сервер должен быть включен перед тестированием.
+Для виртуального хоста нужно задать точное имя и порт ВЕБ-СЕРВЕРА e.g. apache в файле tests/acceptance.suite.yml
+
+<code> - WebDriver:</code>
+<code>url: http://yii2.local:80</code>
+<code>browser: chrome</code>
+
+Необходима стабильная версия google-chrome (sudo apt-get install google-chrome-stable)
+
+Драйвер Chrome Headless забираем на <a href="https://chromedriver.chromium.org/downloads">этой странице</a> согласно номера версии
+
+После разархирования надо переместить исполняемый файл в папку, доступную в $PATH
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">sudo mv chromedriver /usr/bin/chromedriver
+
+sudo chown root:root /usr/bin/chromedriver
+
+sudo chmod +x /usr/bin/chromedriver</pre>
+&nbsp;
+
+<code></code><code></code>
+
+Понадобится установить JDK ( sudo apt-get install default-jdk  )
+
+sh скрипт вида запускает сервер селениума (<a href="https://github.com/SeleniumHQ/selenium/releases/">берем отсюда</a>) и запускает сценарии тестирования
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">java -jar selenium-server.jar standalone --port 4444 
+java -jar selenium-server.jar node --hub http://localhost:4444</pre>
+&nbsp;
+
+Если все верно, на http://localhost:4444/ui откроется Selenium Grid UI
+<img class="alignnone wp-image-560 size-full" src="http://nazarow.ru/wp-content/uploads/2022/11/selenium-grid-ui.png" alt="" width="1153" height="542" />
+
+Запускаем тесты
+<pre class="EnlighterJSRAW" data-enlighter-language="bash">cd /home/username//yii2/
+./vendor/bin/codecept run
+./vendor/bin/codecept g:cest acceptance MyNewScenarioCest</pre>
+&nbsp;
+
+<img class="alignnone wp-image-559 size-full" src="http://nazarow.ru/wp-content/uploads/2022/11/codecept_yii.png" alt="" width="1579" height="612" />
+
+&nbsp;
+</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+

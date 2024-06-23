@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Русские зеркала для Manjaro Linux</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,21 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Русские зеркала для Manjaro Linux</h1><p>Список зеркал для Archlinux Manjaro после установки системы желательно переключить на российские сервера, чтобы избежать проблем с обновлением. Чтобы изменить список зеркал,<!--more-->
+
+нужно отредактировать файл <code>/etc/pacman.d/mirrorlist</code> от имени суперпользователя:
+<code>
+## Country : Russia
+#Server = https://mirror.yandex.ru/mirrors/manjaro/stable/$repo/$arch 
+
+## Country : Russia
+Server = https://mirror.truenetwork.ru/manjaro/stable/$repo/$arch
+
+## Country : Russia
+Server = https://mirror.kamtv.ru/manjaro/stable/$repo/$arch
+</code>
+
+C зеркалами Яндекса бывают проблемы и лучше их не добавлять</p>
 <i>Теги документа</i> 
 
 <script>

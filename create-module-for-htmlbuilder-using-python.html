@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Пишем модуль для HtmlBuilder на языке Python</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,36 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Пишем модуль для HtmlBuilder на языке Python</h1><p>Модуль в терминах генератора сайтов - внешняя программа, которая читает параметры, переданные в странице. <!--more-->
+
+Допустим, мы хотим написать модуль к HtmlBuilder, который будет выводить приветствие. Если в странице написано <code>hello_world мир</code>
+то модуль должен отдать строку Привет, мир.
+
+Предварительно установим pyinstaller, поскольку он понадобится для сборки двоичного исполнимого файла
+
+<code>pip install pyinstaller</code>
+
+В новом файле hello_world.py добавим строки
+<pre>import sys
+def main():
+	mod_param = sys.argv[1]
+	mod = open("hello_world.tmp", "w")
+	mod.write("ПРИВЕТ, "+ mod_param+ "!")
+	mod.close()
+main()
+
+</pre>
+Объяснение - мы читаем первый аргумент из командной строки, который по смыслу будет именем. Затем по соглашению после вызова модуля генератор попытается прочесть как ответ - файл с именем модуля и расширением .tmp, то есть нужно просто скинуть данные в hello_world.tmp.  Аналогично можно написать модуль с помощью другого языка программирования.
+
+Теперь соберем расширение командой
+
+<code>pyinstaller hello_world.py --onefile</code>
+
+В папке dist появится исполняемый файл hello_world, который нужно скопировать в каталог с программой.
+
+Теперь в настройках на вкладке Специальное ставим галочку напротив Использовать модуль
+
+После сборки открываем выбранную страницу и видим, что текст  <code>%hello_world мир%</code> заменился на ПРИВЕТ, мир!</p>
 <i>Теги документа</i> 
 
 <script>

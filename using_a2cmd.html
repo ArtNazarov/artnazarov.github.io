@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Использование сканера a2cmd от EmsiSoft в Windows</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,63 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Использование сканера a2cmd от EmsiSoft в Windows</h1><p>a2cmd /u
+
+Затем выполним быстрое сканирование системы<!--more-->
+
+a2cmd /quick
+
+Далее запустим более глубокий анализ дисков, допустим есть диск D: и диск E:
+
+Для проверки пишем
+
+a2cmd /f=D:,E: /dq /dda
+
+Достаточно тщательная проверка
+
+a2cmd /f=пути /pup /malware /traces /rk /memory /n /dda /dq
+
+Объяснение ключей запуска
+
+/pup - удалит потенциальное нежелательное ПО (реклама и прочее)
+
+/malware - удалит вредоносное ПО,
+
+/traces - ищет шпионское ПО,
+
+/rk - ищет программы удаленного управления ,
+
+/memory - проведет проверку памяти,
+
+/dq - быстрое удаление вредоносов,
+
+/dda - прямой доступ к диску,
+
+/f - список дисков или каталогов для проверки
+
+При желании можно дополнить ключами /a - проверять в архивах (замедлит скорость), /am - проверить почту, /cloud=0 (выключить анализ в облаке, не рекомендуется, по умолчанию включено)
+
+Вот и всё, теперь вы умеете пользоваться сканером, удачной борьбы с вирусами!
+
+После полной проверки рекомендуется выполнить перезагрузку или добавить ключ /rebootallowed в команду
+
+Добавляем пункт в контекстное меню проводника:
+
+1. Запускаем редактор реестра Win+R, regedit
+
+2. Переходим в ветку Компьютер\HKEY_CLASSES_ROOT\Directory\shell
+
+3. Создаем новый раздел CheckAV. Изменяем значение параметра Имя(по умолчанию) на Проверить в a2cmd
+
+4. Переходим в Компьютер\HKEY_CLASSES_ROOT\Directory\shell\checkAV
+
+5. Создаем раздел command. Значение параметра (Имя по умолчанию) меняем на c:\windows\system32\cmd.exe /K "C:\emsisoftcmd\a2cmd.exe /f=%1"
+
+6. Открываем любую папку в Проводнике, нажимаем по ней правой кнопкой, в контекстном меню должен появиться новый пункт "Проверить в a2cmd"
+
+Аналогичным образом можно создавать собственные пункты меню для других программ.
+
+Скачать сканер можно с сайта COMSS ( https://www.comss.ru/page.php?id=2159 )</p>
 <i>Теги документа</i> 
 
 <script>

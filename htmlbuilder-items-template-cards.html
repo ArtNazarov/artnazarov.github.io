@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Работа с шаблоном элементов списка в HtmlBuilder - делаем карточки для блога</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,34 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Работа с шаблоном элементов списка в HtmlBuilder - делаем карточки для блога</h1><p>Рассмотрим как просто создать карточки с изображениями для вывода блога в HtmlBuilder<!--more-->
+
+Вначале нам понадобится скачать картинки и положить их в папку images проекта
+
+<img class="alignnone wp-image-525 size-large" src="http://nazarow.ru/wp-content/uploads/2022/10/cards_in_folder-1024x409.png" alt="" width="640" height="256" />
+
+Перейдем на сайт Boostrap и скачаем пример Html разметки для карточек  5-ой версии
+
+<img class="alignnone wp-image-527 size-large" src="http://nazarow.ru/wp-content/uploads/2022/10/cards_bootstrap-1024x600.png" alt="" width="640" height="375" />
+
+&nbsp;
+
+&nbsp;
+
+Затем откроем пресет (общие настройки) и перейдем в оформление шаблона элемента, вставим код с Bootstrap и заменим
+
+в примере выражениями , ,  те места, куда должна выводится картинка, альтернативный текст и аннотация
+
+<img class="alignnone wp-image-524 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/cards_template.png" alt="" width="1137" height="388" />
+
+Теперь в настройках страницы добавим в дополнительные поля путь к картинке, пояснение и аннотацию к статье, например
+
+<img class="alignnone wp-image-529 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/cards_options.png" alt="" width="1101" height="384" />
+
+Сгенерируем новый сайт, видно, что появились карточки
+
+<img class="alignnone wp-image-526 size-full" src="http://nazarow.ru/wp-content/uploads/2022/10/cards_final.png" alt="" width="343" height="655" />
+&nbsp;</p>
 <i>Теги документа</i> 
 
 <script>

@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Препроцессор Stylus в HtmlBuilder</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,14 +39,37 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
+<h1>Препроцессор Stylus в HtmlBuilder</h1><p><p>Установим глобально stylus</p>
+
+<pre><code> #  npm install -g stylus</code></pre>
+
+<p>Затем создадим файл stylusx.cpp</p>
+<pre><code>
+
+#include <cstdlib>
+
+int main(){
+
+std::system("cp stylusx.inp stylusx.styl && stylus stylusx.styl -o stylusx.css && cp stylusx.css stylusx.out");
+}
+</code>  </pre>
+
+<p>Скомпилируем</p>
+
+<pre><code>gcc stylusx.cpp -o stylusx</code></pre>
+
+<p>Добавим пользовательский тег stylusx в таблицу стилей,
+обрамив им stylus  </p>
+
+<img src="/images/stylus1.png">
+
+<p>Запустим генератор.
+Как видим, в выходном файле выполнены замены</p>
+
+<img src="/images/stylus2.png">
+
+
+
 </p>
 <i>Теги документа</i> 
 

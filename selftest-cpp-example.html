@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-О необходимости самотестирования программы, пример</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,93 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>О необходимости самотестирования программы, пример</h1><p>Пример программы, которая выполняет самотестирование.
+
+<!--more-->Рассмотрим программу, которая складывает и вычитает числа.
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int sum(int a, int b) {
+return a+b+1;
+}
+
+int mul(int a, int b){
+return a*b*2;
+}
+
+bool testSum(){
+ int a = 3;
+ int b = 2;
+ int expected = 5;
+ return 5 == sum(a, b);
+}
+
+bool testMul(){
+ int a = 5;
+ int b = 2;
+ int expected = 10;
+ return 10 == mul(a, b);
+}
+
+bool selfTest(){
+ bool flag = true;
+ flag = flag &amp;&amp; testSum();
+ flag = flag &amp;&amp; testMul();
+ return flag;
+}
+
+
+
+int main(){
+
+ if ( ! selfTest() ) {
+                cout &lt;&lt; "self test error";
+                exit(0);
+        }
+else
+   {
+        cout &lt;&lt; "self test: OK \n\r";
+   };
+
+ int a = 0;
+ int b = 0;
+ int res = 0;
+ char outbuf[50];
+ char ch;
+
+ cin &gt;&gt; a;
+ cin &gt;&gt; b;
+ res = mul(a, b);
+ sprintf(outbuf,  "a * b = %d\n\r",  res);
+ cout &lt;&lt; outbuf;
+ res = sum(a , b);
+ sprintf(outbuf,  "a + b = %d\n\r", res);
+ cout &lt;&lt; outbuf;
+ cout &lt;&lt; "Press q, enter";
+ cin &gt;&gt; ch;
+}</pre>
+Нетрудно увидеть, что в программе есть грубые фактические ошибки. Но формально, с точки зрения компилятора, все верно и программа
+скомпилируется
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">gcc selftest.cpp -lstdc++ -o selftest
+</pre>
+Этот пример говорит, что компилятор, даже такой совершенный, как gcc не может проверить, верна программа или нет.
+Тем не менее, внутри кода программы мы делаем самотест, который проверяет, что и сумма, и умножение должны быть
+верны. И если что-то не так, делаем досрочный выход из программы
+
+<img class="alignnone size-medium wp-image-593" src="http://nazarow.ru/wp-content/uploads/2022/11/Screenshot_20221118_173805-300x63.png" alt="" width="300" height="63" />
+
+Теперь исправим реализацию
+
+<img class="alignnone wp-image-594 size-large" src="http://nazarow.ru/wp-content/uploads/2022/11/Screenshot_20221118_173953-1024x479.png" alt="" width="640" height="299" />
+
+Скомпилируем и запустим заново
+
+<img class="alignnone wp-image-595 size-full" src="http://nazarow.ru/wp-content/uploads/2022/11/Screenshot_20221118_174024.png" alt="" width="827" height="188" />
+
+Программа выполняет самотестирование и убедившись, что все ОК, разрешает произвести действия,
+в данном случае расчеты.</p>
 <i>Теги документа</i> 
 
 <script>

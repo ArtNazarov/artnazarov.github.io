@@ -8,7 +8,7 @@
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <meta charset="utf-8">
-<title>My Site-Карта сайта</title>
+<title>My Site-Включение локального репозитория в Deepin Linux</title>
 
 </head><body>
  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
@@ -39,15 +39,13 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<h1>Карта сайта</h1><p><ul>
-<li><a href="./section_linux.html">Линукс</a></li>
-<li><a href="./section_android.html">Android</a></li>
-<li><a href="./section_windows.html">Windows</a></li>
-<li><a href="./section_etc.html">Прочие записи</a></li>
-<li><a href="./section_htmlbuilder.html">HtmlBuilder</a></li>
-<li><a href="./section_yii2.html">yii2</a></li>
-</ul>
-</p>
+<h1>Включение локального репозитория в Deepin Linux</h1><p>При установке системы можно столкнуться с неприятной проблемой, когда драйвер Wi-Fi удается собрать из исходников на живом DVD, а после установки системы такая возможность внезапно начинает отсутствовать из-за нехватки вспомогательных пакетов для разработчиков, поскольку не все требуемые зависимости будут записаны в ходе установки.<!--more-->
+
+Чтобы решить эту проблему, нужно вручную подключить локальный репозиторий, который будет ссылаться на iso установочный образ. В этом случае требуемые зависимости удастся установить и сборка модуля драйвера не будет представлять сложности.
+
+Алгоритм действий следующий - заходим под суперпользователем, создаем каталог с коротким именем,
+монтируем iso образ в режиме только для чтения в каталог, добавляем настройку в файл с перечислением репозиториев, обновляем список пакетов:
+<script src="https://gist.github.com/ArtNazarov/7691f95f9b4692cc798d0e6db1e53b2e.js"></script>This is my first static page. Here link <<blog>> to section</p>
 <i>Теги документа</i> 
 
 <script>

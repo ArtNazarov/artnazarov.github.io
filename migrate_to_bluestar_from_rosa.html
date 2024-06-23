@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html><head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<meta charset="utf-8">
+<title>My Site-Как перейти с Роса Линукс на BlueStar (arch based)</title>
+
+</head><body>
+ <nav class="navbar navbar-light" style="background-color: #e3f2fd;">   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Nazarow.ru</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_htmlbuilder.html">HtmlBuilder</a></li>
+         <li class="nav-item"><a class="nav-link" href="/section_linux.html">Linux</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_yii2.html">Yii2</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_android.html">Android</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_windows.html">Windows</a></li>
+         <li  class="nav-item"><a class="nav-link" href="/section_etc.html">Прочие заметки</a></li>
+         <li class="nav-item"><a class="nav-link" href='/support.html'>Контакты</a></li>
+      </ul>
+      
+    </div>
+  </div>
+</nav> 
+
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<h1>Как перейти с Роса Линукс на BlueStar (arch based)</h1><p><!-- wp:paragraph -->
+<p style="text-align: justify;">Несколько слов о Синей Звезде - BlueStar это немецкий дистрибутив на базе arch linux, что для пользователя означает возможность установки около 63000 программ, для сравнения Роса Линукс ограничена числом 19000 (по данным repology).<!--more--></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><img class="wp-image-72" style="width: 640px;" src="https://nazarow.ru/wp-content/uploads/2022/04/ArchLinux-BlueStar.png" alt="" /></p>
+<p><img class="alignnone wp-image-98 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/zvvonline.png" alt="" width="1280" height="720" /></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>( свежее ядро, плеер и пасьянсы на месте)</p>
+<p>Температура и нагрузка на систему в норме (ctrl+Esc, psensor)</p>
+<p><img class="alignnone wp-image-96 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/monitorPlasma-cropped.jpg" alt="" width="812" height="434" /></p>
+<p><img class="alignnone wp-image-95 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/psensor.png" alt="" width="1280" height="720" /></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Если вы переходите с новой росы на последнюю версию синей звезды, то миграция пройдет в целом без проблем.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Основные моменты</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol>
+<li style="text-align: justify;">Всегда делайте на Линукс резервную копию перед вмешательством в систему. <br />Копируем содержимое хомяка (домашней папки /home/username) со скрытыми папками, для этого<br />в источнике и приемнике обязательно стать владельцем<code> sudo <strong>chown</strong> $USER:$USER -R .</code><br />для переноса всех файлов на другой диск. Удобно выполнить копирование в файловом менеджере mc<br /><br />Обратите внимание, что в зависимости от программ, которые вы используете, может понадобится сделать копию каталога /opt или других каталогов, но домашняя папка должна быть скопирована в любом случае.</li>
+</ol>
+<!-- /wp:list -->
+
+<!-- wp:list {"ordered":true,"start":2} -->
+<ol start="2">
+<li style="text-align: justify;">BlueStar с наименьшими проблемами устанавливается <br />в автоматическом режиме, когда стирается выделенный под систему накопитель. <br /><br />В файле /etc/pacman.conf ставим <code>SigLevel=Never TrustAll</code> для всех репозиториев.</li>
+</ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph --><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true,"start":3} -->
+<ol start="3">
+<li style="text-align: justify;">После установки возвращаем домашнюю папку /home/username на место из копии, настройки<br />программ вроде thunderbird, google chrome и т.п. подхватятся автоматически. Для резервного копирования почты в thunderbird можно поставить расширение <a href="https://github.com/thundernest/import-export-tools-ng">import export ng</a></li>
+<li style="text-align: justify;">Настройки grub аналогичны (см про росу) Для обновления grub пользуемся другой командой <code>grub-mkconfig -o /boot/grub/grub.cfg</code></li>
+<li style="text-align: justify;">В Синей звезде используется менеджеры пакетов <strong>pacman</strong> и <strong>yay</strong>. Добираем неустановленный софт, например, <br />yay -Sy google-chrome или sudo pacman -Sy vlc<br />для правки настроек удобно использовать gedit или notepadqq<br />Совет - поставить приложение r-linux для восстановления удаленных файлов <code><strong>yay</strong> -S r-linux</code></li>
+<li style="text-align: left;">Ставим центр приложений Discover<br /><code><strong>yay</strong> -Sy discover</code><br /><code>sudo <strong>pacman</strong> -Syu packagekit-qt5</code><br />чтобы получить больше тем для окружения plasma и программы, распространяемые через flathub и kde.org<br /><code>sudo <strong>pacman</strong> -S flatpak</code><br /><code><strong>flatpak</strong> remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code><br /><code><strong>flatpak</strong> update<br /><strong>flatpak</strong> remote-add --if-not-exists kdeapps --from https://distribute.kde.org/kdeapps.flatpakrepo<br /><strong>flatpak</strong> update</code> <br />пример установки поисковика по файлам<br /><code><strong>flatpak</strong> install fsearch<br /><strong>flatpak</strong> install --user netbeans<br /><img class="alignnone wp-image-91 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/DiscoverPlasma.png" alt="" width="1280" height="720" /></code>Автоматическое обновление flatpak (необязательно)<br />
+<p><code>sudo <strong>nano</strong> /etc/systemd/system/update-system-flatpaks.service</code><br />содержимое файла<br /><code>[Unit]</code><br /><code>Description=Update system Flatpaks</code></p>
+<p><code>[Service]</code><br /><code>Type=oneshot</code><br /><code>ExecStart=/usr/bin/flatpak --system update -y</code></p>
+<p><code>[Install]</code><br /><code>WantedBy=default.targe</code>t<br />Создаем таймер<br />sudo <strong>nano</strong> /etc/systemd/system/update-system-flatpaks.timer<br />Настройка таймера<br /><code>[Unit]</code><br /><code>Description=Update system Flatpaks daily</code></p>
+<p><code>[Timer]</code><br /><code>OnCalendar=daily</code><br /><code>Persistent=true</code></p>
+<p><code>[Install]</code><br /><code>WantedBy=timers.target</code><br /><br />Включение таймера</p>
+<p><code>sudo <strong>systemctl</strong> daemon-reload</code><br /><code>sudo <strong>systemctl</strong> enable  update-system-flatpaks.timer</code><br /><code>sudo <strong>systemctl</strong> start update-system-flatpaks.timer</code></p>
+</li>
+<li>Если проблемы с выводом звука, то ставим компоненты<br /><code>sudo <strong>pacman</strong> -S pulseaudio-alsa</code><br /><code>sudo <strong>pacman</strong> -S pulseaudio</code><br /><code>sudo <strong>pacman</strong> -S pulseaudio-jack</code><br /><code>sudo <strong>pacman</strong> -S pulseaudio-zeroconf</code><br /><code>sudo <strong>pacman</strong> -S pulseaudio-equalizer</code><br /><code>sudo <strong>pacman</strong> -S pavucontrol</code><br />права на папку<br /><code><strong>chown</strong> username:username /home/username/.config/pulse</code><br />затем перезапуск звука<br /><code><strong>pulseaudio</strong> -k</code><br /><code><strong>pulseaudio</strong> -D</code></li>
+<li style="text-align: justify;">Аналогично winetricks ( программа для настройки запуска win приложений) потребует смены прав<br /><code>sudo <strong>chown</strong> username:username -R /home/username/.wine</code></li>
+<li style="text-align: justify;">Автоматическое подключение к wifi, к сожалению, слетает - в сетевом менеджере ставим подключаться автоматически с приоритетом 0, все пользователи могут подключаться - да, на вкладке wifi сохранить ключ переключаем на сохранить в незашифрованном виде, еще можно на всякий случай обновить 2 сетевые службы<br /><code>sudo <strong>pacman</strong> -Syu wpa_supplicant dhcpd.</code> После данных действий wifi обычно поднимается при загрузке автоматически.<br /><br /></li>
+<li>При обновлении системы <code>sudo <strong>pacman</strong> -Syu</code> <em>возможна</em> ситуация, когда из репозиториев система пытается обновить несуществующий к тому моменту пакет. В этом случае удаляем источник проблемы с зависящими от него программами <code>sudo <strong>pacman</strong> -Rscn [-Rc] имя_пакета</code></li>
+<li>Cиняя звезда идет без графической оболочки pamac над менеджером пакетов pamac, так что ставим её с помощью <code>yay -S pamac-aur</code><br /><img class="alignnone wp-image-93 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/pamacCenter.png" alt="" width="1280" height="720" /></li>
+<li>Для либри офис <em>нужно</em> докачать русский язык<br /><code>sudo <strong>pacman</strong> -Sy libreoffice-fresh-ru</code><br /><br /></li>
+<li>Для приложений, поставляемых в виде образов AppImage можно поставить <a href="https://github.com/Nitrux/nx-software-center/releases">nx Software Center</a> <br /><img class="alignnone wp-image-89 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/nxSoftWareCenter.png" alt="" width="1280" height="720" /><br />либо <a href="https://github.com/prateekmedia/appimagepool/releases">AppImage Pool</a><br /><img class="alignnone wp-image-90 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/appImagePool.png" alt="" width="1280" height="720" /><br /><br /></li>
+<li>Немаловажное значение имееют темы оформления и другие компоненты дизайна оконной оболочки. Для этого служит <a href="https://www.opendesktop.org/p/1175480/">pling Store</a> (appImage). Предварительно нужно поставить пакет <a href="https://www.opendesktop.org/p/1136805/">ocs-url</a></li>
+<li>Приложения snap удобно ставить из Snap Store, для его установки:<br /><code><strong>yaourt</strong> -Sy snapd</code><br /><code>sudo <strong>systemctl</strong> start snapd.socket</code><br /><code>sudo <strong>systemctl</strong> enable snapd.socket</code><br /><code><strong>snap</strong> install core</code><br /><code><strong>snap</strong> install snap-store<br /><img class="alignnone wp-image-86 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/SnapCenter1.png" alt="" width="1280" height="720" /> <img class="alignnone wp-image-87 size-full" src="https://nazarow.ru/wp-content/uploads/2022/04/SnapCenter2.png" alt="" width="1280" height="720" /></code></li>
+<li>Для настройки стандартного префикса win32 можно использовать установку библиотек с помощью <a href="https://raw.githubusercontent.com/ArtNazarov/wt-install/main/wt-install-all.sh">wt-install-all.sh</a></li>
+<li>Переходим на российские зеркала<br />в файл /etc/pacman.d/mirrorlist меняем все на<br /><script src="https://gist.github.com/ArtNazarov/f6c0db1351e0fbf2e13cc41c6b455f25.js"></script>
+<p>далее команда <code>sudo <strong>pacman</strong> -Syyu</code></p>
+</li>
+</ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph --><!-- /wp:paragraph -->
+</p>
+<i>Теги документа</i> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'nazarow.ru'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("nazarow.ru");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    if (isRender) { use_host = fleek_url; } else
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = fleek_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+</body></html>
+
