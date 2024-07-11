@@ -1,3 +1,13 @@
+@keyframes myAnim {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(100px);
+	}
+}
+
 .nav-link2 {
   color: gray;
   background-color: none;
@@ -21,6 +31,7 @@ ul.ArticlesList li.ArticlesItem:hover {
   margin-bottom: 5px;
   border: red thin solid;
   padding: 5px;
+  animation: myAnim 0.3s ease 0s 1 normal forwards;
 }
 
 ul.ArticlesList li.ArticlesItem a.ArticlesLink {
