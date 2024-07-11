@@ -1,1 +1,39 @@
+ul.ArticlesList {
+ list-style-type: none;
+  padding: 0;
+}
+
+ul.ArticlesList li.ArticlesItem {
+  margin-top: 5px
+  margin-bottom: 5px;
+  border: none;
+  padding: 5px;
+}
+
+ul.ArticlesList li.ArticlesItem:hover {
+  margin-top: 5px
+  margin-bottom: 5px;
+  border: red thin solid;
+  padding: 5px;
+}
+
+ul.ArticlesList li.ArticlesItem a.ArticlesLink {
+  display: inline-block;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  
+}
+
+ul.ArticlesList li.ArticlesItem a.ArticlesLink:hover {
+  display: inline-block;
+  background-color: magenta;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+
 .example {text-decoration:italic}
+
