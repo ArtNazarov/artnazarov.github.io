@@ -38,7 +38,8 @@
     });
 </script>
 <h1>Использование TailWindCSS вместе с HtmlBuilder для публикации на FireBase</h1>
-<p><pre>
+<p><p> Файл publish.sh </p>
+<pre>
 #!/bin/bash
 
 cd ~/$1/build2
@@ -74,7 +75,41 @@ git commit -m "Автокоммит $(date)"
 read
 
 </pre>
-</p>
+<p>Файл  tailwind.config.js  </p>
+<pre>
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./**/*.html",       // All HTML files in root & subfolders
+    "./js/*.js",     // JS files (if any)
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+} </pre>
+
+<p>Файл package.json</p>
+<pre>
+{
+  "scripts": {
+      "concat": "concat -o ./temp/combined.css ./processed/*.css", 
+      "build": "tailwindcss -i ./temp/combined.css -o ./dist/output.css",
+      "process": "npm run build:all && npm run concat && npm run build",
+      "build:aside": "tailwindcss -i ./css/aside.css -o ./processed/aside.css --watch",
+      "build:all": "for file in ./css/*.css; do tailwindcss -i \"$file\" -o \"./processed/$(basename $file)\"; done"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "concat": "^1.0.3",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.8"
+  }
+}
+</pre></p>
 <i>Теги документа</i> 
 
 <script>
