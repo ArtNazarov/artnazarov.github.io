@@ -77,13 +77,13 @@ sudo iptables -I INPUT -m set --match-set countries src -j DROP </code>  </pre>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
-use_host = 'nazarow.ru'; // main url
+use_host = 'artnazarov.github.io'; // main url
 
 let current_host = window.location.hostname;
 
 // Mirrors
 
-let fleek_url = 'nazarow.on.fleek.co';
+// let fleek_url = 'nazarow.on.fleek.co';
 let render_url = 'nazarow.onrender.com';
 let firebase_url = 'nazarow-a84c0.web.app';
 let cloudflare_url = 'nazarow.pages.dev';
@@ -91,18 +91,18 @@ let vercel_url = ' nazarow.vercel.app';
 
 // Check mirror
 
-let isMain = current_host.includes("nazarow.ru");
+let isMain = current_host.includes("artnazarov.github.io");
 let isRender = current_host.includes("onrender");
 let isFirebase = current_host.includes("web.app");
 let isCloudFlare = current_host.includes("pages.dev");
 let isVercel = current_host.includes("vercel"); 
 
 if (!isMain) {
-    if (isRender) { use_host = fleek_url; } else
+    /* if (isRender) { use_host = fleek_url; } else */
     if (isFirebase) { use_host = firebase_url; } else
    if (isCloudFlare) { use_host = cloudflare_url; } else
    if (isVercel) { use_host = vercel_url; } else
-        { use_host = fleek_url; }; // as default
+        { use_host = vercel_url; }; // as default
    
 };
 
