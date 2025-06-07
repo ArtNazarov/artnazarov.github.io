@@ -37,6 +37,7 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
+<div class="ps-4">
 <h1>Блокировка IP по нескольким странам</h1>
 <p><p>Предположим, что стоит задача закрыть доступ к устройству
 для каких-то недружественных стран. В этом случае, необходимо
@@ -72,8 +73,9 @@ while read -r line; do
 done < "$filename"
 sudo iptables -I INPUT -m set --match-set countries src -j DROP </code>  </pre>
 </p>
-<i>Теги документа</i> 
+<i>Теги документа</i>
 &nbsp;<a href="/tags/arch.html">ArchLinux</a>
+</div> 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -118,12 +120,12 @@ navLinks.forEach(link => {
 
 });
 </script>
-<footer class="py-3 my-4">
+ <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="mailto:awnlwt1ty@mozmail.com" class="nav-link2 px-2 text-muted">Электропочта</a></li>
       <li class="nav-item"><a target="_blank" href="https://github.com/artnazarov" class="nav-link2 px-2 text-muted">Github</a></li>
      </ul>
-    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder</p>
+    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder. Используется Bootstrap 5</p>
   </footer>
 
 

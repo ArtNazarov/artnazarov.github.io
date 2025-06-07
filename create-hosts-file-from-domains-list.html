@@ -37,6 +37,7 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
+<div class="ps-4">
 <h1>Пишем утилиту для формирования hosts файла по списку доменов</h1>
 <p>Рассмотрим задачу - по списку вредоносных доменов создать файл hosts<!--more-->
 
@@ -68,8 +69,9 @@
 </pre>
 Для этого можно воспользоваться следующим алгоритмом - читаем все строки в массив из входного файла, затем делаем преобразование с каждой строкой (добавляем переданную строку к началу очередной) и записываем результаты в выходной файл. Чтобы программа запускалась из командной строки нужно подключить модуль sys, первым и вторым параметром передадим входной и выходной файл, третьим строку 0.0.0.0.  После сборки исполнимого файла вызвать утилиту можно будет так ./adder blacklists.txt hosts-add.txt 0.0.0.0
 Получившийся список можно сохранить в файле /etc/hosts в Linux, а в Windows использовать в утилите Acrylic DNS Proxy</p>
-<i>Теги документа</i> 
+<i>Теги документа</i>
 
+</div> 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -114,12 +116,12 @@ navLinks.forEach(link => {
 
 });
 </script>
-<footer class="py-3 my-4">
+ <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="mailto:awnlwt1ty@mozmail.com" class="nav-link2 px-2 text-muted">Электропочта</a></li>
       <li class="nav-item"><a target="_blank" href="https://github.com/artnazarov" class="nav-link2 px-2 text-muted">Github</a></li>
      </ul>
-    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder</p>
+    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder. Используется Bootstrap 5</p>
   </footer>
 
 

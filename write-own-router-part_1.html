@@ -37,6 +37,7 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
+<div class="ps-4">
 <h1>Пишем роутер uri с помощью регулярных выражений - 1</h1>
 <p>Регулярные выражения - исключительно мощный инструмент для извлечения данных путем сопоставления с образцом. Применим регулярки (regexps) к задаче разбора адресной строки на параметры<!--more-->В простейшем случае нас будет интересовать разделение строки на контроллер и действие. В более сложных случаях хотелось бы получать имя параметра со значением.
 Например для строк вида index/contact index есть контроллер, contact - действие.
@@ -206,8 +207,9 @@ Get super/buy
 Get no/where
 Контроллер nowhere</pre>
 &nbsp;</p>
-<i>Теги документа</i> 
+<i>Теги документа</i>
 
+</div> 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -252,12 +254,12 @@ navLinks.forEach(link => {
 
 });
 </script>
-<footer class="py-3 my-4">
+ <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="mailto:awnlwt1ty@mozmail.com" class="nav-link2 px-2 text-muted">Электропочта</a></li>
       <li class="nav-item"><a target="_blank" href="https://github.com/artnazarov" class="nav-link2 px-2 text-muted">Github</a></li>
      </ul>
-    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder</p>
+    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder. Используется Bootstrap 5</p>
   </footer>
 
 

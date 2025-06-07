@@ -37,6 +37,7 @@
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
+<div class="ps-4">
 <h1>Установка Android на ноутбук или персональный компьютер</h1>
 <p>В настоящее время существуют проекты по переносу Android на обычные ноутбуки и персональные компьютеры. Поскольку в основе Android лежит ядро Linux, не представляет сложности установить настоящий Android в качестве дополнительной операционной системы. Это довольно интересно, поскольку предоставляет доступ к тысячам программ из play market.<!--more-->
 
@@ -101,8 +102,9 @@ dd if=/dev/zero of=data.img bs=1 count=0 seek=6G
 mkfs.ext4 data.img
 
 После того, как data.img будет зачищен, при загрузке Android нужно будет заново задать стартовые настройки вроде логина и пароля.</p>
-<i>Теги документа</i> 
+<i>Теги документа</i>
 
+</div> 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -147,12 +149,12 @@ navLinks.forEach(link => {
 
 });
 </script>
-<footer class="py-3 my-4">
+ <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="mailto:awnlwt1ty@mozmail.com" class="nav-link2 px-2 text-muted">Электропочта</a></li>
       <li class="nav-item"><a target="_blank" href="https://github.com/artnazarov" class="nav-link2 px-2 text-muted">Github</a></li>
      </ul>
-    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder</p>
+    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder. Используется Bootstrap 5</p>
   </footer>
 
 
