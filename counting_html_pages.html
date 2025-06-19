@@ -1,4 +1,6 @@
-<html><head><meta charset="utf-8">
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
 <meta name="description" content="Author: Nazarov A.A, Orenburg, Russia">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -46,8 +48,10 @@ div.paginator > a:focus {
 
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
-<title>&#9883; Личный блог Назарова А.А., Оренбург, 2022 - 2025-Прочие записи</title>
-</head><body><div id="app"></div>
+<title>&#9883; Личный блог Назарова А.А., Оренбург, 2022 - 2025-Подсчет числа собранных страниц</title>
+
+</head><body>
+<div id="app"></div>
 <div id="search"></div>
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
@@ -55,11 +59,30 @@ div.paginator > a:focus {
     });
 </script>
 <div class="ps-4">
-<h1>Тема: Прочие записи</h1> <a href="/section_etc.html">#</a> &nbsp;|&nbsp; <a href="/o/caption-DESC/section_etc.html">&#x25BC;</a>&nbsp;По заголовку&nbsp;<a href="/o/caption-ASC/section_etc.html">&#x25B2;</a>&nbsp;|&nbsp; &nbsp;|&nbsp; <a href="/o/dt-DESC/section_etc.html">&#x25BC;</a>&nbsp;По дате&nbsp;<a href="/o/dt-ASC/section_etc.html">&#x25B2;</a>&nbsp;|&nbsp; 
-<br/>
-Материалы:<ul class="ArticlesList"><li class="ArticlesItem"><a class="ArticlesLink" href="/ban-ifmanyrequests.html">Баним пользователя за превышение частоты запросов</a></li><li class="ArticlesItem"><a class="ArticlesLink" href="/index.html">Главная</a></li><li class="ArticlesItem"><a class="ArticlesLink" href="/protect-messages.html">Защита переписки в интернете</a></li><li class="ArticlesItem"><a class="ArticlesLink" href="/cpp_dependency_managers.html">Использование менеджеров зависимостей С++</a></li><li class="ArticlesItem"><a class="ArticlesLink" href="/sql-injections.html">Об SQL-инъекциях</a></li><li class="ArticlesItem"><a class="ArticlesLink" href="/support.html">Обратная связь</a></li><li class="ArticlesItem"><a class="ArticlesLink" href="/create-hosts-file-from-domains-list.html">Пишем утилиту для формирования hosts файла по списку доменов</a></li></ul>
-<div class="paginator"> 1 </div>
-</div>
+<h1>Подсчет числа собранных страниц</h1>
+<p><p>Чтобы подсчитать собранные страницы, достаточно выполнить скрипт count_stat.sh в каталоге сборки</p>
+<pre><code>
+#!/bin/bash
+
+# Подсчёт количества html-файлов
+STAT_PAGES_CNT=$(find . -type f -name "*.html" ! -path "./pagefind/*" ! -path "./o/*" ! -path "./tags/*" | wc -l)
+
+# Замена всех вхождений STAT_PAGES_CNT в html-файлах на значение переменной
+find . -type f -name "*.html" ! -path "./pagefind/*" -exec sed -i "s/STAT_PAGES_CNT/$STAT_PAGES_CNT/g" {} +
+
+# Вывод результата (опционально)
+echo "Количество html страниц: $STAT_PAGES_CNT
+</code></pre>
+<p>Перед этим в глобальный блок в программе добавить STAT_PAGES_CNT и сгенерировать сайт</p>
+<p>Затем в каталоге сборки:</p>
+<pre><code>
+  chmod +x count_stat.sh
+  ./count_stat.sh
+</code></pre>
+</p>
+<i>Теги документа</i>
+
+</div> 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -116,4 +139,7 @@ navLinks.forEach(link => {
     <p class="text-center text-muted">Сгенерировано страниц: 93</p>
   </footer>
 
-</body>
+
+
+</body></html>
+
