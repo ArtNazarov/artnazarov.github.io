@@ -1,0 +1,97 @@
+<html><head><meta charset="utf-8">
+<meta name="description" content="Author: Nazarov A.A, Orenburg, Russia">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel" src="/index.js"></script>
+
+
+<!-- CSS only -->
+<link href="/style.css" rel="stylesheet" />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<title>My Site-Линукс</title>
+</head><body><div id="app"></div>
+<div id="search"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+<div class="ps-4">
+<h1>Тема: Линукс</h1> <a href="/section_linux.html">#</a> &nbsp;|&nbsp; <a href="/o/caption-DESC/section_linux.html">&#x25BC;</a>&nbsp;По заголовку&nbsp;<a href="/o/caption-ASC/section_linux.html">&#x25B2;</a>&nbsp;|&nbsp; &nbsp;|&nbsp; <a href="/o/dt-DESC/section_linux.html">&#x25BC;</a>&nbsp;По дате&nbsp;<a href="/o/dt-ASC/section_linux.html">&#x25B2;</a>&nbsp;|&nbsp; 
+<br/>
+Материалы:<ul class="ArticlesList"><li class="ArticlesItem"><a class="ArticlesLink" href="win_optimize.html">Оптимизация Windows 11 после установки в случае высокой нагрузки на систему</a></li></ul>
+<div class="paginator"><a href="/o/dt-DESC/section_linux.html">1</a> <a href="/o/dt-DESC/section_linux_2.html">2</a> <a href="/o/dt-DESC/section_linux_3.html">3</a> <a href="/o/dt-DESC/section_linux_4.html">4</a> <a href="/o/dt-DESC/section_linux_5.html">5</a> <a href="/o/dt-DESC/section_linux_6.html">6</a>  7 </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+use_host = 'artnazarov.github.io'; // main url
+
+let current_host = window.location.hostname;
+
+// Mirrors
+
+// let fleek_url = 'nazarow.on.fleek.co';
+let render_url = 'nazarow.onrender.com';
+let firebase_url = 'nazarow-a84c0.web.app';
+let cloudflare_url = 'nazarow.pages.dev';
+let vercel_url = ' nazarow.vercel.app';
+
+// Check mirror
+
+let isMain = current_host.includes("artnazarov.github.io");
+let isRender = current_host.includes("onrender");
+let isFirebase = current_host.includes("web.app");
+let isCloudFlare = current_host.includes("pages.dev");
+let isVercel = current_host.includes("vercel"); 
+
+if (!isMain) {
+    /* if (isRender) { use_host = fleek_url; } else */
+    if (isFirebase) { use_host = firebase_url; } else
+   if (isCloudFlare) { use_host = cloudflare_url; } else
+   if (isVercel) { use_host = vercel_url; } else
+        { use_host = vercel_url; }; // as default
+   
+};
+
+
+
+const host = use_host; // заменить на нужный хост
+const navLinks = document.querySelectorAll(".nav-link"); // выбираем все элементы с классом nav-menu
+console.log(navLinks);
+navLinks.forEach(link => {
+  const oldHref = link.getAttribute("href"); // получаем старое значение href
+  link.setAttribute("href", 'https://' + host + oldHref); // устанавливаем новое значение href
+});
+
+});
+</script>
+ <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="mailto:awnlwt1ty@mozmail.com" class="nav-link2 px-2 text-muted">Электропочта</a></li>
+      <li class="nav-item"><a target="_blank" href="https://github.com/artnazarov" class="nav-link2 px-2 text-muted">Github</a></li>
+      <li class="nav-item"><a target="_blank" href="https://dartn-e2911.web.app/" class="nav-link2 px-2 text-muted">Старый сайт</a></li>
+      <li class="nav-item"><a target="_blank" href="https://nzv-portfolio.web.app/" class="nav-link2 px-2 text-muted">Новый сайт</a></li>
+      <li class="nav-item"><a target="_blank" href="https://t.me/artnazarov_bot" class="nav-link2 px-2 text-muted">Бот в Telegram</a></li>
+     </ul>
+    <p class="text-center text-muted">© 2022-2024 Артем Назаров, Оренбург. Портировано с Wordpress на HtmlBuilder. Используется Bootstrap 5</p>
+  </footer>
+
+</body>
