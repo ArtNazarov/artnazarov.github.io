@@ -1,3 +1,18 @@
+.sp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* или 1600px */
+  height: 100vh;
+  z-index: 999;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(0, 255, 0, 0.1) 0,
+    rgba(0, 255, 0, 0.1) calc(1600px / 12),
+    rgba(255, 255, 255, 0.3) calc(1600px / 12),
+    rgba(255, 255, 255, 0.3) calc(1600px / 12 + 13px));
+}
 .w-80 {
 width:80%  !important;
 }
