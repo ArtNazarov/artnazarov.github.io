@@ -40,7 +40,7 @@ div.paginator > a:focus {
     </style>
 <!-- CSS only -->
 <link href="/style.css" rel="stylesheet" />
-
+<link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
@@ -59,9 +59,9 @@ div.paginator > a:focus {
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<div class="ps-4">
+<main class="perfection mx-auto w-90">
 <h1>Об SQL-инъекциях</h1>
-<p>Обычно про SQL инъекции рассказывают на примере оператора SELECT, что недостаточно очевидно показывает опасность инъекции. Разберем случаи, когда на сайте реализовано api, позволяющее асинхронно выполнять удаление или обновление данных.<!--more-->
+Обычно про SQL инъекции рассказывают на примере оператора SELECT, что недостаточно очевидно показывает опасность инъекции. Разберем случаи, когда на сайте реализовано api, позволяющее асинхронно выполнять удаление или обновление данных.<!--more-->
 
 Рассмотрим запрос к сайту вида <code>somesite.ru/delprofile.php?user=alice</code>
 
@@ -102,7 +102,9 @@ div.paginator > a:focus {
 <code>UPDATE users SET password='12345' WHERE username='alice' OR 1=1;--»</code>
 
 и пароли будут сменены для всех пользователей сайта и злоумышленник
-сможет получить доступ к аккаунта обычных или привелигированных пользователей.</p>
+сможет получить доступ к аккаунта обычных или привелигированных пользователей.
+</main>
+<div class="ps-4">
 <i>Теги документа</i>
 
 </div> 
