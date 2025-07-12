@@ -61,7 +61,7 @@ div.paginator > a:focus {
 </script>
 <main class="perfection mx-auto w-90">
 <h1>Интеграция HtmlBuilder с Youmoney</h1>
-<p>Вместо ___ используйте одно из дополнительных полей публикации. Как создать дополнительное поле, смотрите в справке программы</p>
+<p>&lt;form method="POST" action="https://yoomoney.ru/quickpay/confirm"&gt;<br /> &lt;input type="hidden" name="receiver" value="41001xxxxxxxxxxxx"/&gt;<br /> &lt;input type="hidden" name="quickpay-form" value="button"/&gt;<br /> &lt;input type="hidden" name="sum" value="___" data-type="number"/&gt;<br /> &lt;label&gt;&lt;input type="radio" name="paymentType" value="PC"/&gt;ЮMoney&lt;/label&gt;<br /> &lt;label&gt;&lt;input type="radio" name="paymentType" value="AC"/&gt;Банковской картой&lt;/label&gt;<br /> &lt;input type="submit" value="Перевести"/&gt;<br />&lt;/form&gt;</p><p>Вместо ___ используйте одно из дополнительных полей публикации. Как создать дополнительное поле, смотрите в справке программы</p>
 <p>
 <code><pre>
 <form method="POST" action="https://yoomoney.ru/quickpay/confirm">
