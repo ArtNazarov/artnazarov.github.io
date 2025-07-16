@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Latest News</title><link>http://</link><description>Latest news feed from the database</description>
+<item><title>Пример, как состыковать htmlbuilder и NodeJS</title><link>http:///nodex-mod-htmlbuilder.html</link><description>Пытливый читатель может за�</description><pubDate>Вт, 17 ноя 2922 21:10:00</pubDate></item>
+<item><title>Включение локального репозитория в Deepin Linux</title><link>http:///deepin.html</link><description>При установке системы можн�</description><pubDate>Пт, 27 июн 2921 13:54:00</pubDate></item>
+<item><title>Интеграция HtmlBuilder с Youmoney</title><link>http:///yoomoney-htmlbuilder.html</link><description>&lt;form method="POST" action="https://yoomoney.ru</description><pubDate>Сб, 12 июл 2025 12:20:53</pubDate></item>
+<item><title>Подсчет числа собранных страниц</title><link>http:///counting_html_pages.html</link><description>Чтобы подсчитать собранные</description><pubDate>Чт, 19 июн 2025 13:57:00</pubDate></item>
+<item><title>Добавление комментариев к каталогам Linux</title><link>http:///commenting_linux_folders.html</link><description>Для добавления комментарие</description><pubDate>Чт, 19 июн 2025 09:33:00</pubDate></item>
+<item><title>Использование TailWindCSS вместе с HtmlBuilder для публикации на FireBase</title><link>http:///tailwindcss.html</link><description> Файл publish.sh 
+
+#!/bin/bash
+
+cd ~/$1/build2</description><pubDate>Сб, 07 июн 2025 15:15:00</pubDate></item>
+<item><title>Использование менеджеров зависимостей С++</title><link>http:///cpp_dependency_managers.html</link><description>Менеджеры зависимостей С++
+�</description><pubDate>Пн, 15 янв 2024 13:20:00</pubDate></item>
+<item><title>Развертывание статических сайтов, инструкция</title><link>http:///deploy_static_sites.html</link><description>Публикация (развертывание) </description><pubDate>Вс, 06 авг 2023 00:00:00</pubDate></item>
+<item><title>Блокировка IP по нескольким странам</title><link>http:///block_ips_by_country.html</link><description>Предположим, что стоит зада</description><pubDate>Пн, 19 дек 2022 23:54:00</pubDate></item>
+<item><title>Блокировка украинских IP</title><link>http:///block_ua_ips.html</link><description> К сожалению, с украинских IP</description><pubDate>Пт, 16 дек 2022 19:04:00</pubDate></item>
+<item><title>Интерактивные компоненты React в HtmlBuilder</title><link>http:///react_in_htmlbuilder.html</link><description>Добавим в страницу разметк�</description><pubDate>Сб, 10 дек 2022 21:58:00</pubDate></item>
+<item><title>Обратная связь</title><link>http:///support.html</link><description>
+О себе
+Связаться
+Репозитор</description><pubDate>Пт, 09 дек 2022 11:39:00</pubDate></item>
+<item><title>Использование Github Pages в HtmlBuilder</title><link>http:///using_gh_pages_in_htmlbuilder.html</link><description>Создайте репозиторий для с�</description><pubDate>Пн, 05 дек 2022 15:27:00</pubDate></item>
+<item><title>WYSIWYG (визуальный редактор) в HtmlBuilder</title><link>http:///wysiwyg_express_in_htmlbuilder.html</link><description>Прикрутил к генератору виз�</description><pubDate>Вс, 04 дек 2022 19:51:00</pubDate></item>
+<item><title>Документы в формате LaTeX</title><link>http:///using_latex_in_htmlbuilder.html</link><description>Язык разметки LaTeX позволяет</description><pubDate>Вс, 04 дек 2022 14:33:00</pubDate></item>
+<item><title>Препроцессор Stylus в HtmlBuilder</title><link>http:///using_stylus_in_htmlbuilder.html</link><description>Установим глобально stylus
+
+ #  </description><pubDate>Сб, 03 дек 2022 19:21:00</pubDate></item>
+<item><title>Использование облегченного языка разметки Textile</title><link>http:///using_textile_in_htmlbuilder.html</link><description>Еще один пример создания ра</description><pubDate>Сб, 03 дек 2022 01:02:00</pubDate></item>
+<item><title>Использование SASS с HtmlBuilder</title><link>http:///using_sass_in_htmlbuilder.html</link><description>Установим глобально sass
+
+ #  np</description><pubDate>Пт, 02 дек 2022 23:05:00</pubDate></item>
+<item><title>Добавляем LESS в HtmlBuilder</title><link>http:///using_less_in_htmlbuilder.html</link><description>Установим глобально less
+
+ #  np</description><pubDate>Пт, 02 дек 2022 21:43:00</pubDate></item>
+<item><title>Пример модуля на Java</title><link>http:///java_module_htmlbuilder.html</link><description>Создадим файл javax.java. Модуль</description><pubDate>Вт, 29 ноя 2022 19:53:00</pubDate></item>
+</channel></rss>
