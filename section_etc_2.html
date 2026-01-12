@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html><head>
-<meta charset="utf-8">
+<html><head><meta charset="utf-8">
 <meta name="description" content="Author: Nazarov A.A, Orenburg, Russia">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -48,10 +46,8 @@ div.paginator > a:focus {
 
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
-<title>&#9883; Личный блог Назарова А.А., Оренбург, 2022 - 2025-Документы в формате LaTeX</title>
-
-</head><body>
-<!-- <div class="sp"></div> -->
+<title>&#9883; Личный блог Назарова А.А., Оренбург, 2022 - 2025-Прочие записи</title>
+</head><body><!-- <div class="sp"></div> -->
 <div id="app"></div>
 <div id="search"></div>
 <script>
@@ -59,76 +55,12 @@ div.paginator > a:focus {
         new PagefindUI({ element: "#search", showSubResults: true });
     });
 </script>
-<main class="perfection mx-auto w-90">
-<h1>Документы в формате LaTeX</h1>
-<p>Язык разметки LaTeX позволяет с помощью развитой системы разметки подготовливать
-технические документы с формулами, которые потом конвертируется в html формат.
-Разрабатывался Дональдом Кнутом и Лесли Лампортом</p>
-
-<p>Установим mdtex2html c помощью pip</p>
-
-<code>pip install mdtex2html</code>
-
-<p>Создадим файл latexp.py и напишем конвертер</p>
-
-<pre class="EnlighterJSRAW" data-enlighter-language="python">
-<code>
-import mdtex2html
-
-def conv(x):
-        return mdtex2html.convert(x)
-
-# read file
-
-with open("latexpx.inp") as fin:
-        content_latex = fin.readlines()
-
-# convert each line
-
-content_html = list( map ( lambda line: conv(line), content_latex))
-
-# write file
-
-with open("latexpx.out", "w") as fout:
-        fout.writelines(content_html)
-
-</code>
-</pre>
-
-<p>Подготовим обертку на С++</p>
-<pre>
-<code>
-#include <cstdlib>
-
-int main(){
-
-std::system("python3 latexp.py");
-
-}
-</code>
-</pre>
-
-<p>Соберем файл latexpx</p>
-
-<code>gcc latexpx.cpp -o latexpx</code>
-
-<p>Из каталога скопируем в папку с программой файлы latexpx latexp.py</p>
-
-<p>На какой-либо странице вставим разметку</p>
-
-<img src="/images/latex1.png">
-
-<p>и запустим генератор</p>
-
-<p>Результат</p>
-
-<img src="/images/latex2.png">
-
-</main>
 <div class="ps-4">
-<i>Теги документа</i>
-
-</div> 
+<h1>Тема: Прочие записи</h1> <a href="/section_etc.html">#</a> &nbsp;|&nbsp; <a href="/o/caption-DESC/section_etc.html">&#x25BC;</a>&nbsp;По заголовку&nbsp;<a href="/o/caption-ASC/section_etc.html">&#x25B2;</a>&nbsp;|&nbsp; &nbsp;|&nbsp; <a href="/o/dt-DESC/section_etc.html">&#x25BC;</a>&nbsp;По дате&nbsp;<a href="/o/dt-ASC/section_etc.html">&#x25B2;</a>&nbsp;|&nbsp; 
+<br/>
+Материалы:<ul class="ArticlesList"><li class="ArticlesItem"><a class="ArticlesLink" href="/luassg_and_entity_xml_crud_app.html">Как создать статический сайт без базы данных: простой и элегантный подход с Lua и GTK</a></li></ul>
+<div class="paginator"><a href="section_etc.html">1</a>  2 </div>
+</div>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -185,7 +117,4 @@ navLinks.forEach(link => {
     <p class="text-center text-muted">Сгенерировано страниц: 96</p>
   </footer>
 
-
-
-</body></html>
-
+</body>
