@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Latest News</title><link>http://</link><description>Latest news feed from the database</description>
 <item><title>Пример, как состыковать htmlbuilder и NodeJS</title><link>http:///nodex-mod-htmlbuilder.html</link><description>Пытливый читатель может за�</description><pubDate>Вт, 17 ноя 2922 21:10:00</pubDate></item>
 <item><title>Включение локального репозитория в Deepin Linux</title><link>http:///deepin.html</link><description>При установке системы можн�</description><pubDate>Пт, 27 июн 2921 13:54:00</pubDate></item>
+<item><title>Как создать статический сайт без базы данных: простой и элегантный подход с Lua и GTK</title><link>http:///luassg_and_entity_xml_crud_app.html</link><description> Хотите запустить собствен�</description><pubDate>Вс, 11 янв 2026 00:00:00</pubDate></item>
 <item><title>Интеграция HtmlBuilder с Youmoney</title><link>http:///yoomoney-htmlbuilder.html</link><description>&lt;form method="POST" action="https://yoomoney.ru</description><pubDate>Сб, 12 июл 2025 12:20:53</pubDate></item>
 <item><title>Подсчет числа собранных страниц</title><link>http:///counting_html_pages.html</link><description>Чтобы подсчитать собранные</description><pubDate>Чт, 19 июн 2025 13:57:00</pubDate></item>
 <item><title>Добавление комментариев к каталогам Linux</title><link>http:///commenting_linux_folders.html</link><description>Для добавления комментарие</description><pubDate>Чт, 19 июн 2025 09:33:00</pubDate></item>
@@ -32,5 +33,4 @@ cd ~/$1/build2</description><pubDate>Сб, 07 июн 2025 15:15:00</pubDate></it
 <item><title>Добавляем LESS в HtmlBuilder</title><link>http:///using_less_in_htmlbuilder.html</link><description>Установим глобально less
 
  #  np</description><pubDate>Пт, 02 дек 2022 21:43:00</pubDate></item>
-<item><title>Пример модуля на Java</title><link>http:///java_module_htmlbuilder.html</link><description>Создадим файл javax.java. Модуль</description><pubDate>Вт, 29 ноя 2022 19:53:00</pubDate></item>
 </channel></rss>
