@@ -71,7 +71,7 @@ sudo systemctl start sshd.service</code>
 
 2.1 В настройках сети VirtualBox пробрасываем гостевой порт 22 на порт 3022 хоста ( Настройки -&gt; Сеть -&gt; Дополнительно)
 2.2 В настройках сети VirtualBox пробрасываем гостевой порт 80 на порт 8080 хоста ( Настройки -&gt; Сеть -&gt; Дополнительно)
-<img class="alignnone wp-image-396 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-ports-config.png" alt="" width="1600" height="900" />
+<img class="alignnone wp-image-396 size-full" src="/wp-content/uploads/2022/06/Axyl-ports-config.png" alt="" width="1600" height="900" />
 3. Настраиваем общие папки.
 На хосте
 <code>sudo mkdir /mnt/shared_server
@@ -86,7 +86,7 @@ sudo chown 755 /mnt/shared_server</code>
 создать постоянную папку - да
 В терминале гостевой машины
 <code>sudo usermod -a -G vboxsf $USER</code>
-<img class="alignnone wp-image-398 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-shared-folders.png" alt="" width="1600" height="900" />
+<img class="alignnone wp-image-398 size-full" src="/wp-content/uploads/2022/06/Axyl-shared-folders.png" alt="" width="1600" height="900" />
 Пробуем загрузится в консоль
 
 <code>ssh -p 3022 artem@127.0.0.1</code> ( пользователь гостевой машины, созданный на этапе установки )
@@ -107,7 +107,7 @@ sudo systemctl start httpd.service
 
 открываем на хосте 127.0.0.1:8080 - отобразится страница следующего вида
 
-<img class="alignnone wp-image-399 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-apache.png" alt="" width="1600" height="900" />
+<img class="alignnone wp-image-399 size-full" src="/wp-content/uploads/2022/06/Axyl-apache.png" alt="" width="1600" height="900" />
 
 Необходимо внести некоторые настройки, чтобы php файлы обрабатывались интерпретатором
 
@@ -138,7 +138,7 @@ Include conf/extra/php_module.conf
 
 sudo systemctl restart httpd.service
 
-Открываем на хосте 127.0.0.1:8080<img class="alignnone wp-image-400 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-ready-LAMP.png" alt="" width="1600" height="900" />
+Открываем на хосте 127.0.0.1:8080<img class="alignnone wp-image-400 size-full" src="/wp-content/uploads/2022/06/Axyl-ready-LAMP.png" alt="" width="1600" height="900" />
 
 php сценарий обработан, базовая настройка сделана.
 
@@ -197,9 +197,9 @@ sudo nano /srv/http/domain1.com/index.html</code>
 
 Если все сделано верно, отобразится строка, соответствующая домену
 
-<img class="alignnone wp-image-403 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-virtualhosts.png" alt="" width="1600" height="900" />
+<img class="alignnone wp-image-403 size-full" src="/wp-content/uploads/2022/06/Axyl-virtualhosts.png" alt="" width="1600" height="900" />
 
-Также можно почитать про <a href="http://nazarow.ru/%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%be%d0%b2-%d0%b2%d0%b8%d1%80%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d0%bc/">образы</a> и про<a href="http://nazarow.ru/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b2%d0%b8%d1%80%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d1%85%d0%be%d1%81%d1%82%d0%be%d0%b2-%d0%b2-xampp/"> настройку виртуальных хостов</a>
+Также можно почитать про <a href="/%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%be%d0%b2-%d0%b2%d0%b8%d1%80%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d0%bc/">образы</a> и про<a href="http://nazarow.ru/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b2%d0%b8%d1%80%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d1%85%d0%be%d1%81%d1%82%d0%be%d0%b2-%d0%b2-xampp/"> настройку виртуальных хостов</a>
 
 Модифицированный скрипт для Axyl (для добавления виртуального хоста)
 
@@ -236,11 +236,12 @@ LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
 
 Итог - тестовое https соединение настроено
 
-<img class="alignnone wp-image-412 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-https3.png" alt="" width="1640" height="908" />
+<img class="alignnone wp-image-412 size-full" src="/wp-content/uploads/2022/06/Axyl-https3.png" alt="" width="1640" height="908" />
 
-<img class="alignnone wp-image-414 size-full" src="http://nazarow.ru/wp-content/uploads/2022/06/Axyl-https4.png" alt="" width="1640" height="908" />
+<img class="alignnone wp-image-414 size-full" src="/wp-content/uploads/2022/06/Axyl-https4.png" alt="" width="1640" height="908" />
 
 если после запуска в Application Log  требует libcrypt.so.1, ставим <code>yay -S libxcrypt-compat</code>
+
 </main>
 <div class="ps-4">
 <i>Теги документа</i>
